@@ -2,37 +2,37 @@
 
 > **"Ideias que ganham forma. Experiências que deixam marca."**
 
-Portfólio editorial e imersivo desenvolvido em **React 19**, **Vite** e **TypeScript**, concebido com direção de arte de alto padrão (inspirado na sofisticação gráfica da Human e na composição mobile de ponta).
+Portfólio editorial e imersivo desenvolvido em **React 19**, **Vite** e **TypeScript**, concebido com direção de arte de alto padrão e paleta fria exclusiva (**Ice-Blue & Silver Luxury**).
 
 ---
 
 ## ✦ Estrutura e Destaques
 
-### Experiência Mobile Fiel à Referência:
-1. **Fundo Tecnológico**: Fundo escuro profundo com finas linhas verticais (`repeating-linear-gradient`), coordenadas pontilhadas e brilhos estelares sutis (*sparkles*).
-2. **Topo com Chamada**: *"Entre em contato!"* centralizado com acesso direto ao WhatsApp.
-3. **Cápsula Header**: Barra horizontal arredondada com borda fina translúcida contendo:
-   - À esquerda: Logomarca `WESLEY NUNES` com ponto neon.
-   - À direita: Botão destacado em verde-lima `☰ Menu`.
-4. **Botão Destaque "Portfólio"**: Grande botão centralizado em verde-lima/amarelo-neon vibrante com bolha/esfera translúcida decorativa sobreposta e sombra luminosa.
+### Experiência Mobile Atualizada:
+1. **Paleta Fria Oficial**:
+   - Preto profundo (`#05070B`), grafite escuro (`#111318`), prata suave (`#D9D9D9`), branco frio (`#F5F7FA`) e destaque refinado em **azul-gelo (`#A9C8D8`)**.
+   - Zero verde-neon/lime: toda a iluminação, botões e detalhes gráficos seguem o conceito sofisticado e frio do estúdio.
+2. **Quadro Compacto dos Cases**:
+   - Altura do viewport visível dos projetos reduzida pela metade: `height: clamp(260px, 38vh, 320px)`.
+   - Screenshots em alta resolução (1080x1920 / verticais) percorrem suavemente o interior do viewport com `overflow: hidden`.
+   - Proporção elegante, permitindo visualizar múltiplos projetos na tela sem scroll excessivo.
+3. **Topo & Header Cápsula**:
+   - *"Entre em contato!"* em branco/cinza suave centralizado.
+   - Cápsula com borda fina azul-gelo translúcida.
+   - Botão **`☰ Menu`** com acabamento em azul-gelo metálico e texto escuro de alto contraste.
+4. **Botão Central "Portfólio"**:
+   - Destaque em gradiente prateado/azul-gelo com bolha esférica fria decorativa e glow azulado sutil.
 5. **Seção de Cases**:
    - `03 / CASES DE SUCESSO`
-   - `// Clique sobre a imagem para interagir.` (com destaque neon no símbolo `//`).
-6. **Projetos em Coluna Única no Mobile**: Cards ocupando praticamente toda a largura, espaçamento compacto (14px), sem caixas pesadas, foco absoluto na imagem real do website.
-7. **Menu Mobile Completo**: Abertura em tela cheia com transição suave contendo links para Portfólio, Projetos, Sobre, Contato e atalhos diretos para WhatsApp e Instagram.
-
-### Desktop & Funcionalidades:
-- **Galeria em 3 Colunas** no desktop com espaçamento de 18px.
-- **Componente `ProjectAutoScroll`**:
-  - Desktop: Rolagem automática suave ao passar o mouse (`hover`).
-  - Mobile: Rolagem automática suave ao tocar no card (`touch`). Tocar novamente reinicia do topo.
-  - Alternar entre projetos interrompe e reseta o card anterior imediatamente (apenas 1 projeto ativo por vez).
-  - Web Animations API proporcional à extensão real de cada screenshot.
-  - Pausa inteligente em abas inativas via `visibilitychange`.
+   - `// Clique sobre a imagem para interagir.` (com o símbolo `//` em azul-gelo).
+6. **Rolagem por Toque (`ProjectAutoScroll`)**:
+   - Toque ativa a rolagem automática fluida (Web Animations API a 60/120fps).
+   - Tocar em outro projeto interrompe e reseta o anterior para o topo.
+   - Tocar novamente no projeto ativo reinicia a animação.
 
 ---
 
-## 📞 Informações de Contato Oficiais
+## 📞 Informações Oficiais de Contato
 
 - **WhatsApp**: [+55 (88) 98195-7471](https://wa.me/5588981957471?text=Ol%C3%A1%2C%20Wesley!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.)
 - **Instagram**: [@euwesleyununes](https://www.instagram.com/euwesleyununes/)

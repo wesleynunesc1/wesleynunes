@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
   return (
     <>
       <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
-        {/* Mobile Top Callout — "Entre em contato!" */}
+        {/* Mobile Top Callout — "Entre em contato!" em branco/cinza suave */}
         <div className="mobile-top-callout">
           <a
             href={whatsappUrl}
@@ -66,15 +66,15 @@ export const Header: React.FC = () => {
               <ArrowUpRight size={15} />
             </a>
 
-            {/* Mobile Lime Menu Button */}
+            {/* Mobile Ice-Blue / Cold Silver Menu Button */}
             <button
-              className="btn-mobile-lime-menu"
+              className="btn-mobile-ice-menu"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? 'Fechar Menu' : 'Abrir Menu'}
               aria-expanded={mobileMenuOpen}
             >
-              <span className="lime-menu-icon">☰</span>
-              <span className="lime-menu-text">Menu</span>
+              <span className="ice-menu-icon">☰</span>
+              <span className="ice-menu-text">Menu</span>
             </button>
           </div>
         </div>

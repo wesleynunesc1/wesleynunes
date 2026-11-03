@@ -1,7 +1,7 @@
 .gallery-project-card {
   position: relative;
-  background-color: #000000;
-  border-radius: 4px;
+  background-color: #0b0e14;
+  border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
   outline: none;
@@ -10,16 +10,16 @@
 }
 
 .gallery-project-card:focus-visible {
-  outline: 2px solid var(--color-lime);
+  outline: 2px solid var(--color-ice);
   outline-offset: 2px;
 }
 
 .gallery-project-card:hover,
 .gallery-project-card.is-active {
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(200, 245, 60, 0.1);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(169, 200, 216, 0.15);
 }
 
-/* Card Media Container */
+/* Card Media Container (Desktop 9:16) */
 .card-media-wrapper {
   position: relative;
   width: 100%;
@@ -35,7 +35,7 @@
   left: 0;
   right: 0;
   padding: 1.5rem 1.25rem 1.25rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(6, 8, 12, 0.85) 40%, rgba(6, 8, 12, 0.98) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 11, 0.85) 40%, rgba(5, 7, 11, 0.98) 100%);
   opacity: 0;
   transform: translateY(8px);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -69,7 +69,7 @@
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--color-lime);
+  color: var(--color-ice);
   text-transform: uppercase;
 }
 
@@ -88,8 +88,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(200, 245, 60, 0.15);
-  border: 1px solid var(--color-lime);
+  background: rgba(169, 200, 216, 0.14);
+  border: 1px solid rgba(169, 200, 216, 0.4);
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 600;
@@ -103,27 +103,46 @@
 }
 
 .btn-overlay-visit:hover {
-  background: var(--color-lime);
-  color: #070d03;
+  background: var(--color-ice);
+  color: #05070b;
   transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   MOBILE COMPACT VIEWPORT: REDUCE HEIGHT BY HALF
+   ========================================================================== */
 @media (max-width: 768px) {
   .gallery-project-card {
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    border: 1px solid rgba(169, 200, 216, 0.16);
+    background-color: #090c12;
   }
 
   .card-media-wrapper {
-    aspect-ratio: 9 / 15.5;
+    aspect-ratio: auto;
+    width: 100%;
+    /* Compact height ~half of previous: clamp(260px, 38vh, 320px) */
+    height: clamp(260px, 38vh, 320px);
   }
 
-  /* Show minimal overlay on touch or active */
+  /* Compact discreet overlay on mobile */
   .card-info-overlay {
-    padding: 1.25rem 1rem 1rem;
+    padding: 1.15rem 0.85rem 0.85rem;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .overlay-title {
-    font-size: 0.98rem;
+    font-size: 0.94rem;
+  }
+
+  .overlay-category {
+    font-size: 0.66rem;
+  }
+
+  .btn-overlay-visit {
+    padding: 0.38rem 0.75rem;
+    font-size: 0.72rem;
   }
 }

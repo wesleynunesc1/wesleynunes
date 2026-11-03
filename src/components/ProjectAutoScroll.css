@@ -16,3 +16,10 @@
   transform: translateY(0);
   will-change: transform;
 }
+
+@media (max-width: 768px) {
+  .project-scroll-viewport {
+    height: 100%;
+    max-height: clamp(260px, 38vh, 320px);
+  }
+}
