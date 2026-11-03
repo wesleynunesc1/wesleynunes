@@ -1,8 +1,16 @@
 import React from 'react';
-import { Mail, ArrowUpRight, MessageSquare } from 'lucide-react';
+import { MessageSquare, ArrowUpRight } from 'lucide-react';
 import './Contact.css';
 
 export const Contact: React.FC = () => {
+  // WhatsApp encoded url with official requested initial message
+  const whatsappNumber = '5588981957471';
+  const whatsappMessage = encodeURIComponent(
+    'Olá, Wesley! Vi seu portfólio e gostaria de conversar sobre um projeto.'
+  );
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const instagramUrl = 'https://www.instagram.com/euwesleyununes/';
+
   return (
     <section id="contato" className="contact-section">
       <div className="contact-inner">
@@ -25,22 +33,29 @@ export const Contact: React.FC = () => {
 
           <div className="contact-action-buttons">
             <a
-              href="mailto:contato@wesleynunes.com"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-contact-primary"
             >
-              <Mail size={18} />
-              <span>contato@wesleynunes.com</span>
+              <MessageSquare size={18} />
+              <span>WhatsApp: +55 (88) 98195-7471</span>
               <ArrowUpRight size={16} />
             </a>
 
             <a
-              href="https://wa.me/5500000000000"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-contact-whatsapp"
+              className="btn-contact-instagram"
             >
-              <MessageSquare size={17} />
-              <span>Conversar via WhatsApp</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+              </svg>
+              <span>Instagram: @euwesleyununes</span>
+              <ArrowUpRight size={16} />
             </a>
           </div>
 
@@ -50,7 +65,7 @@ export const Contact: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="social-link"
-              aria-label="Perfil no GitHub"
+              aria-label="Perfil no GitHub de Wesley Nunes"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
@@ -60,18 +75,13 @@ export const Contact: React.FC = () => {
             </a>
             <div className="social-divider" />
             <a
-              href="https://linkedin.com"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="social-link"
-              aria-label="Perfil no LinkedIn"
+              aria-label="Perfil no Instagram de Wesley Nunes"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect width="4" height="12" x="2" y="9" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-              <span>LinkedIn</span>
+              <span>@euwesleyununes</span>
             </a>
           </div>
         </div>

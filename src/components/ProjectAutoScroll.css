@@ -1,18 +1,10 @@
 .project-scroll-viewport {
   position: relative;
   width: 100%;
-  height: 480px;
+  height: 100%;
   overflow: hidden;
-  cursor: pointer;
-  background-color: #0b0d12;
+  background-color: #000000;
   user-select: none;
-  touch-action: pan-y;
-  outline: none;
-}
-
-.project-scroll-viewport:focus-visible {
-  outline: 2px solid var(--color-ice);
-  outline-offset: -2px;
 }
 
 .project-screenshot-image {
@@ -23,101 +15,4 @@
   object-position: top center;
   transform: translateY(0);
   will-change: transform;
-}
-
-/* Subtle overlay gradient on top/bottom of frame */
-.project-scroll-viewport::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 24px;
-  background: linear-gradient(180deg, rgba(11, 14, 20, 0.4) 0%, transparent 100%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.project-scroll-viewport::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 36px;
-  background: linear-gradient(0deg, rgba(11, 14, 20, 0.6) 0%, transparent 100%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Status Pill Overlay */
-.scroll-indicator-overlay {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
-
-.scroll-pill-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.95rem;
-  background: rgba(11, 15, 22, 0.82);
-  border: 1px solid rgba(169, 200, 216, 0.25);
-  border-radius: 9999px;
-  color: var(--color-ice);
-  font-size: 0.725rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-  transition: all 0.25s ease;
-}
-
-.project-scroll-viewport:hover .scroll-pill-hint {
-  background: rgba(16, 22, 33, 0.94);
-  border-color: rgba(169, 200, 216, 0.5);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.pill-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-ice);
-  opacity: 0.6;
-}
-
-.pill-dot.active {
-  background-color: #38bdf8;
-  opacity: 1;
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.9);
-  animation: pulsePillDot 1.4s infinite ease-in-out;
-}
-
-.scroll-pill-hint.is-scrolling {
-  border-color: rgba(56, 189, 248, 0.4);
-  color: #ffffff;
-}
-
-.scroll-pill-hint.is-replaying {
-  border-color: rgba(169, 200, 216, 0.4);
-}
-
-@keyframes pulsePillDot {
-  0%, 100% { transform: scale(0.9); opacity: 0.7; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
-
-@media (max-width: 768px) {
-  .project-scroll-viewport {
-    height: 380px;
-  }
 }

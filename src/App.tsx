@@ -1,8 +1,7 @@
 import { AmbientBackground } from './components/AmbientBackground';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { InfiniteMarquee } from './components/InfiniteMarquee';
 import { PortfolioGallery } from './components/PortfolioGallery';
+import { InfiniteMarquee } from './components/InfiniteMarquee';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
@@ -13,28 +12,25 @@ export function App() {
       {/* Ambient Moving Atmospheric Lights */}
       <AmbientBackground />
 
-      {/* Fixed Header */}
+      {/* Fixed Minimalist Header */}
       <Header />
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections — Begins directly with Selected Projects */}
       <main>
-        {/* Seção 02 — Hero Principal */}
-        <Hero />
-
-        {/* Seção 03 — Faixa Animada (Infinite Marquee) */}
-        <InfiniteMarquee />
-
-        {/* Seção 04 — Portfólio / Projetos Selecionados com Auto-Scroll */}
+        {/* Seção 01 — Portfólio / Projetos Selecionados (Galeria 3 colunas) */}
         <PortfolioGallery />
 
-        {/* Seção 05 — Sobre Mim (Editorial) */}
+        {/* Letreiro horizontal editorial */}
+        <InfiniteMarquee />
+
+        {/* Seção 02 — Sobre Mim (Editorial) */}
         <About />
 
-        {/* Seção 06 — Contato */}
+        {/* Seção 03 — Contato Oficial */}
         <Contact />
       </main>
 
-      {/* Rodapé Oficial */}
+      {/* Rodapé Oficial com links diretos */}
       <Footer />
     </div>
   );

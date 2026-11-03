@@ -8,7 +8,7 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -16,11 +16,15 @@ export const Header: React.FC = () => {
 
   const closeMenu = () => setMobileMenuOpen(false);
 
+  const whatsappUrl =
+    'https://wa.me/5588981957471?text=' +
+    encodeURIComponent('Olá, Wesley! Vi seu portfólio e gostaria de conversar sobre um projeto.');
+
   return (
     <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
       <div className="header-inner">
         {/* Brand Wordmark */}
-        <a href="#hero" className="brand-logo" onClick={closeMenu}>
+        <a href="#projetos" className="brand-logo" onClick={closeMenu}>
           <span className="brand-primary">WESLEY</span>
           <span className="brand-secondary">NUNES</span>
           <span className="brand-dot" />
@@ -29,7 +33,6 @@ export const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <nav className="desktop-nav" aria-label="Navegação Principal">
           <ul className="nav-list">
-            <li><a href="#hero" className="nav-link">Início</a></li>
             <li><a href="#projetos" className="nav-link">Projetos</a></li>
             <li><a href="#sobre" className="nav-link">Sobre</a></li>
             <li><a href="#contato" className="nav-link">Contato</a></li>
@@ -38,7 +41,12 @@ export const Header: React.FC = () => {
 
         {/* Action Button */}
         <div className="header-cta">
-          <a href="#contato" className="btn-header-talk">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-header-talk"
+          >
             <span>Iniciar Projeto</span>
             <ArrowUpRight size={15} />
           </a>
@@ -58,12 +66,17 @@ export const Header: React.FC = () => {
       {/* Mobile Drawer Menu */}
       <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav-inner">
-          <a href="#hero" className="mobile-nav-link" onClick={closeMenu}>Início</a>
           <a href="#projetos" className="mobile-nav-link" onClick={closeMenu}>Projetos</a>
           <a href="#sobre" className="mobile-nav-link" onClick={closeMenu}>Sobre</a>
           <a href="#contato" className="mobile-nav-link" onClick={closeMenu}>Contato</a>
           <div className="mobile-drawer-footer">
-            <a href="#contato" className="btn-mobile-contact" onClick={closeMenu}>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-mobile-contact"
+              onClick={closeMenu}
+            >
               Iniciar um Projeto
               <ArrowUpRight size={18} />
             </a>

@@ -1,6 +1,6 @@
 .contact-section {
   position: relative;
-  padding: 8rem 2rem 5rem;
+  padding: 6rem 2rem 5rem;
   z-index: 5;
 }
 
@@ -88,7 +88,7 @@
   justify-content: center;
   gap: 1.25rem;
   flex-wrap: wrap;
-  margin-bottom: 2.8rem;
+  margin-bottom: 2.5rem;
   width: 100%;
 }
 
@@ -114,23 +114,23 @@
   box-shadow: 0 8px 30px rgba(169, 200, 216, 0.4);
 }
 
-.btn-contact-whatsapp {
+.btn-contact-instagram {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  padding: 0.95rem 1.65rem;
+  padding: 0.95rem 1.75rem;
   background: rgba(17, 24, 38, 0.75);
   border: 1px solid rgba(169, 200, 216, 0.25);
   color: var(--color-silver);
   text-decoration: none;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   border-radius: 9999px;
   transition: all 0.3s ease;
 }
 
-.btn-contact-whatsapp:hover {
-  background: rgba(169, 200, 216, 0.12);
+.btn-contact-instagram:hover {
+  background: rgba(169, 200, 216, 0.14);
   border-color: rgba(169, 200, 216, 0.5);
   color: #ffffff;
   transform: translateY(-2px);
@@ -169,12 +169,12 @@
 
 @media (max-width: 600px) {
   .contact-section {
-    padding: 5rem 1.25rem 3rem;
+    padding: 4.5rem 1.25rem 3rem;
   }
   .contact-action-buttons {
     flex-direction: column;
   }
-  .btn-contact-primary, .btn-contact-whatsapp {
+  .btn-contact-primary, .btn-contact-instagram {
     width: 100%;
     justify-content: center;
   }

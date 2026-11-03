@@ -1,115 +1,89 @@
-.portfolio-section {
+.portfolio-gallery-section {
   position: relative;
-  padding: 8rem 2rem 7rem;
+  /* Reduced top padding: immediate start right below fixed header (header is ~70px) */
+  padding: 6.5rem 2rem 5rem;
   z-index: 5;
+  background-color: transparent;
 }
 
-.portfolio-inner {
-  max-width: 1240px;
+.portfolio-gallery-container {
+  max-width: 1360px;
   margin: 0 auto;
 }
 
-.section-header-block {
-  text-align: center;
-  max-width: 780px;
-  margin: 0 auto 4.5rem;
+/* Header alinhado à esquerda, sutil e discreto */
+.gallery-header {
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 0.45rem;
+  text-align: left;
 }
 
-.section-tag-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.95rem;
-  background: rgba(169, 200, 216, 0.06);
-  border: 1px solid rgba(169, 200, 216, 0.18);
-  border-radius: 9999px;
-  font-size: 0.72rem;
+.gallery-section-tag {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--color-ice);
-  margin-bottom: 1.35rem;
+  letter-spacing: 0.16em;
+  color: var(--color-white);
+  text-transform: uppercase;
 }
 
-.section-tag-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: var(--color-ice);
-}
-
-.section-title {
+.gallery-instruction {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
   font-family: var(--font-sans);
-  font-size: clamp(2.2rem, 4.2vw, 3.5rem);
-  font-weight: 300;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  color: #ffffff;
-  margin-bottom: 1.15rem;
-}
-
-.section-subtitle {
-  font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-  font-weight: 300;
-  line-height: 1.6;
+  font-size: 0.825rem;
+  font-weight: 400;
   color: var(--color-text-muted);
-  margin-bottom: 1.5rem;
 }
 
-.section-instruction-note {
-  font-size: 0.82rem;
-  color: var(--color-text-dim);
-  background: rgba(16, 21, 30, 0.6);
-  border: 1px dashed rgba(169, 200, 216, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-}
-
-.note-accent {
+.instruction-symbol {
   color: var(--color-ice);
   font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
-/* Grid Layout */
-.portfolio-grid {
+.instruction-text-mobile {
+  display: none;
+}
+
+/* 3-Column Responsive Grid with ~18-20px spacing */
+.projects-grid-3col {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
 
-/* Featured card style in grid */
-.portfolio-grid .project-browser-card.is-featured {
-  grid-column: span 2;
-}
-
-.portfolio-grid .project-browser-card.is-featured .project-scroll-viewport {
-  height: 580px;
-}
-
-@media (max-width: 1024px) {
-  .portfolio-grid {
-    grid-template-columns: 1fr;
-    gap: 2.2rem;
-  }
-  .portfolio-grid .project-browser-card.is-featured {
-    grid-column: span 1;
-  }
-  .portfolio-grid .project-browser-card.is-featured .project-scroll-viewport {
-    height: 440px;
+/* Tablet Layout (2 columns) */
+@media (max-width: 1080px) {
+  .projects-grid-3col {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
   }
 }
 
+/* Mobile Layout (1 column) */
 @media (max-width: 768px) {
-  .portfolio-section {
-    padding: 5rem 1.25rem 4rem;
+  .portfolio-gallery-section {
+    padding: 5.5rem 1.25rem 3.5rem;
   }
-  .section-header-block {
-    margin-bottom: 2.5rem;
+
+  .gallery-header {
+    margin-bottom: 1.5rem;
   }
-  .portfolio-grid .project-browser-card.is-featured .project-scroll-viewport {
-    height: 380px;
+
+  .instruction-text-desktop {
+    display: none;
+  }
+
+  .instruction-text-mobile {
+    display: inline;
+  }
+
+  .projects-grid-3col {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

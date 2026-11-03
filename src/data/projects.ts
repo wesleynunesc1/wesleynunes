@@ -7,7 +7,7 @@ export interface Project {
   websiteUrl?: string;
   featured?: boolean;
   order: number;
-  scrollSpeed?: number; // duration in seconds or multiplier
+  scrollSpeed?: number;
   tags?: string[];
   year?: string;
 }
@@ -15,11 +15,11 @@ export interface Project {
 export const projectsData: Project[] = [
   {
     id: 'leo-nunes',
-    title: 'Leo Nunes — Barbearia & Estilo',
-    category: 'Landing Page & Sistema de Agendamento',
-    description: 'Experiência digital sofisticada e de alta conversão para barbearia premium, combinando agendamento intuitivo, apresentação da equipe e atmosfera refinada.',
+    title: 'Leo Nunes Barbearia',
+    category: 'Website / Sistema de Agendamentos',
+    description: 'Website desenvolvido para apresentar a identidade da barbearia e proporcionar uma experiência de agendamento digital moderna e intuitiva.',
     screenshot: '/projects/leo-nunes.jpg',
-    websiteUrl: 'https://leonunes.com.br',
+    websiteUrl: 'https://leonunesbarbearia.vercel.app',
     featured: true,
     order: 1,
     scrollSpeed: 22,
@@ -29,8 +29,8 @@ export const projectsData: Project[] = [
   {
     id: 'lumina-studios',
     title: 'Lumina Digital Architecture',
-    category: 'Web Experience & Portfolio Editorial',
-    description: 'Ambiente imersivo para estúdio de design e arquitetura digital com navegação dinâmica, estética brutalista com acabamento luxury e tipografia expressiva.',
+    category: 'Web Experience / Architecture',
+    description: 'Ambiente imersivo para estúdio de design e arquitetura digital com navegação dinâmica e tipografia expressiva.',
     screenshot: '/projects/lumina-preview.svg',
     websiteUrl: 'https://lumina.example.com',
     featured: false,
@@ -42,8 +42,8 @@ export const projectsData: Project[] = [
   {
     id: 'aurora-fintech',
     title: 'Aurora Wealth Management',
-    category: 'Fintech Platform & Product Landing Page',
-    description: 'Interface clean e tecnológica projetada para investidores de alto patrimônio, trazendo visualização clara de portfólio, segurança e sofisticação gráfica.',
+    category: 'Fintech Platform / Web App',
+    description: 'Interface clean e tecnológica projetada para investidores de alto patrimônio, trazendo visualização clara de portfólio.',
     screenshot: '/projects/aurora-preview.svg',
     websiteUrl: 'https://aurorawealth.example.com',
     featured: false,
@@ -55,14 +55,40 @@ export const projectsData: Project[] = [
   {
     id: 'nexus-craft',
     title: 'Nexus Craft — Creative Engine',
-    category: 'SaaS Platform & Developer Showcase',
-    description: 'Plataforma para desenvolvedores criativos com visual escuro elegante, microinterações precisas e foco absoluto em documentação e conversão fluida.',
+    category: 'SaaS Platform / Developer Showcase',
+    description: 'Plataforma para desenvolvedores criativos com visual escuro elegante, microinterações precisas e foco absoluto em fluidez.',
     screenshot: '/projects/nexus-preview.svg',
     websiteUrl: 'https://nexuscraft.example.com',
     featured: false,
     order: 4,
     scrollSpeed: 19,
     tags: ['Design System', 'SaaS', 'Dark Mode Luxury'],
+    year: '2026',
+  },
+  {
+    id: 'atelier-noir',
+    title: 'Atelier Noir — Haute Horlogerie',
+    category: 'E-commerce Luxury / Brand Experience',
+    description: 'Galeria editorial de relojoaria suíça independente com estética minimalista e curadoria fotográfica.',
+    screenshot: '/projects/lumina-preview.svg',
+    websiteUrl: 'https://ateliernoir.example.com',
+    featured: false,
+    order: 5,
+    scrollSpeed: 17,
+    tags: ['Luxury E-commerce', 'Editorial Layout', 'Motion'],
+    year: '2025',
+  },
+  {
+    id: 'vortex-ai',
+    title: 'Vortex AI — Cognitive Infrastructure',
+    category: 'Deep Tech / Enterprise AI',
+    description: 'Landing page para infraestrutura de inteligência artificial de baixa latência e orquestração de modelos autônomos.',
+    screenshot: '/projects/aurora-preview.svg',
+    websiteUrl: 'https://vortexai.example.com',
+    featured: false,
+    order: 6,
+    scrollSpeed: 18,
+    tags: ['Enterprise SaaS', 'High Performance', 'Next.js'],
     year: '2026',
   },
 ];

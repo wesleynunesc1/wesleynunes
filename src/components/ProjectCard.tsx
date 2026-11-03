@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Sparkles, Globe } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '../data/projects';
 import { ProjectAutoScroll } from './ProjectAutoScroll';
 import './ProjectCard.css';
@@ -8,101 +8,67 @@ interface ProjectCardProps {
   project: Project;
   isActive: boolean;
   onActivate: () => void;
+  onDeactivate: () => void;
+  onTouchToggle: () => void;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   isActive,
   onActivate,
+  onDeactivate,
+  onTouchToggle,
 }) => {
   return (
     <article
-      className={`project-browser-card ${project.featured ? 'is-featured' : ''} ${isActive ? 'card-active' : ''}`}
+      className={`gallery-project-card ${isActive ? 'is-active' : ''}`}
+      onMouseEnter={onActivate}
+      onMouseLeave={onDeactivate}
+      onClick={onTouchToggle}
+      tabIndex={0}
+      role="button"
+      aria-label={`Projeto ${project.title} - ${project.category}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onTouchToggle();
+        }
+      }}
     >
-      {/* Browser Chrome Header */}
-      <div className="browser-chrome-header">
-        <div className="browser-dots" aria-hidden="true">
-          <span className="dot dot-close" />
-          <span className="dot dot-minimize" />
-          <span className="dot dot-expand" />
-        </div>
+      {/* Screenshot Frame */}
+      <div className="card-media-wrapper">
+        <ProjectAutoScroll
+          screenshotSrc={project.screenshot}
+          projectTitle={project.title}
+          isActive={isActive}
+          onActivate={onActivate}
+          scrollSpeedSeconds={project.scrollSpeed}
+        />
 
-        <div className="browser-url-bar">
-          <Globe size={12} className="url-icon" />
-          <span className="url-text">
-            {project.websiteUrl ? project.websiteUrl.replace(/^https?:\/\//, '') : `${project.id}.preview.local`}
-          </span>
-        </div>
+        {/* Hover/Active Discrete Bottom Info Overlay */}
+        <div className="card-info-overlay" aria-hidden="true">
+          <div className="overlay-content">
+            <div className="overlay-meta">
+              <span className="overlay-category">{project.category}</span>
+              <h3 className="overlay-title">{project.title}</h3>
+            </div>
 
-        <div className="browser-actions-right">
-          {project.featured && (
-            <span className="featured-chip">
-              <Sparkles size={11} />
-              Destaque
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Auto Scroll Viewport Container */}
-      <ProjectAutoScroll
-        screenshotSrc={project.screenshot}
-        projectTitle={project.title}
-        isActive={isActive}
-        onActivate={onActivate}
-        scrollSpeedSeconds={project.scrollSpeed}
-      />
-
-      {/* Card Info & Meta Footer */}
-      <div className="card-info-footer">
-        <div className="card-meta-top">
-          <span className="card-category">{project.category}</span>
-          {project.year && <span className="card-year">{project.year}</span>}
-        </div>
-
-        <h3 className="card-title">{project.title}</h3>
-
-        {project.description && (
-          <p className="card-description">{project.description}</p>
-        )}
-
-        {project.tags && project.tags.length > 0 && (
-          <ul className="card-tags-list" aria-label="Tecnologias utilizadas">
-            {project.tags.map((tag, i) => (
-              <li key={i} className="card-tag-pill">
-                {tag}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className="card-action-bar">
-          <button
-            type="button"
-            className={`btn-toggle-scroll ${isActive ? 'active' : ''}`}
-            onClick={onActivate}
-          >
-            {isActive ? 'Reiniciar visualização' : 'Ativar rolagem'}
-          </button>
-
-          {project.websiteUrl && (
-            <a
-              href={project.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-external-site"
-              aria-label={`Ver site ao vivo: ${project.title}`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <span>Ver site</span>
-              <ExternalLink size={14} />
-            </a>
-          )}
+            {project.websiteUrl && (
+              <a
+                href={project.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-overlay-visit"
+                title={`Abrir ${project.title} em nova aba`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>Ver site</span>
+                <ArrowUpRight size={15} />
+              </a>
+            )}
+          </div>
         </div>
       </div>
-
-      {/* Subtle Border Glow when active */}
-      <div className="card-ambient-outline" aria-hidden="true" />
     </article>
   );
 };
