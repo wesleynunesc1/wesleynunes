@@ -28,7 +28,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     }
   }, []);
 
-  // Reset to initial position
+  // Reset to initial top position
   const resetPosition = useCallback(() => {
     stopAnimation();
     if (imageRef.current) {
@@ -57,7 +57,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     // Cancel existing animation
     stopAnimation();
 
-    // Constant speed calculation proportional to real height
+    // Constant speed calculation proportional to real height (~170px/s)
     const calculatedDuration = Math.max(scrollSpeedSeconds * 1000, (maxScrollDistance / 170) * 1000);
 
     const keyframes: Keyframe[] = [
@@ -89,7 +89,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [isActive]);
 
-  // React to isActive changes (hover or tap)
+  // React to isActive changes (hover or touch)
   useEffect(() => {
     if (isActive && imageLoaded) {
       startScroll();
@@ -131,6 +131,14 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
         loading="lazy"
         onLoad={() => setImageLoaded(true)}
       />
+
+      {/* Discret hint badge indicating auto scroll capability (disappears when active) */}
+      {!isActive && (
+        <div className="scroll-hint-badge" aria-hidden="true">
+          <span className="scroll-hint-dot" />
+          <span className="scroll-hint-text">Auto Scroll</span>
+        </div>
+      )}
     </div>
   );
 };

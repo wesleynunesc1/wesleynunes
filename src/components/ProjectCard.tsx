@@ -35,8 +35,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }
       }}
     >
-      {/* Screenshot Frame */}
-      <div className="card-media-wrapper">
+      {/* ÁREA SUPERIOR — PREVIEW DO WEBSITE COM AUTO SCROLL */}
+      <div className="card-preview-area">
         <ProjectAutoScroll
           screenshotSrc={project.screenshot}
           projectTitle={project.title}
@@ -44,30 +44,28 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           onActivate={onActivate}
           scrollSpeedSeconds={project.scrollSpeed}
         />
+      </div>
 
-        {/* Hover/Active Discrete Bottom Info Overlay */}
-        <div className="card-info-overlay" aria-hidden="true">
-          <div className="overlay-content">
-            <div className="overlay-meta">
-              <span className="overlay-category">{project.category}</span>
-              <h3 className="overlay-title">{project.title}</h3>
-            </div>
-
-            {project.websiteUrl && (
-              <a
-                href={project.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-overlay-visit"
-                title={`Abrir ${project.title} em nova aba`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <span>Ver site</span>
-                <ArrowUpRight size={15} />
-              </a>
-            )}
-          </div>
+      {/* ÁREA INFERIOR — INFORMAÇÕES INTEGRADAS DO PROJETO (NÃO SOBREPÕE O PRINT) */}
+      <div className="card-info-strip">
+        <div className="card-info-text">
+          <span className="card-project-category">{project.category}</span>
+          <h3 className="card-project-title">{project.title}</h3>
         </div>
+
+        {project.websiteUrl && (
+          <a
+            href={project.websiteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-card-visit"
+            title={`Abrir ${project.title} em nova aba`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span>Ver site</span>
+            <ArrowUpRight size={14} />
+          </a>
+        )}
       </div>
     </article>
   );

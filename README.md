@@ -6,29 +6,27 @@ Portfólio editorial e imersivo desenvolvido em **React 19**, **Vite** e **TypeS
 
 ---
 
-## ✦ Estrutura e Destaques
+## ✦ Estrutura e Refinamentos Premium
 
-### Experiência Mobile Atualizada:
-1. **Paleta Fria Oficial**:
-   - Preto profundo (`#05070B`), grafite escuro (`#111318`), prata suave (`#D9D9D9`), branco frio (`#F5F7FA`) e destaque refinado em **azul-gelo (`#A9C8D8`)**.
-   - Zero verde-neon/lime: toda a iluminação, botões e detalhes gráficos seguem o conceito sofisticado e frio do estúdio.
-2. **Quadro Compacto dos Cases**:
-   - Altura do viewport visível dos projetos reduzida pela metade: `height: clamp(260px, 38vh, 320px)`.
-   - Screenshots em alta resolução (1080x1920 / verticais) percorrem suavemente o interior do viewport com `overflow: hidden`.
-   - Proporção elegante, permitindo visualizar múltiplos projetos na tela sem scroll excessivo.
-3. **Topo & Header Cápsula**:
-   - *"Entre em contato!"* em branco/cinza suave centralizado.
-   - Cápsula com borda fina azul-gelo translúcida.
-   - Botão **`☰ Menu`** com acabamento em azul-gelo metálico e texto escuro de alto contraste.
-4. **Botão Central "Portfólio"**:
-   - Destaque em gradiente prateado/azul-gelo com bolha esférica fria decorativa e glow azulado sutil.
-5. **Seção de Cases**:
-   - `03 / CASES DE SUCESSO`
-   - `// Clique sobre a imagem para interagir.` (com o símbolo `//` em azul-gelo).
-6. **Rolagem por Toque (`ProjectAutoScroll`)**:
-   - Toque ativa a rolagem automática fluida (Web Animations API a 60/120fps).
-   - Tocar em outro projeto interrompe e reseta o anterior para o topo.
-   - Tocar novamente no projeto ativo reinicia a animação.
+### Refinamento da Versão Mobile:
+1. **Otimização dos Espaçamentos (Redução de 25% a 35%)**:
+   - Espaçamento equilibrado entre o Header e o botão Portfólio.
+   - Transição enxuta entre o botão Portfólio e o título `01 / CASES DE SUCESSO`.
+   - Distância harmônica até o primeiro projeto.
+   - Gap consistente de 16px entre os cards.
+2. **Novo Design dos Cards de Projetos**:
+   - **Área Superior (Preview do Website)**: Screenshot vertical com rolagem automática contínua (`overflow: hidden`), sem cortes ou distorções, com altura visível compacta de `clamp(260px, 38vh, 300px)`.
+   - **Área Inferior (Faixa de Informações)**: Fundo grafite integrado com categoria em azul-gelo, título em branco e botão *"Ver site"* com ícone de seta diagonal (sem sobrepor o print durante a animação).
+   - **Indicador de Rolagem**: Discreto pill `Auto Scroll` com ponto luminoso em azul-gelo no canto do card quando inativo, que desaparece assim que ativado.
+3. **Instruções de Interação**:
+   - Mobile: `// Toque para explorar o site.`
+   - Desktop: `// Passe o mouse para explorar o site.`
+4. **Header Cápsula & Botão Portfólio**:
+   - Header cápsula mais compacto com alinhamento vertical refinado.
+   - Botão Portfólio com glow 30% mais suave e esfera decorativa menor (26px), mantendo a translucidez elegante e fria.
+   - Menu dropdown deslizante preservado com transição suave.
+5. **Faixa Animada (Marquee)**:
+   - Posicionada logo após a conclusão da galeria de projetos, com padding vertical otimizado e transição fluida contínua.
 
 ---
 

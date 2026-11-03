@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #000000;
+  background-color: #05070b;
   user-select: none;
 }
 
@@ -17,9 +17,46 @@
   will-change: transform;
 }
 
+/* Subtle motion indicator badge when inactive */
+.scroll-hint-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.22rem 0.55rem;
+  background: rgba(5, 7, 11, 0.75);
+  border: 1px solid rgba(169, 200, 216, 0.22);
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+
+.scroll-hint-dot {
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  background-color: var(--color-ice);
+  box-shadow: 0 0 6px var(--color-ice);
+}
+
+.scroll-hint-text {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-ice);
+  text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
   .project-scroll-viewport {
     height: 100%;
-    max-height: clamp(260px, 38vh, 320px);
+    /* Compact height rule: clamp(260px, 38vh, 300px) */
+    max-height: clamp(260px, 38vh, 300px);
   }
 }

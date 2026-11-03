@@ -17,6 +17,7 @@ export const PortfolioGallery: React.FC = () => {
 
   const handleTouchToggle = (id: string) => {
     setActiveProjectId((current) => {
+      // Toggle or restart animation
       if (current === id) {
         return id;
       }
@@ -29,10 +30,10 @@ export const PortfolioGallery: React.FC = () => {
   return (
     <section id="projetos" className="portfolio-gallery-section">
       <div className="portfolio-gallery-container">
-        {/* Mobile Central Featured "Portfólio" Button with Floating Bubble */}
+        {/* Mobile Central Featured "Portfólio" Button with Refined Sphere */}
         <div className="mobile-portfolio-cta-wrapper">
           <div className="mobile-portfolio-pill-box">
-            {/* Decorative overlapping bubble sphere */}
+            {/* Delicate translucid cold sphere */}
             <div className="portfolio-pill-bubble" aria-hidden="true" />
             <button
               type="button"
@@ -55,12 +56,12 @@ export const PortfolioGallery: React.FC = () => {
 
           <p className="gallery-instruction">
             <span className="instruction-symbol">//</span>
-            <span className="instruction-text-desktop">Passe o mouse sobre a imagem para interagir.</span>
-            <span className="instruction-text-mobile">Clique sobre a imagem para interagir.</span>
+            <span className="instruction-text-desktop">Passe o mouse para explorar o site.</span>
+            <span className="instruction-text-mobile">Toque para explorar o site.</span>
           </p>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Gallery */}
         <div className="projects-grid-3col">
           {sortedProjects.map((project) => (
             <ProjectCard

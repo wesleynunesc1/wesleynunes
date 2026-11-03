@@ -1,11 +1,14 @@
 .gallery-project-card {
   position: relative;
   background-color: #0b0e14;
-  border-radius: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(169, 200, 216, 0.16);
   overflow: hidden;
   cursor: pointer;
   outline: none;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
   user-select: none;
 }
 
@@ -16,66 +19,52 @@
 
 .gallery-project-card:hover,
 .gallery-project-card.is-active {
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(169, 200, 216, 0.15);
+  border-color: rgba(169, 200, 216, 0.38);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(169, 200, 216, 0.12);
 }
 
-/* Card Media Container (Desktop 9:16) */
-.card-media-wrapper {
+/* ÁREA SUPERIOR — PREVIEW DO WEBSITE */
+.card-preview-area {
   position: relative;
   width: 100%;
-  aspect-ratio: 9 / 16;
-  background-color: #000000;
+  aspect-ratio: 9 / 15;
+  background-color: #05070b;
   overflow: hidden;
 }
 
-/* Discrete Overlay at bottom */
-.card-info-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem 1.25rem 1.25rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(5, 7, 11, 0.85) 40%, rgba(5, 7, 11, 0.98) 100%);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  z-index: 10;
-}
-
-.gallery-project-card:hover .card-info-overlay,
-.gallery-project-card.is-active .card-info-overlay {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.overlay-content {
+/* ÁREA INFERIOR — INFORMAÇÕES INTEGRADAS DO PROJETO */
+.card-info-strip {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding: 0.95rem 1.15rem;
+  background-color: #0e1219;
+  border-top: 1px solid rgba(169, 200, 216, 0.1);
 }
 
-.overlay-meta {
+.card-info-text {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
   min-width: 0;
 }
 
-.overlay-category {
+.card-project-category {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--color-ice);
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.overlay-title {
+.card-project-title {
   font-family: var(--font-sans);
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 500;
   color: #ffffff;
   white-space: nowrap;
@@ -84,16 +73,16 @@
   letter-spacing: -0.01em;
 }
 
-.btn-overlay-visit {
+.btn-card-visit {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(169, 200, 216, 0.14);
-  border: 1px solid rgba(169, 200, 216, 0.4);
+  background: rgba(169, 200, 216, 0.12);
+  border: 1px solid rgba(169, 200, 216, 0.32);
   color: #ffffff;
-  font-size: 0.75rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  padding: 0.45rem 0.85rem;
+  padding: 0.42rem 0.85rem;
   border-radius: 9999px;
   text-decoration: none;
   backdrop-filter: blur(8px);
@@ -102,47 +91,43 @@
   transition: all 0.2s ease;
 }
 
-.btn-overlay-visit:hover {
+.btn-card-visit:hover {
   background: var(--color-ice);
   color: #05070b;
+  border-color: var(--color-ice);
   transform: translateY(-1px);
 }
 
 /* ==========================================================================
-   MOBILE COMPACT VIEWPORT: REDUCE HEIGHT BY HALF
+   MOBILE COMPACT VIEWPORT: HEIGHT CLAMP(260px, 38vh, 300px)
    ========================================================================== */
 @media (max-width: 768px) {
   .gallery-project-card {
-    border-radius: 8px;
-    border: 1px solid rgba(169, 200, 216, 0.16);
-    background-color: #090c12;
+    border-radius: 7px;
   }
 
-  .card-media-wrapper {
+  .card-preview-area {
     aspect-ratio: auto;
     width: 100%;
-    /* Compact height ~half of previous: clamp(260px, 38vh, 320px) */
-    height: clamp(260px, 38vh, 320px);
+    /* Compact visible height */
+    height: clamp(260px, 38vh, 300px);
   }
 
-  /* Compact discreet overlay on mobile */
-  .card-info-overlay {
-    padding: 1.15rem 0.85rem 0.85rem;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+  .card-info-strip {
+    padding: 0.8rem 1rem;
+    gap: 0.75rem;
   }
 
-  .overlay-title {
-    font-size: 0.94rem;
+  .card-project-title {
+    font-size: 0.92rem;
   }
 
-  .overlay-category {
-    font-size: 0.66rem;
+  .card-project-category {
+    font-size: 0.64rem;
   }
 
-  .btn-overlay-visit {
-    padding: 0.38rem 0.75rem;
+  .btn-card-visit {
+    padding: 0.36rem 0.75rem;
     font-size: 0.72rem;
   }
 }
