@@ -17,7 +17,7 @@ export const PortfolioGallery: React.FC = () => {
 
   const handleTouchToggle = (id: string) => {
     setActiveProjectId((current) => {
-      // If tapping active card again, trigger re-render to replay
+      // If tapping active card again, reset and re-trigger animation
       if (current === id) {
         return id;
       }
@@ -30,20 +30,38 @@ export const PortfolioGallery: React.FC = () => {
   return (
     <section id="projetos" className="portfolio-gallery-section">
       <div className="portfolio-gallery-container">
-        {/* Section Header */}
-        <div className="gallery-header">
+        {/* Mobile Central Featured "Portfólio" Button with Floating Bubble */}
+        <div className="mobile-portfolio-cta-wrapper">
+          <div className="mobile-portfolio-pill-box">
+            {/* Decorative overlapping bubble sphere */}
+            <div className="portfolio-pill-bubble" aria-hidden="true" />
+            <button
+              type="button"
+              className="btn-mobile-portfolio-main"
+              onClick={() => {
+                const el = document.getElementById('cases-start');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Portfólio
+            </button>
+          </div>
+        </div>
+
+        {/* Section Header: 03 / CASES DE SUCESSO */}
+        <div id="cases-start" className="gallery-header">
           <span className="gallery-section-tag">
-            PORTFÓLIO / PROJETOS SELECIONADOS
+            03 / CASES DE SUCESSO
           </span>
 
           <p className="gallery-instruction">
             <span className="instruction-symbol">//</span>
             <span className="instruction-text-desktop">Passe o mouse sobre a imagem para interagir.</span>
-            <span className="instruction-text-mobile">Toque em um projeto para explorar.</span>
+            <span className="instruction-text-mobile">Clique sobre a imagem para interagir.</span>
           </p>
         </div>
 
-        {/* 3-Column Grid on Desktop, 2 on Tablet, 1 on Mobile */}
+        {/* Projects Grid: 3 col Desktop, 2 col Tablet, 1 col Mobile */}
         <div className="projects-grid-3col">
           {sortedProjects.map((project) => (
             <ProjectCard
