@@ -1,0 +1,144 @@
+/* ==========================================================================
+   WESLEY NUNES — PREMIUM DESIGN SYSTEM (REFERÊNCIA HUMAN EDITORIAL)
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-dark: #080a0f;
+  --bg-card: #0f131a;
+  --bg-card-hover: #141923;
+  --bg-panel: #11141c;
+  --bg-contrast: #111318;
+
+  --color-ice: #a9c8d8;
+  --color-ice-dim: rgba(169, 200, 216, 0.45);
+  --color-ice-glow: rgba(169, 200, 216, 0.15);
+  --color-blue-deep: #1e3a5f;
+  --color-silver: #d9d9d9;
+  --color-white: #ffffff;
+  --color-text-muted: #8e9bb0;
+  --color-text-dim: #5c687a;
+  
+  --line-subtle: rgba(169, 200, 216, 0.12);
+  --line-hover: rgba(169, 200, 216, 0.3);
+  --line-card: #1f2736;
+
+  /* Typography */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Space Grotesk', ui-monospace, SFMono-Regular, monospace;
+
+  /* Transitions */
+  --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 0.2s;
+  --duration-normal: 0.35s;
+  --duration-slow: 0.6s;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  color: var(--color-silver);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+  background-color: var(--bg-dark);
+}
+
+::selection {
+  background-color: var(--color-ice);
+  color: #080a0f;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #1f2736;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ice-dim);
+}
+
+/* Typography Helpers */
+.font-display {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+.text-silver-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #d9d9d9 45%, #8e9bb0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-ice-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #a9c8d8 50%, #6ba2bc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ambient Lighting Classes */
+.ambient-glow-ice {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(169, 200, 216, 0.16) 0%, rgba(169, 200, 216, 0.04) 45%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-navy {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(30, 58, 95, 0.35) 0%, rgba(17, 25, 40, 0.1) 50%, transparent 75%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Glass Surface Styles */
+.glass-panel {
+  background: rgba(17, 20, 28, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line-subtle);
+}
+
+.glass-pill {
+  background: rgba(22, 28, 40, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(169, 200, 216, 0.18);
+  border-radius: 9999px;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

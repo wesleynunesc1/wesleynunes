@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 3600" width="1200" height="3600">
+  <defs>
+    <linearGradient id="nexus-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0B0E" />
+      <stop offset="50%" stop-color="#10121A" />
+      <stop offset="100%" stop-color="#07080A" />
+    </linearGradient>
+    <linearGradient id="nexus-violet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C084FC" />
+      <stop offset="50%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="3600" fill="url(#nexus-bg)" />
+  <circle cx="200" cy="400" r="450" fill="#818CF8" opacity="0.1" filter="blur(80px)" />
+  <circle cx="1000" cy="2400" r="400" fill="#C084FC" opacity="0.1" filter="blur(80px)" />
+
+  <!-- Nav -->
+  <g transform="translate(120, 70)">
+    <text x="0" y="45" font-family="sans-serif" font-size="24" font-weight="700" fill="#FFFFFF" letter-spacing="2">NEXUS CRAFT</text>
+    <text x="500" y="45" font-family="sans-serif" font-size="15" fill="#94A3B8">ENGINE • SHADERS • SDK • PRICING • DOCS</text>
+    <rect x="850" y="15" width="110" height="40" rx="8" fill="#818CF8" />
+    <text x="875" y="41" font-family="sans-serif" font-size="14" fill="#0A0B0E" font-weight="600">GET SDK</text>
+  </g>
+
+  <!-- Hero Section -->
+  <g transform="translate(120, 320)">
+    <rect x="0" y="0" width="190" height="30" rx="15" fill="#1C182F" stroke="#818CF8" stroke-width="1" />
+    <text x="25" y="20" font-family="sans-serif" font-size="12" font-weight="600" fill="#C084FC" letter-spacing="1">GRAPHICS RUNTIME 4.0</text>
+
+    <text x="0" y="110" font-family="sans-serif" font-size="64" font-weight="300" fill="#FFFFFF">Real-time WebGPU</text>
+    <text x="0" y="185" font-family="sans-serif" font-size="64" font-weight="700" fill="url(#nexus-violet)">Rendering Engine.</text>
+    <text x="0" y="260" font-family="sans-serif" font-size="20" fill="#94A3B8">Next-generation procedural shaders and fluid physics at 120 FPS in the browser.</text>
+
+    <!-- Code & Interactive preview -->
+    <rect x="0" y="320" width="960" height="540" rx="16" fill="#0F1117" stroke="#252A38" stroke-width="1.5" />
+    <!-- Terminal header -->
+    <circle cx="40" cy="355" r="6" fill="#EF4444" />
+    <circle cx="60" cy="355" r="6" fill="#F59E0B" />
+    <circle cx="80" cy="355" r="6" fill="#10B981" />
+    <text x="120" y="360" font-family="monospace" font-size="14" fill="#64748B">pipeline.config.ts — NexusEngine v4</text>
+
+    <!-- Code simulation -->
+    <text x="40" y="420" font-family="monospace" font-size="16" fill="#818CF8">import { createScene, WebGPURenderer } from '@nexus/core';</text>
+    <text x="40" y="460" font-family="monospace" font-size="16" fill="#C084FC">const engine = await WebGPURenderer.init({</text>
+    <text x="70" y="500" font-family="monospace" font-size="16" fill="#E2E8F0">  precision: 'ultra-high',</text>
+    <text x="70" y="540" font-family="monospace" font-size="16" fill="#E2E8F0">  hdrBloom: true,</text>
+    <text x="70" y="580" font-family="monospace" font-size="16" fill="#E2E8F0">  subsurfaceScattering: true,</text>
+    <text x="40" y="620" font-family="monospace" font-size="16" fill="#C084FC">});</text>
+    <text x="40" y="680" font-family="monospace" font-size="16" fill="#34D399">// 120 FPS Benchmark verified on mobile & desktop</text>
+    <text x="40" y="720" font-family="monospace" font-size="16" fill="#818CF8">engine.runPipeline(document.getElementById('canvas'));</text>
+  </g>
+
+  <!-- Showcase Cards -->
+  <g transform="translate(120, 1500)">
+    <text x="0" y="40" font-family="sans-serif" font-size="36" font-weight="300" fill="#FFFFFF">Engine Capabilities</text>
+
+    <rect x="0" y="90" width="460" height="420" rx="16" fill="#11131C" stroke="#252A38" />
+    <text x="40" y="160" font-family="sans-serif" font-size="24" fill="#FFFFFF">Raymarching VDB Volumes</text>
+    <text x="40" y="210" font-family="sans-serif" font-size="16" fill="#94A3B8">Simulate atmospheric smoke, cosmic nebulas and volumetrics with zero frame drops.</text>
+
+    <rect x="500" y="90" width="460" height="420" rx="16" fill="#11131C" stroke="#252A38" />
+    <text x="540" y="160" font-family="sans-serif" font-size="24" fill="#FFFFFF">Dynamic Compute Shaders</text>
+    <text x="540" y="210" font-family="sans-serif" font-size="16" fill="#94A3B8">Offload complex physics calculations directly onto client GPUs without main thread locking.</text>
+  </g>
+
+  <!-- Integration Steps -->
+  <g transform="translate(120, 2300)">
+    <text x="0" y="40" font-family="sans-serif" font-size="36" font-weight="300" fill="#FFFFFF">Integrated in 3 Lines of Code</text>
+
+    <rect x="0" y="80" width="960" height="240" rx="16" fill="#0C0E14" stroke="#1F2432" />
+    <text x="40" y="150" font-family="monospace" font-size="20" fill="#38BDF8">npx install-nexus-app@latest</text>
+    <text x="40" y="200" font-family="sans-serif" font-size="15" fill="#64748B">Instant boilerplate with Vite, TypeScript and WebGPU compute pipeline preconfigured.</text>
+  </g>
+
+  <!-- Footer -->
+  <g transform="translate(120, 3200)">
+    <line x1="0" y1="0" x2="960" y2="0" stroke="#252A38" />
+    <text x="0" y="100" font-family="sans-serif" font-size="48" font-weight="300" fill="#FFFFFF">Unleash the browser GPU.</text>
+    <text x="0" y="160" font-family="sans-serif" font-size="20" fill="#818CF8">dev@nexuscraft.engine</text>
+    <text x="0" y="240" font-family="sans-serif" font-size="14" fill="#475569">© 2026 Nexus Craft Technologies Inc. Open source core under Apache-2.0.</text>
+  </g>
+</svg>

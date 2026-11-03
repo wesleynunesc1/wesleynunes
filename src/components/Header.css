@@ -1,0 +1,233 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1.25rem 2rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-header.header-scrolled {
+  padding: 0.85rem 2rem;
+  background: rgba(8, 10, 15, 0.78);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(169, 200, 216, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Wordmark Logo */
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--color-white);
+  transition: opacity 0.25s ease;
+  position: relative;
+}
+
+.brand-logo:hover {
+  opacity: 0.9;
+}
+
+.brand-primary {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.brand-secondary {
+  color: var(--color-ice);
+  margin-left: 0.35rem;
+  font-weight: 300;
+}
+
+.brand-dot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--color-ice);
+  border-radius: 50%;
+  margin-left: 0.35rem;
+  box-shadow: 0 0 10px rgba(169, 200, 216, 0.8);
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+  position: relative;
+  padding: 0.35rem 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--color-ice), transparent);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover {
+  color: var(--color-white);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Header CTA */
+.header-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-header-talk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(169, 200, 216, 0.06);
+  border: 1px solid rgba(169, 200, 216, 0.2);
+  color: var(--color-ice);
+  text-decoration: none;
+  font-size: 0.825rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-header-talk:hover {
+  background: rgba(169, 200, 216, 0.15);
+  border-color: rgba(169, 200, 216, 0.45);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(169, 200, 216, 0.18);
+}
+
+/* Mobile Toggle */
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(169, 200, 216, 0.2);
+  border-radius: 8px;
+  color: var(--color-ice);
+  padding: 0.45rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-toggle:hover {
+  background: rgba(169, 200, 216, 0.1);
+  color: #ffffff;
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav-drawer {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .btn-header-talk {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .mobile-nav-drawer {
+    display: block;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    background: rgba(8, 10, 15, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(169, 200, 216, 0.15);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+  }
+
+  .mobile-nav-drawer.open {
+    max-height: 380px;
+    padding: 1.5rem 1.5rem 2rem;
+  }
+
+  .mobile-nav-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .mobile-nav-link {
+    color: var(--color-silver);
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 400;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobile-drawer-footer {
+    padding-top: 1rem;
+  }
+
+  .btn-mobile-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.85rem;
+    background: rgba(169, 200, 216, 0.12);
+    border: 1px solid rgba(169, 200, 216, 0.3);
+    border-radius: 9999px;
+    color: var(--color-ice);
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
