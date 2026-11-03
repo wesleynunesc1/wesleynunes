@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import './Header.css';
 
 export const Header: React.FC = () => {
@@ -22,119 +22,79 @@ export const Header: React.FC = () => {
   const instagramUrl = 'https://www.instagram.com/euwesleyununes/';
 
   return (
-    <>
-      <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
-        {/* Mobile Top Callout — "Entre em contato!" em branco/cinza suave */}
-        <div className="mobile-top-callout">
+    <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
+      <div className="header-inner">
+        {/* Brand Wordmark */}
+        <a href="#projetos" className="brand-logo" onClick={closeMenu}>
+          <span className="brand-primary">WESLEY</span>
+          <span className="brand-secondary">NUNES</span>
+          <span className="brand-dot" />
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="desktop-nav" aria-label="Navegação Principal">
+          <ul className="nav-list">
+            <li><a href="#projetos" className="nav-link">Projetos</a></li>
+            <li><a href="#sobre" className="nav-link">Sobre</a></li>
+            <li><a href="#contato" className="nav-link">Contato</a></li>
+          </ul>
+        </nav>
+
+        {/* Header Action Button (Desktop) & Menu Button (Mobile) */}
+        <div className="header-cta">
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mobile-callout-link"
+            className="btn-header-talk"
           >
-            Entre em contato!
-          </a>
-        </div>
-
-        {/* Main Bar / Mobile Capsule Container */}
-        <div className="header-inner">
-          {/* Brand Wordmark */}
-          <a href="#projetos" className="brand-logo" onClick={closeMenu}>
-            <span className="brand-primary">WESLEY</span>
-            <span className="brand-secondary">NUNES</span>
-            <span className="brand-dot" />
+            <span>Iniciar Projeto</span>
+            <ArrowUpRight size={15} />
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="desktop-nav" aria-label="Navegação Principal">
-            <ul className="nav-list">
-              <li><a href="#projetos" className="nav-link">Projetos</a></li>
-              <li><a href="#sobre" className="nav-link">Sobre</a></li>
-              <li><a href="#contato" className="nav-link">Contato</a></li>
-            </ul>
-          </nav>
-
-          {/* Header Action Button (Desktop) & Menu Button (Mobile) */}
-          <div className="header-cta">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-header-talk"
-            >
-              <span>Iniciar Projeto</span>
-              <ArrowUpRight size={15} />
-            </a>
-
-            {/* Mobile Ice-Blue / Cold Silver Menu Button */}
-            <button
-              className="btn-mobile-ice-menu"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? 'Fechar Menu' : 'Abrir Menu'}
-              aria-expanded={mobileMenuOpen}
-            >
-              <span className="ice-menu-icon">☰</span>
-              <span className="ice-menu-text">Menu</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Mobile Drawer Menu */}
-      <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-drawer-header">
-          <span className="drawer-title">NAVEGAÇÃO</span>
+          {/* Mobile Ice-Blue Menu Button */}
           <button
-            className="drawer-close-btn"
-            onClick={closeMenu}
-            aria-label="Fechar navegação"
+            className="btn-mobile-ice-menu"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Fechar Menu' : 'Abrir Menu'}
+            aria-expanded={mobileMenuOpen}
           >
-            <X size={20} />
+            <span className="ice-menu-icon">{mobileMenuOpen ? '✕' : '☰'}</span>
+            <span className="ice-menu-text">{mobileMenuOpen ? 'Fechar' : 'Menu'}</span>
           </button>
         </div>
+      </div>
 
+      {/* Mobile Drawer Menu — efeito dropdown/deslizante original logo abaixo da barra */}
+      <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav-inner">
-          <a href="#projetos" className="mobile-nav-link" onClick={closeMenu}>
-            <span>Portfólio</span>
-            <span className="drawer-link-arrow">→</span>
-          </a>
-          <a href="#projetos" className="mobile-nav-link" onClick={closeMenu}>
-            <span>Projetos</span>
-            <span className="drawer-link-arrow">→</span>
-          </a>
-          <a href="#sobre" className="mobile-nav-link" onClick={closeMenu}>
-            <span>Sobre</span>
-            <span className="drawer-link-arrow">→</span>
-          </a>
-          <a href="#contato" className="mobile-nav-link" onClick={closeMenu}>
-            <span>Contato</span>
-            <span className="drawer-link-arrow">→</span>
-          </a>
-
-          <div className="mobile-drawer-direct-links">
+          <a href="#projetos" className="mobile-nav-link" onClick={closeMenu}>Projetos</a>
+          <a href="#sobre" className="mobile-nav-link" onClick={closeMenu}>Sobre</a>
+          <a href="#contato" className="mobile-nav-link" onClick={closeMenu}>Contato</a>
+          <div className="mobile-drawer-footer">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="drawer-action-btn whatsapp-btn"
+              className="btn-mobile-contact"
               onClick={closeMenu}
             >
-              <span>WhatsApp: +55 (88) 98195-7471</span>
+              <span>Iniciar Projeto</span>
               <ArrowUpRight size={16} />
             </a>
             <a
               href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="drawer-action-btn instagram-btn"
+              className="btn-mobile-instagram"
               onClick={closeMenu}
             >
-              <span>Instagram: @euwesleyununes</span>
+              <span>Instagram @euwesleyununes</span>
               <ArrowUpRight size={16} />
             </a>
           </div>
         </nav>
       </div>
-    </>
+    </header>
   );
 };

@@ -17,7 +17,6 @@ export const PortfolioGallery: React.FC = () => {
 
   const handleTouchToggle = (id: string) => {
     setActiveProjectId((current) => {
-      // If tapping active card again, reset and re-trigger animation
       if (current === id) {
         return id;
       }
@@ -48,10 +47,10 @@ export const PortfolioGallery: React.FC = () => {
           </div>
         </div>
 
-        {/* Section Header: 03 / CASES DE SUCESSO */}
+        {/* Section Header: 01 / CASES DE SUCESSO */}
         <div id="cases-start" className="gallery-header">
           <span className="gallery-section-tag">
-            03 / CASES DE SUCESSO
+            01 / CASES DE SUCESSO
           </span>
 
           <p className="gallery-instruction">
@@ -61,7 +60,7 @@ export const PortfolioGallery: React.FC = () => {
           </p>
         </div>
 
-        {/* Projects Grid: 3 col Desktop, 2 col Tablet, 1 col Mobile */}
+        {/* Projects Grid */}
         <div className="projects-grid-3col">
           {sortedProjects.map((project) => (
             <ProjectCard
