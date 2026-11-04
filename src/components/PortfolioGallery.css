@@ -1,7 +1,6 @@
 .portfolio-gallery-section {
   position: relative;
-  /* Clean desktop vertical padding */
-  padding: 5.5rem 2rem 4rem;
+  padding: 5rem 2rem 4rem;
   z-index: 5;
   background-color: transparent;
 }
@@ -56,11 +55,7 @@
 }
 
 /* ==========================================================================
-   DESKTOP GRID: EXACT MATCH TO REFERENCE SPECIFICATION
-   - 3 columns with repeat(3, minmax(0, 1fr))
-   - 16px gap
-   - Cards fill their respective columns (aligned horizontally and vertically)
-   - Left-aligned when row has fewer items (no auto stretch)
+   DESKTOP GRID: 3 COLUMNS WITH HARMONIC 16px GAP
    ========================================================================== */
 .projects-grid-3col {
   display: grid;
@@ -69,8 +64,14 @@
   width: 100%;
 }
 
-/* Tablet Layout (2 columns) */
+/* ==========================================================================
+   TABLET RESPONSIVE (2 COLUMNS)
+   ========================================================================== */
 @media (max-width: 1080px) and (min-width: 769px) {
+  .portfolio-gallery-section {
+    padding: 4.5rem 1.5rem 3.5rem;
+  }
+
   .projects-grid-3col {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
@@ -78,18 +79,18 @@
 }
 
 /* ==========================================================================
-   MOBILE VIEWPORT STYLES (PRESERVED ACCORDING TO APPROVED SPECIFICATION)
+   MOBILE VIEWPORT STYLES (1 COLUMN, BALANCED & ELEVATED)
    ========================================================================== */
 @media (max-width: 768px) {
   .portfolio-gallery-section {
-    padding: 0.6rem 0.85rem 2rem;
+    padding: 0.6rem 0.85rem 2.2rem;
   }
 
   .mobile-portfolio-cta-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0.65rem auto 1.45rem;
+    margin: 0.65rem auto 1.35rem;
     position: relative;
     width: 100%;
   }

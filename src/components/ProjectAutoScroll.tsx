@@ -118,19 +118,27 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     };
   }, [isActive, imageLoaded, startScroll, stopAnimation]);
 
+  // Fallback if browser doesn't support WebP or fails to load
+  const jpgFallback = screenshotSrc.replace(/\.webp$/, '.jpg');
+
   return (
     <div
       ref={containerRef}
       className={`project-scroll-viewport ${isActive ? 'is-active' : ''}`}
     >
-      <img
-        ref={imageRef}
-        src={screenshotSrc}
-        alt={`Screenshot do website ${projectTitle}`}
-        className="project-screenshot-image"
-        loading="lazy"
-        onLoad={() => setImageLoaded(true)}
-      />
+      <picture>
+        <source srcSet={screenshotSrc} type="image/webp" />
+        <source srcSet={jpgFallback} type="image/jpeg" />
+        <img
+          ref={imageRef}
+          src={screenshotSrc}
+          alt={`Screenshot do website ${projectTitle}`}
+          className="project-screenshot-image"
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setImageLoaded(true)}
+        />
+      </picture>
 
       {/* Discret hint badge indicating auto scroll capability (disappears when active) */}
       {!isActive && (
