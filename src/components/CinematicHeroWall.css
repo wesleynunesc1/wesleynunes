@@ -3,7 +3,7 @@
 .fs-hero-section {
   position: relative;
   width: 100%;
-  height: 280svh; /* Compact, objective timeline without dead scroll distance */
+  height: 250svh; /* Exact FilmSupply continuous track */
   background-color: #05070B;
 }
 
@@ -234,7 +234,7 @@
 /* Mobile specific styling */
 @media (max-width: 768px) {
   .fs-hero-section {
-    height: 240svh; /* Objective, tight scroll distance on mobile */
+    height: 250svh; /* Objective, tight scroll distance on mobile */
   }
 
   .fs-hero-cell {

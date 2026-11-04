@@ -48,8 +48,6 @@ export const CinematicHeroWall: React.FC = () => {
 
       // Header element in DOM (controlled directly by timeline)
       const header = document.querySelector<HTMLElement>('.site-header');
-      // Next section (Portfolio Gallery) to connect seamlessly
-      const nextSection = document.getElementById(filmHeroContent.targetSectionId);
 
       if (!section || !grid || !copy || !dim || !surroundLayer) return;
 
@@ -94,7 +92,7 @@ export const CinematicHeroWall: React.FC = () => {
           trigger: section,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: isMobile ? 0.35 : 0.55,
+          scrub: isMobile ? 0.3 : 0.5,
           anticipatePin: 1,
           fastScrollEnd: true,
           preventOverlaps: true,
@@ -102,100 +100,86 @@ export const CinematicHeroWall: React.FC = () => {
         },
       });
 
-      // TIMELINE BREAKDOWN:
-      // Total duration: 100 units (compact, objective timeline)
+      // TIMELINE BREAKDOWN (Exact continuous FilmSupply architecture):
+      // Total duration: 250 units (corresponding to 250svh scroll track)
       //
-      // 0% - 25%: Content vanishes smoothly via combined opacity, slight upward drift and clipping mask
-      // 15% - 70%: Continuous virtual camera zoom-out (scale 1.0 -> 0.4654)
-      // 25% - 60%: Progressive revelation of surrounding panels
-      //            - Laterals appear (25% -> 40%)
-      //            - Top / bottom appear (32% -> 48%)
-      //            - Corners complete the wall (40% -> 58%)
-      // 60% - 75%: Full composition hold (brief, natural breathing room)
-      //            - Header progressively fades in (55% -> 70%)
-      // 75% - 100%: Seamless cinematic transition:
-      //            - Mosaic translates upward (yPercent: -35) with soft dimming
-      //            - Next section immediately slides up to meet it without blank gaps
+      // [0 -> 40]: Hero text/logo/CTA fades smoothly via opacity + translateY
+      // [0 -> 150]: Virtual camera continuous zoom-out (scale 1.0 -> 0.4654)
+      // [0 -> 25]: Surrounding cells emerge organically as camera starts pulling back
+      //            - Layer becomes visible at 0
+      //            - Cells fade in 0 -> 40
+      // [55 -> 95]: Header fades in gracefully while composition is visible
+      // [150 -> 250]: CONTINUOUS TRANSITION:
+      //            - Grid translates up: yPercent: 0 -> -50
+      //            - Soft dimming: dim opacity: 0 -> 0.75
+      //            - Because the following section has `margin-top: -100svh`,
+      //              as the mosaic moves up from 150 to 250, Cases de Sucesso
+      //              moves directly up into the viewport simultaneously. ZERO blank gap!
 
-      masterTl
-        // 0% -> 25%: Hero elements vanish with combined opacity + translateY + clipping mask
-        .to(
-          copy,
-          {
-            opacity: 0,
-            y: -24,
-            clipPath: 'inset(0% 0% 85% 0%)',
-            ease: 'power2.inOut',
-            duration: 25,
-          },
-          0
-        )
+      // 0 -> 40: Copy fades out
+      masterTl.to(
+        copy,
+        {
+          opacity: 0,
+          y: -24,
+          ease: 'power1.in',
+          duration: 40,
+        },
+        0
+      );
 
-        // 15% -> 70%: Continuous zoom-out of the grid
-        .to(
-          grid,
-          {
-            scale: isMobile ? 0.48 : 0.4654,
-            ease: 'power1.inOut',
-            duration: 55,
-          },
-          15
-        )
+      // 0 -> 150: Continuous Zoom-out of the 3x3 grid
+      masterTl.to(
+        grid,
+        {
+          scale: isMobile ? 0.48 : 0.4654,
+          ease: 'power1.inOut',
+          duration: 150,
+        },
+        0
+      );
 
-        // 25%: Make surrounding layer container visible
-        .set(
-          surroundLayer,
-          {
-            visibility: 'visible',
-          },
-          25
-        )
+      // Surrounding panels layer visibility & opacity
+      masterTl.set(
+        surroundLayer,
+        {
+          visibility: 'visible',
+        },
+        0
+      );
 
-        // 25% -> 40%: Laterals appear first
-        .to(
-          [leftCell, rightCell].filter(Boolean),
-          {
-            opacity: 1,
-            ease: 'power1.out',
-            duration: 15,
-          },
-          25
-        )
+      masterTl.to(
+        surroundLayer,
+        {
+          opacity: 1,
+          ease: 'power1.out',
+          duration: 35,
+        },
+        5
+      );
 
-        // 32% -> 48%: Top & bottom appear
-        .to(
-          [topCell, bottomCell].filter(Boolean),
-          {
-            opacity: 1,
-            ease: 'power1.out',
-            duration: 16,
-          },
-          32
-        )
+      // Surrounding cells fade in smoothly as camera pulls back
+      const allSurrounding = [
+        leftCell,
+        rightCell,
+        topCell,
+        bottomCell,
+        ...corners,
+      ].filter(Boolean);
 
-        // 40% -> 58%: Corners appear to complete the wall
-        .to(
-          corners.filter(Boolean),
+      if (allSurrounding.length > 0) {
+        masterTl.to(
+          allSurrounding,
           {
             opacity: 1,
             ease: 'power1.out',
-            duration: 18,
+            duration: 35,
           },
-          40
-        )
-
-        // Surrounding layer general opacity 0 -> 1
-        .to(
-          surroundLayer,
-          {
-            opacity: 1,
-            ease: 'none',
-            duration: 20,
-          },
-          25
+          5
         );
+      }
 
-      // Header progressive reveal: 55% -> 72%
+      // Header progressive reveal: 55 -> 95
       if (header) {
         masterTl.to(
           header,
@@ -203,7 +187,7 @@ export const CinematicHeroWall: React.FC = () => {
             opacity: 1,
             y: 0,
             ease: 'power2.out',
-            duration: 17,
+            duration: 40,
             onStart: () => {
               header.style.pointerEvents = 'auto';
             },
@@ -215,41 +199,27 @@ export const CinematicHeroWall: React.FC = () => {
         );
       }
 
-      // 75% -> 100%: Smooth coordinated exit & entrance of next section
+      // 150 -> 250: Coordinated Exit
+      // The grid moves up by yPercent: -50 while dimming
       masterTl
         .to(
           grid,
           {
-            yPercent: isMobile ? -36 : -32,
-            ease: 'power1.inOut',
-            duration: 25,
+            yPercent: -50,
+            ease: 'none',
+            duration: 100,
           },
-          75
+          150
         )
         .to(
           dim,
           {
-            opacity: 0.65,
+            opacity: 0.75,
             ease: 'power1.in',
-            duration: 22,
+            duration: 80,
           },
-          78
+          150
         );
-
-      // If next section exists, animate its entrance smoothly
-      if (nextSection) {
-        masterTl.fromTo(
-          nextSection,
-          { y: 60, opacity: 0.8 },
-          {
-            y: 0,
-            opacity: 1,
-            ease: 'power1.out',
-            duration: 25,
-          },
-          75
-        );
-      }
     }, sectionRef);
 
     return () => ctx.revert();
