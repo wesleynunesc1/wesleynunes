@@ -3,17 +3,20 @@ export interface FilmHeroCellConfig {
   position: 'main' | 't' | 'b' | 'l' | 'r' | 'tl' | 'tr' | 'bl' | 'br';
   title: string;
   category: string;
-  /** Optimized Hero screenshot (top section only, light & crisp) */
-  heroImage: string;
+  /** Optimized Hero screenshot for Desktop (1280x900 top section) */
+  heroImageDesktop: string;
+  /** Focused Hero screenshot for Mobile (vertical 600x880 top section) */
+  heroImageMobile: string;
   /** Full length screenshot for auto-scrolling gallery */
   fullScreenshot: string;
   websiteUrl?: string;
   videoSrc?: string;
   poster?: string;
+  objectPositionDesktop?: string;
+  objectPositionMobile?: string;
 }
 
 export const filmHeroContent = {
-  badge: 'WESLEY NUNES / DIGITAL PORTFOLIO',
   title: 'EXPERIÊNCIAS DIGITAIS QUE IMPRESSIONAM.',
   subtitle: 'Design, tecnologia e experiências digitais em cada detalhe.',
   ctaText: 'EXPLORAR PROJETOS',
@@ -27,11 +30,14 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'main',
     title: 'Wesley Nunes',
     category: 'Digital Studio',
-    heroImage: '/projects/heroes/wesleynunes-lp.webp',
+    heroImageDesktop: '/projects/heroes/wesleynunes-lp.webp',
+    heroImageMobile: '/projects/heroes-mobile/wesleynunes-lp.webp',
     fullScreenshot: '/projects/wesleynunes-lp.webp',
     websiteUrl: 'https://wesleynunes.com',
     videoSrc: '/cinematic/hero-intro.mp4',
     poster: '/projects/heroes/wesleynunes-lp.webp',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
 
   // 2. QUADROS QUE SURGEM AO REDOR (Acima, Abaixo, Esquerda, Direita e Cantos)
@@ -41,9 +47,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 't',
     title: 'Cimentop Concrete',
     category: 'Construção Civil',
-    heroImage: '/projects/heroes/cimentopconcrete.webp',
+    heroImageDesktop: '/projects/heroes/cimentopconcrete.webp',
+    heroImageMobile: '/projects/heroes-mobile/cimentopconcrete.webp',
     fullScreenshot: '/projects/cimentopconcrete.webp',
     websiteUrl: 'https://cimentopconcrete.com',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Abaixo (Bottom)
   {
@@ -51,9 +60,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'b',
     title: 'Pedro Fit',
     category: 'High Performance',
-    heroImage: '/projects/heroes/pedrofit.webp',
+    heroImageDesktop: '/projects/heroes/pedrofit.webp',
+    heroImageMobile: '/projects/heroes-mobile/pedrofit.webp',
     fullScreenshot: '/projects/pedrofit.webp',
     websiteUrl: 'https://pedrofit.vercel.app',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Esquerda (Left)
   {
@@ -61,9 +73,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'l',
     title: 'Mateus Cavalcante',
     category: 'Design & Tecnologia',
-    heroImage: '/projects/heroes/mateuscavalcante.webp',
+    heroImageDesktop: '/projects/heroes/mateuscavalcante.webp',
+    heroImageMobile: '/projects/heroes-mobile/mateuscavalcante.webp',
     fullScreenshot: '/projects/mateuscavalcante.webp',
     websiteUrl: 'https://mateuscavalcante.vercel.app',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Direita (Right)
   {
@@ -71,9 +86,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'r',
     title: 'Leo Nunes Barbearia',
     category: 'Experiência & Barbearia Premium',
-    heroImage: '/projects/heroes/leo-nunes.webp',
+    heroImageDesktop: '/projects/heroes/leo-nunes.webp',
+    heroImageMobile: '/projects/heroes-mobile/leo-nunes.webp',
     fullScreenshot: '/projects/leo-nunes.webp',
     websiteUrl: 'https://leonunesbarbearia.vercel.app',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Top-Left (Superior Esquerdo)
   {
@@ -81,9 +99,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'tl',
     title: 'Cartório do Brasileiro',
     category: 'Serviços Jurídicos',
-    heroImage: '/projects/heroes/cartoriodobrasileiro.webp',
+    heroImageDesktop: '/projects/heroes/cartoriodobrasileiro.webp',
+    heroImageMobile: '/projects/heroes-mobile/cartoriodobrasileiro.webp',
     fullScreenshot: '/projects/cartoriodobrasileiro.webp',
     websiteUrl: 'https://cartoriodobrasileiro.com',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Top-Right (Superior Direito)
   {
@@ -91,9 +112,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'tr',
     title: 'Nunes Hub',
     category: 'Hub de Inovação',
-    heroImage: '/projects/heroes/nuneshub.webp',
+    heroImageDesktop: '/projects/heroes/nuneshub.webp',
+    heroImageMobile: '/projects/heroes-mobile/nuneshub.webp',
     fullScreenshot: '/projects/nuneshub.webp',
     websiteUrl: 'https://nuneshub.vercel.app',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Bottom-Left (Inferior Esquerdo)
   {
@@ -101,9 +125,12 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'bl',
     title: 'Conexão Baby',
     category: 'E-commerce Infantil',
-    heroImage: '/projects/heroes/conexaobaby.webp',
+    heroImageDesktop: '/projects/heroes/conexaobaby.webp',
+    heroImageMobile: '/projects/heroes-mobile/conexaobaby.webp',
     fullScreenshot: '/projects/conexaobaby.webp',
     websiteUrl: 'https://conexaobaby.com.br',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
   // Bottom-Right (Inferior Direito)
   {
@@ -111,8 +138,11 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'br',
     title: 'Alicerce Digital',
     category: 'Estratégia Digital',
-    heroImage: '/projects/heroes/alicercedigital.webp',
+    heroImageDesktop: '/projects/heroes/alicercedigital.webp',
+    heroImageMobile: '/projects/heroes-mobile/alicercedigital.webp',
     fullScreenshot: '/projects/alicercedigital.webp',
     websiteUrl: 'https://alicercedigital.com',
+    objectPositionDesktop: 'center top',
+    objectPositionMobile: 'center top',
   },
 ];

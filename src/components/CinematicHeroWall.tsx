@@ -83,16 +83,17 @@ export const CinematicHeroWall: React.FC = () => {
       gsap.set(grid, { transformOrigin: '50% 50%', scale: 1 });
 
       // Master Timeline pinned with ScrollTrigger
-      // scrub: 0.5 for immediate, tactile 1:1 synchronization with user finger/wheel
+      // scrub: immediate 0.4 on mobile, 0.6 on desktop for fluid 1:1 response
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: isMobile ? 0.4 : 0.6,
+          scrub: isMobile ? 0.35 : 0.55,
           anticipatePin: 1,
           fastScrollEnd: true,
           preventOverlaps: true,
+          invalidateOnRefresh: false, // Prevent jumps on dynamic browser bar show/hide
         },
       });
 
@@ -193,23 +194,22 @@ export const CinematicHeroWall: React.FC = () => {
 
       // Header progressive reveal: 58% -> 74%
       if (header) {
-        masterTl
-          .to(
-            header,
-            {
-              opacity: 1,
-              y: 0,
-              ease: 'power2.out',
-              duration: 16,
-              onStart: () => {
-                header.style.pointerEvents = 'auto';
-              },
-              onReverseComplete: () => {
-                header.style.pointerEvents = 'none';
-              },
+        masterTl.to(
+          header,
+          {
+            opacity: 1,
+            y: 0,
+            ease: 'power2.out',
+            duration: 16,
+            onStart: () => {
+              header.style.pointerEvents = 'auto';
             },
-            58
-          );
+            onReverseComplete: () => {
+              header.style.pointerEvents = 'none';
+            },
+          },
+          58
+        );
       }
 
       // 78% -> 100%: Smooth coordinated exit & entrance of next section
@@ -280,12 +280,18 @@ export const CinematicHeroWall: React.FC = () => {
                   id={cell.id}
                 >
                   <div className="fs-cell-media">
-                    <img
-                      src={cell.heroImage}
-                      alt={cell.title}
-                      className="fs-cell-img"
-                      loading="eager"
-                    />
+                    <picture>
+                      <source
+                        media="(max-width: 768px)"
+                        srcSet={cell.heroImageMobile}
+                      />
+                      <img
+                        src={cell.heroImageDesktop}
+                        alt={cell.title}
+                        className="fs-cell-img"
+                        loading="eager"
+                      />
+                    </picture>
                     <div className="fs-cell-shade" />
                   </div>
                 </div>
@@ -303,27 +309,38 @@ export const CinematicHeroWall: React.FC = () => {
                   muted
                   loop
                   playsInline
-                  poster={mainCell.poster || mainCell.heroImage}
+                  poster={mainCell.poster || mainCell.heroImageDesktop}
                 >
                   <source src={mainCell.videoSrc} type="video/mp4" />
                 </video>
               )}
-              <img
-                src={mainCell.heroImage}
-                alt={mainCell.title}
-                className="fs-cell-img"
-                loading="eager"
-              />
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcSet={mainCell.heroImageMobile}
+                />
+                <img
+                  src={mainCell.heroImageDesktop}
+                  alt={mainCell.title}
+                  className="fs-cell-img"
+                  loading="eager"
+                />
+              </picture>
               {/* Controlled dark gradient overlay on main panel for optimal legibility */}
               <div className="fs-cell-shade main-shade" />
             </div>
 
             {/* CENTRAL CONTENT ON MAIN PANEL */}
             <div ref={copyRef} className="fs-hero-content">
-              {/* Upper Label */}
-              <div className="fs-hero-badge">
-                <span className="fs-badge-dot" />
-                <span className="fs-badge-text">{filmHeroContent.badge}</span>
+              {/* Official Brand Logo (Replaces old text tag, zero border, transparent) */}
+              <div className="fs-hero-brand-logo">
+                <img
+                  src="/logo.png"
+                  alt="Wesley Nunes"
+                  className="fs-hero-logo-img"
+                  width="220"
+                  height="32"
+                />
               </div>
 
               {/* Main Title */}
