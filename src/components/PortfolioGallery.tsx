@@ -25,7 +25,10 @@ export const PortfolioGallery: React.FC = () => {
     });
   };
 
-  const sortedProjects = [...projectsData].sort((a, b) => a.order - b.order);
+  // Only display published projects with real screenshots (pending projects remain prepared in data without cluttering public gallery)
+  const publishedProjects = projectsData
+    .filter((project) => project.status !== 'pending' && Boolean(project.screenshot))
+    .sort((a, b) => a.order - b.order);
 
   return (
     <section id="projetos" className="portfolio-gallery-section">
@@ -61,9 +64,12 @@ export const PortfolioGallery: React.FC = () => {
           </p>
         </div>
 
-        {/* Projects Gallery */}
-        <div className="projects-grid-3col">
-          {sortedProjects.map((project) => (
+        {/* Projects Gallery Desktop 3-col Grid */}
+        <div
+          className="projects-grid-3col"
+          onMouseLeave={() => setActiveProjectId(null)}
+        >
+          {publishedProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}

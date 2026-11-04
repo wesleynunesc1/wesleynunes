@@ -10,6 +10,7 @@ export interface Project {
   scrollSpeed?: number;
   tags?: string[];
   year?: string;
+  status?: 'published' | 'pending';
 }
 
 export const projectsData: Project[] = [
@@ -25,5 +26,51 @@ export const projectsData: Project[] = [
     scrollSpeed: 22,
     tags: ['Next.js / React', 'UI/UX Design', 'Motion', 'High Conversion'],
     year: '2026',
+    status: 'published',
+  },
+  // 4 novos registros provisórios preparados para receber as capturas e dados reais
+  {
+    id: 'novo-projeto-01',
+    title: 'Novo Projeto 01',
+    category: 'Website / Landing Page',
+    description: 'Projeto digital em desenvolvimento com foco em alta performance e design visual contemporâneo.',
+    screenshot: '',
+    websiteUrl: '',
+    order: 2,
+    scrollSpeed: 20,
+    status: 'pending',
+  },
+  {
+    id: 'novo-projeto-02',
+    title: 'Novo Projeto 02',
+    category: 'Digital Experience / UI Design',
+    description: 'Experiência digital interativa com tipografia refinada e arquitetura visual moderna.',
+    screenshot: '',
+    websiteUrl: '',
+    order: 3,
+    scrollSpeed: 20,
+    status: 'pending',
+  },
+  {
+    id: 'novo-projeto-03',
+    title: 'Novo Projeto 03',
+    category: 'Web Application / Frontend',
+    description: 'Aplicação web focada em conversão, fluidez e acabamento estético de estúdio digital.',
+    screenshot: '',
+    websiteUrl: '',
+    order: 4,
+    scrollSpeed: 20,
+    status: 'pending',
+  },
+  {
+    id: 'novo-projeto-04',
+    title: 'Novo Projeto 04',
+    category: 'Creative Development / E-commerce',
+    description: 'Website construído com atenção aos detalhes de motion, iluminação e navegação intuitiva.',
+    screenshot: '',
+    websiteUrl: '',
+    order: 5,
+    scrollSpeed: 20,
+    status: 'pending',
   },
 ];

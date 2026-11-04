@@ -6,27 +6,53 @@ Portfólio editorial e imersivo desenvolvido em **React 19**, **Vite** e **TypeS
 
 ---
 
-## ✦ Estrutura e Refinamentos Premium
+## ✦ Estrutura e Destaques
 
-### Refinamento da Versão Mobile:
-1. **Otimização dos Espaçamentos (Redução de 25% a 35%)**:
-   - Espaçamento equilibrado entre o Header e o botão Portfólio.
-   - Transição enxuta entre o botão Portfólio e o título `01 / CASES DE SUCESSO`.
-   - Distância harmônica até o primeiro projeto.
-   - Gap consistente de 16px entre os cards.
-2. **Novo Design dos Cards de Projetos**:
-   - **Área Superior (Preview do Website)**: Screenshot vertical com rolagem automática contínua (`overflow: hidden`), sem cortes ou distorções, com altura visível compacta de `clamp(260px, 38vh, 300px)`.
-   - **Área Inferior (Faixa de Informações)**: Fundo grafite integrado com categoria em azul-gelo, título em branco e botão *"Ver site"* com ícone de seta diagonal (sem sobrepor o print durante a animação).
-   - **Indicador de Rolagem**: Discreto pill `Auto Scroll` com ponto luminoso em azul-gelo no canto do card quando inativo, que desaparece assim que ativado.
-3. **Instruções de Interação**:
-   - Mobile: `// Toque para explorar o site.`
-   - Desktop: `// Passe o mouse para explorar o site.`
-4. **Header Cápsula & Botão Portfólio**:
-   - Header cápsula mais compacto com alinhamento vertical refinado.
-   - Botão Portfólio com glow 30% mais suave e esfera decorativa menor (26px), mantendo a translucidez elegante e fria.
-   - Menu dropdown deslizante preservado com transição suave.
-5. **Faixa Animada (Marquee)**:
-   - Posicionada logo após a conclusão da galeria de projetos, com padding vertical otimizado e transição fluida contínua.
+### 1. Galeria Desktop Inspirada na Referência Visual:
+- **Grid de 3 Colunas Alinhadas**:
+  - `grid-template-columns: repeat(3, minmax(0, 1fr))`
+  - Espaçamento de `16px` uniforme entre linhas e colunas
+  - Largura máxima de `1440px` centralizada
+  - Alinhamento à esquerda consistente nas linhas que contenham 1 ou 2 projetos (sem esticar artificialmente).
+- **Cards Horizontais Uniformes**:
+  - Proporção da área de visualização: `aspect-ratio: 1.35 / 1`
+  - Fundo preto com cantos discretos (`border-radius: 4px`) e moldura sutil.
+  - Imagem ocupa toda a largura sem distorção ou corte horizontal, ocultando com `overflow: hidden` o excedente vertical.
+- **Informações Elegantes no Hover**:
+  - Visual limpo no estado padrão (foco 100% no website).
+  - Ao passar o cursor, surge suavemente na parte inferior um degradê escuro contendo nome do projeto, categoria em azul-gelo e botão *"Ver site"* com ícone de seta diagonal.
+- **Auto Scroll Responsivo**:
+  - A imagem rola automaticamente e de forma suave do topo ao rodapé ao posicionar o cursor.
+  - Ao sair da galeria ou mover para outro case, a animação é imediatamente interrompida e resetada para o topo.
+
+### 2. Preservação Total do Layout Mobile Aprovado:
+- Header em cápsula com logomarca `WESLEY NUNES` e botão `Menu`.
+- Botão "Portfólio" com esfera decorativa translúcida.
+- Seção `01 / CASES DE SUCESSO` com `// Toque para explorar o site.`
+- Cards em coluna única com altura compacta (`clamp(260px, 38vh, 300px)`).
+- Faixa de informações integrada na base que não cobre o screenshot no celular.
+- Auto Scroll acionado por toque suave.
+
+### 3. Preparação Dinâmica para 4 Novos Projetos:
+A fonte de dados em `src/data/projects.ts` está estruturada para receber novos cases:
+```typescript
+{
+  id: 'novo-projeto-01',
+  title: 'Novo Projeto 01',
+  category: 'Website / Landing Page',
+  description: '...',
+  screenshot: '', // Preencher quando adicionar a imagem
+  websiteUrl: '',
+  order: 2,
+  scrollSpeed: 20,
+  status: 'pending' // 'pending' oculta da galeria pública; 'published' exibe automaticamente
+}
+```
+
+#### Como adicionar novos projetos quando tiver as capturas:
+1. Copie o screenshot para `public/projects/nome-do-projeto.jpg`.
+2. Em `src/data/projects.ts`, preencha o caminho `screenshot: '/projects/nome-do-projeto.jpg'`, o `title`, a `category`, a `websiteUrl` e altere o `status` para `'published'`.
+3. O novo projeto entrará imediatamente no grid de 3 colunas, encaixando-se na sequência.
 
 ---
 

@@ -35,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }
       }}
     >
-      {/* ÁREA SUPERIOR — PREVIEW DO WEBSITE COM AUTO SCROLL */}
+      {/* ÁREA DE PREVIEW COM AUTO SCROLL */}
       <div className="card-preview-area">
         <ProjectAutoScroll
           screenshotSrc={project.screenshot}
@@ -44,10 +44,32 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           onActivate={onActivate}
           scrollSpeedSeconds={project.scrollSpeed}
         />
+
+        {/* OVERLAY DISCRETO NO DESKTOP AO PASSAR O MOUSE */}
+        <div className="card-desktop-hover-overlay" aria-hidden="true">
+          <div className="overlay-meta-info">
+            <span className="overlay-project-category">{project.category}</span>
+            <h3 className="overlay-project-title">{project.title}</h3>
+          </div>
+
+          {project.websiteUrl && (
+            <a
+              href={project.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-overlay-visit"
+              title={`Abrir ${project.title} em nova aba`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span>Ver site</span>
+              <ArrowUpRight size={14} />
+            </a>
+          )}
+        </div>
       </div>
 
-      {/* ÁREA INFERIOR — INFORMAÇÕES INTEGRADAS DO PROJETO (NÃO SOBREPÕE O PRINT) */}
-      <div className="card-info-strip">
+      {/* ÁREA INFERIOR — INFORMAÇÕES INTEGRADAS NO MOBILE (NÃO SOBREPÕE O PRINT NO MOBILE) */}
+      <div className="card-info-strip mobile-only-strip">
         <div className="card-info-text">
           <span className="card-project-category">{project.category}</span>
           <h3 className="card-project-title">{project.title}</h3>
