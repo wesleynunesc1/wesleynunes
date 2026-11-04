@@ -85,7 +85,7 @@ export const projectsData: Project[] = [
     year: '2026',
     status: 'published',
   },
-  // 6. Wesley Nunes (antes do Conexão Baby)
+  // 6. Wesley Nunes
   {
     id: 'wesleynunes-lp',
     title: 'Wesley Nunes — Soluções Web',
@@ -113,7 +113,7 @@ export const projectsData: Project[] = [
     year: '2026',
     status: 'published',
   },
-  // Restante dos projetos
+  // 8. Vista Prime Seven
   {
     id: 'vistaprime',
     title: 'Vista Prime Seven',
@@ -127,6 +127,7 @@ export const projectsData: Project[] = [
     year: '2026',
     status: 'published',
   },
+  // 9. SCBA Escolinha de Futebol
   {
     id: 'scbaescolinha',
     title: 'SCBA Escolinha de Futebol',
@@ -140,6 +141,7 @@ export const projectsData: Project[] = [
     year: '2026',
     status: 'published',
   },
+  // 10. Alicerce Digital
   {
     id: 'alicercedigital',
     title: 'Alicerce Digital',
@@ -153,6 +155,7 @@ export const projectsData: Project[] = [
     year: '2026',
     status: 'published',
   },
+  // 11. Cartório do Brasileiro
   {
     id: 'cartoriodobrasileiro',
     title: 'Cartório do Brasileiro',
@@ -166,6 +169,7 @@ export const projectsData: Project[] = [
     year: '2026',
     status: 'published',
   },
+  // 12. DSS Solutions
   {
     id: 'dsssolutions',
     title: 'DSS Solutions',
@@ -176,19 +180,6 @@ export const projectsData: Project[] = [
     order: 12,
     scrollSpeed: 25,
     tags: ['Enterprise Tech', 'SaaS Showcase', 'Modern UI'],
-    year: '2026',
-    status: 'published',
-  },
-  {
-    id: 'tioni',
-    title: 'Tioni — Marca & Vestuário',
-    category: 'Moda & E-commerce',
-    description: 'Catálogo editorial minimalista com estética refinada, fotografias de produto em destaque e experiência fluida de compras.',
-    screenshot: '/projects/tioni.webp',
-    websiteUrl: 'https://www.tioni.com.br',
-    order: 13,
-    scrollSpeed: 21,
-    tags: ['Fashion & Apparel', 'E-commerce UI', 'Minimalist'],
     year: '2026',
     status: 'published',
   },
