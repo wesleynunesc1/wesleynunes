@@ -112,3 +112,4 @@ export const cinematicPanels: CinematicPanelConfig[] = [
     objectPosition: 'center 15%',
   },
 ];
+

@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import './Header.css';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  visible?: boolean;
+}
+
+export const Header: React.FC<HeaderProps> = ({ visible = true }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,7 +26,11 @@ export const Header: React.FC = () => {
   const instagramUrl = 'https://www.instagram.com/euwesleyununes/';
 
   return (
-    <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
+    <header
+      className={`site-header ${scrolled ? 'header-scrolled' : ''} ${
+        !visible ? 'header-hidden' : 'header-visible'
+      }`}
+    >
       <div className="header-inner">
         {/* Official Brand Logo */}
         <a href="#projetos" className="brand-logo" onClick={closeMenu} aria-label="Wesley Nunes Home">
