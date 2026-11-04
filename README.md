@@ -8,32 +8,21 @@ Portfólio editorial e imersivo desenvolvido em **React 19**, **Vite** e **TypeS
 
 ## ✦ Ordem Oficial dos Projetos
 
-A galeria foi reordenada e otimizada com imagens de carregamento leve (WebP + JPG fallback comprimidos sem perda visual):
+A galeria está configurada na seguinte sequência:
 
 1. **Leo Nunes Barbearia** — [leonunesbarbearia.vercel.app](https://leonunesbarbearia.vercel.app)
 2. **Mateus Cavalcante** — [mateuscavalcante.vercel.app](https://mateuscavalcante.vercel.app)
 3. **Pedro Fit — Consultoria** — [pedrofit.vercel.app](https://pedrofit.vercel.app)
 4. **Nunes Hub** — [nuneshub.vercel.app](https://nuneshub.vercel.app)
 5. **Cimentop Concrete** — [cimentopconcrete.vercel.app](https://cimentopconcrete.vercel.app)
-6. **Conexão Baby** — [conexaobaby.vercel.app](https://conexaobaby.vercel.app)
-7. **Vista Prime Seven** — [vistaprime-seven.vercel.app](https://vistaprime-seven.vercel.app)
-8. **SCBA Escolinha de Futebol** — [scbaescolinha.vercel.app](https://scbaescolinha.vercel.app)
-9. **Alicerce Digital** — [alicercedigital.vercel.app](https://alicercedigital.vercel.app)
-10. **Cartório do Brasileiro** — [cartoriodobrasileiro.com](https://cartoriodobrasileiro.com)
-11. **DSS Solutions** — [dsssolutions.vercel.app](https://dsssolutions.vercel.app)
-12. **Tioni — Marca & Vestuário** — [www.tioni.com.br](https://www.tioni.com.br)
-13. **Wesley Nunes — Soluções Web** — [wesleynunes.vercel.app](https://wesleynunes.vercel.app)
-
----
-
-## ⚡ Otimização & Performance
-
-- **Compressão de Imagens**: Todas as capturas em alta resolução foram convertidas e otimizadas para **WebP** com redução de até **70% no peso** (de ~1.8MB para ~280KB - 400KB), mantendo nitidez nítida em telas Retina.
-- **Picture Tag Progressivo**: `<picture>` com `<source type="image/webp">` e fallback em `<source type="image/jpeg">`, `loading="lazy"` e `decoding="async"`.
-- **Experiência Multi-Dispositivo**:
-  - **Desktop**: Grid de 3 colunas, proporção horizontal uniforme `1.35:1`, auto-scroll suave e overlay no hover.
-  - **Tablet**: Grid responsivo em 2 colunas com 16px de gap.
-  - **Mobile**: Grid de 1 coluna, cards com altura compacta (`clamp(260px, 38vh, 300px)`), faixa inferior de informações integrada que não cobre a imagem e auto-scroll por toque.
+6. **Wesley Nunes — Soluções Web** — [wesleynunes.vercel.app](https://wesleynunes.vercel.app)
+7. **Conexão Baby** — [conexaobaby.vercel.app](https://conexaobaby.vercel.app)
+8. **Vista Prime Seven** — [vistaprime-seven.vercel.app](https://vistaprime-seven.vercel.app)
+9. **SCBA Escolinha de Futebol** — [scbaescolinha.vercel.app](https://scbaescolinha.vercel.app)
+10. **Alicerce Digital** — [alicercedigital.vercel.app](https://alicercedigital.vercel.app)
+11. **Cartório do Brasileiro** — [cartoriodobrasileiro.com](https://cartoriodobrasileiro.com)
+12. **DSS Solutions** — [dsssolutions.vercel.app](https://dsssolutions.vercel.app)
+13. **Tioni — Marca & Vestuário** — [www.tioni.com.br](https://www.tioni.com.br)
 
 ---
 
