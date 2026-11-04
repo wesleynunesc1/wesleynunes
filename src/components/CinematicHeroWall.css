@@ -1,9 +1,9 @@
-/* Cinematic Hero Wall - Exact FilmSupply Reference Architecture */
+/* Cinematic Hero Wall - Exact FilmSupply Reference Architecture (Clean, Borderless) */
 
 .fs-hero-section {
   position: relative;
   width: 100%;
-  height: 320svh; /* Scroll track for comfortable, continuous transformation */
+  height: 340svh; /* Smooth, luxurious scroll track */
   background-color: #05070B;
 }
 
@@ -24,15 +24,26 @@
   will-change: transform;
 }
 
-/* Each Panel (Cell) */
+/* Surrounding Panels Container Layer (Toggled in Timeline) */
+.fs-surround-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: opacity, visibility;
+  pointer-events: none;
+}
+
+/* Each Panel (Cell) - NO BORDERS, NO OUTLINES, NO BOX-SHADOW BORDERS */
 .fs-hero-cell {
   position: absolute;
-  inset: 40px; /* Elegant margin/respiro around the cell on desktop */
-  background-color: #111318;
+  inset: 36px; /* Elegant margin/respiro around the cell on desktop */
+  background-color: #0B0E14;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(169, 200, 216, 0.12);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Main Center Cell (Isolated at scale: 1.0) */
@@ -41,34 +52,36 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-color: rgba(169, 200, 216, 0.22);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-/* Surrounding Cells (Relative offsets based on cell size + gap) */
-/* Desktop gap: 24px + 100% cell offset */
+/* Surrounding Cells (Separated by pure black gap) */
+/* Desktop gap: 20px */
 .fs-hero-cell--t {
-  transform: translateY(calc(-100% - 24px));
+  transform: translateY(calc(-100% - 20px));
 }
 .fs-hero-cell--b {
-  transform: translateY(calc(100% + 24px));
+  transform: translateY(calc(100% + 20px));
 }
 .fs-hero-cell--l {
-  transform: translateX(calc(-100% - 24px));
+  transform: translateX(calc(-100% - 20px));
 }
 .fs-hero-cell--r {
-  transform: translateX(calc(100% + 24px));
+  transform: translateX(calc(100% + 20px));
 }
 .fs-hero-cell--tl {
-  transform: translate(calc(-100% - 24px), calc(-100% - 24px));
+  transform: translate(calc(-100% - 20px), calc(-100% - 20px));
 }
 .fs-hero-cell--tr {
-  transform: translate(calc(100% + 24px), calc(-100% - 24px));
+  transform: translate(calc(100% + 20px), calc(-100% - 20px));
 }
 .fs-hero-cell--bl {
-  transform: translate(calc(-100% - 24px), calc(100% + 24px));
+  transform: translate(calc(-100% - 20px), calc(100% + 20px));
 }
 .fs-hero-cell--br {
-  transform: translate(calc(100% + 24px), calc(100% + 24px));
+  transform: translate(calc(100% + 20px), calc(100% + 20px));
 }
 
 /* Media Layer */
@@ -92,16 +105,17 @@
 .fs-cell-shade {
   position: absolute;
   inset: 0;
-  background-color: rgba(5, 7, 11, 0.35);
+  background-color: rgba(5, 7, 11, 0.4);
   pointer-events: none;
 }
 
+/* Controlled dark gradient overlay on main panel for optimal contrast & legibility */
 .main-shade {
   background: radial-gradient(
     circle at center,
-    rgba(5, 7, 11, 0.5) 0%,
-    rgba(5, 7, 11, 0.88) 75%,
-    #05070B 100%
+    rgba(5, 7, 11, 0.75) 0%,
+    rgba(5, 7, 11, 0.88) 65%,
+    rgba(5, 7, 11, 0.98) 100%
   );
 }
 
@@ -126,12 +140,11 @@
   gap: 8px;
   padding: 8px 20px;
   border-radius: 9999px;
-  background: rgba(17, 19, 24, 0.78);
+  background: rgba(17, 19, 24, 0.85);
   border: 1px solid rgba(169, 200, 216, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   margin-bottom: 28px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .fs-badge-dot {
@@ -172,14 +185,14 @@
   color: #FFFFFF;
   margin: 0 0 20px;
   text-wrap: balance;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9), 0 0 50px rgba(169, 200, 216, 0.15);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 0 50px rgba(169, 200, 216, 0.2);
 }
 
 /* Subtitle */
 .fs-hero-subtitle {
   font-size: clamp(0.95rem, 1.8vw, 1.25rem);
   line-height: 1.5;
-  color: rgba(245, 247, 250, 0.75);
+  color: rgba(245, 247, 250, 0.85);
   max-width: 600px;
   margin: 0 0 34px;
 }
@@ -197,8 +210,8 @@
   gap: 12px;
   padding: 13px 32px;
   border-radius: 9999px;
-  background: rgba(169, 200, 216, 0.1);
-  border: 1px solid rgba(169, 200, 216, 0.45);
+  background: rgba(169, 200, 216, 0.12);
+  border: 1px solid rgba(169, 200, 216, 0.5);
   color: #FFFFFF;
   font-size: 0.82rem;
   font-weight: 700;
@@ -207,7 +220,7 @@
   text-transform: uppercase;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(169, 200, 216, 0.12);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(169, 200, 216, 0.15);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
@@ -215,7 +228,7 @@
 .fs-btn-glow {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(169, 200, 216, 0.25), transparent);
+  background: linear-gradient(135deg, rgba(169, 200, 216, 0.3), transparent);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -223,7 +236,7 @@
 .fs-cta-button:hover {
   border-color: #A9C8D8;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 35px rgba(169, 200, 216, 0.35);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 35px rgba(169, 200, 216, 0.4);
 }
 
 .fs-cta-button:hover .fs-btn-glow {
@@ -253,7 +266,7 @@
 /* Mobile specific styling */
 @media (max-width: 768px) {
   .fs-hero-section {
-    height: 280svh;
+    height: 300svh;
   }
 
   .fs-hero-cell {
@@ -263,28 +276,28 @@
 
   /* Mobile gap */
   .fs-hero-cell--t {
-    transform: translateY(calc(-100% - 14px));
+    transform: translateY(calc(-100% - 12px));
   }
   .fs-hero-cell--b {
-    transform: translateY(calc(100% + 14px));
+    transform: translateY(calc(100% + 12px));
   }
   .fs-hero-cell--l {
-    transform: translateX(calc(-100% - 14px));
+    transform: translateX(calc(-100% - 12px));
   }
   .fs-hero-cell--r {
-    transform: translateX(calc(100% + 14px));
+    transform: translateX(calc(100% + 12px));
   }
   .fs-hero-cell--tl {
-    transform: translate(calc(-100% - 14px), calc(-100% - 14px));
+    transform: translate(calc(-100% - 12px), calc(-100% - 12px));
   }
   .fs-hero-cell--tr {
-    transform: translate(calc(100% + 14px), calc(-100% - 14px));
+    transform: translate(calc(100% + 12px), calc(-100% - 12px));
   }
   .fs-hero-cell--bl {
-    transform: translate(calc(-100% - 14px), calc(100% + 14px));
+    transform: translate(calc(-100% - 12px), calc(100% + 12px));
   }
   .fs-hero-cell--br {
-    transform: translate(calc(100% + 14px), calc(100% + 14px));
+    transform: translate(calc(100% + 12px), calc(100% + 12px));
   }
 
   .fs-hero-title {

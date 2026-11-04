@@ -6,16 +6,21 @@ import './CinematicHeroWall.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface CinematicHeroWallProps {
-  onProgress?: (progress: number) => void;
-}
-
-export const CinematicHeroWall: React.FC<CinematicHeroWallProps> = ({ onProgress }) => {
+export const CinematicHeroWall: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const dimRef = useRef<HTMLDivElement>(null);
+  const surroundLayerRef = useRef<HTMLDivElement>(null);
+
+  // Lateral panels
+  const leftCellRef = useRef<HTMLDivElement>(null);
+  const rightCellRef = useRef<HTMLDivElement>(null);
+  // Top / bottom and corner panels
+  const topCellRef = useRef<HTMLDivElement>(null);
+  const bottomCellRef = useRef<HTMLDivElement>(null);
+  const cornerCellsRef = useRef<HTMLDivElement[]>([]);
 
   const mainCell = filmHeroCells.find((c) => c.position === 'main')!;
   const surroundingCells = filmHeroCells.filter((c) => c.position !== 'main');
@@ -34,105 +39,247 @@ export const CinematicHeroWall: React.FC<CinematicHeroWallProps> = ({ onProgress
       const grid = gridRef.current;
       const copy = copyRef.current;
       const dim = dimRef.current;
+      const surroundLayer = surroundLayerRef.current;
+      const leftCell = leftCellRef.current;
+      const rightCell = rightCellRef.current;
+      const topCell = topCellRef.current;
+      const bottomCell = bottomCellRef.current;
+      const corners = cornerCellsRef.current;
 
-      if (!section || !grid || !copy || !dim) return;
+      // Header element in DOM (controlled directly by timeline)
+      const header = document.querySelector<HTMLElement>('.site-header');
+
+      if (!section || !grid || !copy || !dim || !surroundLayer) return;
 
       const isMobile = window.innerWidth <= 768;
 
-      // Pinned master scroll timeline
-      // 300svh pinned scroll length gives comfortable, natural pacing
-      gsap.set(grid, { transformOrigin: '50% 50%' });
+      // 1. INITIAL STATE (scrollProgress = 0):
+      // Strict: Only the main panel is visible.
+      // Surrounding panels layer is hidden and 0 opacity
+      gsap.set(surroundLayer, {
+        opacity: 0,
+        visibility: 'hidden',
+      });
 
-      const tl = gsap.timeline({
+      if (leftCell) gsap.set(leftCell, { opacity: 0 });
+      if (rightCell) gsap.set(rightCell, { opacity: 0 });
+      if (topCell) gsap.set(topCell, { opacity: 0 });
+      if (bottomCell) gsap.set(bottomCell, { opacity: 0 });
+      corners.forEach((c) => {
+        if (c) gsap.set(c, { opacity: 0 });
+      });
+
+      // Header is initially transparent, translated up, pointer-events none
+      if (header) {
+        gsap.set(header, {
+          opacity: 0,
+          y: -14,
+          pointerEvents: 'none',
+        });
+      }
+
+      gsap.set(grid, { transformOrigin: '50% 50%', scale: 1 });
+
+      // Master Timeline pinned with ScrollTrigger
+      // 340svh provides a natural, smooth, luxurious pace
+      const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: 'bottom bottom',
           scrub: 0.85,
-          onUpdate: (self) => {
-            if (onProgress) {
-              onProgress(self.progress);
-            }
-          },
         },
       });
 
-      // EXACT FILMSUPPLY TRANSFORMATION TIMELINE:
-      // FASE 1 & 2: Textos desaparecem progressivamente (0 -> 35% do percurso)
-      tl.to(
-        copy,
-        {
-          opacity: 0,
-          y: -25,
-          scale: 0.96,
-          ease: 'power2.inOut',
-          duration: 35,
-        },
-        0
-      )
+      // SEQUENCE BREAKDOWN:
+      // Total duration units: 100
+      //
+      // 0% - 10%: Initial state hold. ONLY main panel.
+      //
+      // 10% - 30%: Text starts fading out smoothly (0.10 -> 0.30).
+      //            Central panel begins its scale reduction (0.15 -> 0.75).
+      //
+      // 30% - 55%: Progressive revelation:
+      //            - Surrounding layer becomes visible.
+      //            - First, lateral panels fade in (30% -> 42%).
+      //            - Next, top/bottom panels fade in (36% -> 50%).
+      //            - Corners fade in (42% -> 55%).
+      //
+      // 55% - 80%: Full mosaic view, texts completely gone, central panel seamlessly integrated.
+      //            - Header progressively fades in smoothly from 62% to 76%.
+      //
+      // 80% - 100%: Smooth exit transition:
+      //            - Mosaic translates upward (yPercent: -42) with soft dimming.
+      //            - Projects section enters seamlessly.
+      //            - Header stays visible and interactive.
 
-      // FASE 2 & 3: Zoom-out contínuo do grid (0 -> 140)
-      // O quadro central encolhe de 1.0 para ~0.465, revelando os quadros ao redor que surgem
-      .to(
-        grid,
-        {
-          scale: isMobile ? 0.48 : 0.4654,
-          ease: 'power1.inOut',
-          duration: 140,
-        },
-        0
-      )
+      masterTl
+        // 10% -> 30%: Text fade out
+        .to(
+          copy,
+          {
+            opacity: 0,
+            y: -28,
+            scale: 0.96,
+            ease: 'power2.inOut',
+            duration: 20,
+          },
+          10
+        )
 
-      // FASE 4 & 5: O mosaico sobe coordenadamente e escurece sutilmente dando lugar à próxima seção (140 -> 240)
-      .to(
-        grid,
-        {
-          yPercent: isMobile ? -45 : -40,
-          ease: 'none',
-          duration: 100,
-        },
-        140
-      )
-      .to(
-        dim,
-        {
-          opacity: 0.85,
-          ease: 'power1.in',
-          duration: 80,
-        },
-        140
-      );
+        // 15% -> 75%: Continuous zoom-out of the grid
+        .to(
+          grid,
+          {
+            scale: isMobile ? 0.48 : 0.4654,
+            ease: 'power1.inOut',
+            duration: 60,
+          },
+          15
+        )
+
+        // 30%: Make surrounding layer container visible
+        .set(
+          surroundLayer,
+          {
+            visibility: 'visible',
+          },
+          30
+        )
+
+        // 30% -> 42%: Laterals appear first
+        .to(
+          [leftCell, rightCell].filter(Boolean),
+          {
+            opacity: 1,
+            ease: 'power1.out',
+            duration: 14,
+          },
+          30
+        )
+
+        // 36% -> 50%: Top & bottom appear
+        .to(
+          [topCell, bottomCell].filter(Boolean),
+          {
+            opacity: 1,
+            ease: 'power1.out',
+            duration: 14,
+          },
+          36
+        )
+
+        // 42% -> 55%: Corners appear to complete the wall
+        .to(
+          corners.filter(Boolean),
+          {
+            opacity: 1,
+            ease: 'power1.out',
+            duration: 13,
+          },
+          42
+        )
+
+        // Surrounding layer general opacity 0 -> 1
+        .to(
+          surroundLayer,
+          {
+            opacity: 1,
+            ease: 'none',
+            duration: 15,
+          },
+          30
+        );
+
+      // Header progressive reveal: 60% -> 76%
+      if (header) {
+        masterTl
+          .to(
+            header,
+            {
+              opacity: 1,
+              y: 0,
+              ease: 'power2.out',
+              duration: 16,
+              onStart: () => {
+                header.style.pointerEvents = 'auto';
+              },
+              onReverseComplete: () => {
+                header.style.pointerEvents = 'none';
+              },
+            },
+            60
+          );
+      }
+
+      // 80% -> 100%: Smooth exit to Cases de Sucesso
+      masterTl
+        .to(
+          grid,
+          {
+            yPercent: isMobile ? -45 : -40,
+            ease: 'none',
+            duration: 20,
+          },
+          80
+        )
+        .to(
+          dim,
+          {
+            opacity: 0.85,
+            ease: 'power1.in',
+            duration: 18,
+          },
+          82
+        );
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [onProgress]);
+  }, []);
 
   return (
     <section ref={sectionRef} className="fs-hero-section" id="hero-cinematic">
       <div ref={stickyRef} className="fs-hero-sticky">
-        {/* 3x3 Grid que começa com foco 100% no quadro central */}
+        {/* 3x3 Grid */}
         <div ref={gridRef} className="fs-hero-grid">
-          {/* QUADROS AO REDOR (Surround Cells) */}
-          {surroundingCells.map((cell) => (
-            <div
-              key={cell.id}
-              className={`fs-hero-cell fs-hero-cell--${cell.position}`}
-              id={cell.id}
-            >
-              <div className="fs-cell-media">
-                <img
-                  src={cell.imageSrc}
-                  alt={cell.title}
-                  className="fs-cell-img"
-                  loading="eager"
-                  style={{ objectPosition: cell.objectPosition || 'center' }}
-                />
-                <div className="fs-cell-shade" />
-              </div>
-            </div>
-          ))}
+          {/* SURROUNDING PANELS LAYER (Strictly hidden at scrollProgress = 0) */}
+          <div ref={surroundLayerRef} className="fs-surround-layer" aria-hidden="true">
+            {surroundingCells.map((cell) => {
+              const getCellRef = (pos: string) => {
+                if (pos === 'l') return leftCellRef;
+                if (pos === 'r') return rightCellRef;
+                if (pos === 't') return topCellRef;
+                if (pos === 'b') return bottomCellRef;
+                return (el: HTMLDivElement | null) => {
+                  if (el && !cornerCellsRef.current.includes(el)) {
+                    cornerCellsRef.current.push(el);
+                  }
+                };
+              };
 
-          {/* QUADRO PRINCIPAL ISOLADO NO CENTRO (Main Cell) */}
+              return (
+                <div
+                  key={cell.id}
+                  ref={getCellRef(cell.position) as any}
+                  className={`fs-hero-cell fs-hero-cell--${cell.position}`}
+                  id={cell.id}
+                >
+                  <div className="fs-cell-media">
+                    <img
+                      src={cell.imageSrc}
+                      alt={cell.title}
+                      className="fs-cell-img"
+                      loading="eager"
+                      style={{ objectPosition: cell.objectPosition || 'center' }}
+                    />
+                    <div className="fs-cell-shade" />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* MAIN PANEL (Strictly ISOLATED & Centered at scrollProgress = 0) */}
           <div className="fs-hero-cell fs-hero-cell--main" id={mainCell.id}>
             <div className="fs-cell-media">
               {mainCell.videoSrc && (
@@ -154,31 +301,31 @@ export const CinematicHeroWall: React.FC<CinematicHeroWallProps> = ({ onProgress
                 loading="eager"
                 style={{ objectPosition: mainCell.objectPosition || 'center' }}
               />
-              {/* Overlay escuro para contraste e legibilidade impecável */}
+              {/* Controlled dark gradient overlay for optimal legibility */}
               <div className="fs-cell-shade main-shade" />
             </div>
 
-            {/* CONTEÚDO CENTRALIZADO SOBRE O QUADRO PRINCIPAL */}
+            {/* CENTRAL CONTENT ON MAIN PANEL */}
             <div ref={copyRef} className="fs-hero-content">
-              {/* Etiqueta superior */}
+              {/* Upper Label */}
               <div className="fs-hero-badge">
                 <span className="fs-badge-dot" />
                 <span className="fs-badge-text">{filmHeroContent.badge}</span>
               </div>
 
-              {/* Título Principal */}
+              {/* Main Title */}
               <h1 className="fs-hero-title">
                 EXPERIÊNCIAS DIGITAIS
                 <br />
                 QUE IMPRESSIONAM.
               </h1>
 
-              {/* Subtítulo */}
+              {/* Subtitle */}
               <p className="fs-hero-subtitle">
                 {filmHeroContent.subtitle}
               </p>
 
-              {/* Botão Premium Minimalista */}
+              {/* Minimalist CTA Button */}
               <div className="fs-hero-cta">
                 <a
                   href={`#${filmHeroContent.targetSectionId}`}
@@ -195,7 +342,7 @@ export const CinematicHeroWall: React.FC<CinematicHeroWallProps> = ({ onProgress
           </div>
         </div>
 
-        {/* Coordinated Dimming Layer during exit */}
+        {/* Exit dimming overlay */}
         <div ref={dimRef} className="fs-hero-dim" />
       </div>
     </section>

@@ -104,3 +104,4 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     objectPosition: 'center 15%',
   },
 ];
+

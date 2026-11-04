@@ -1,38 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import './Header.css';
 
-interface HeaderProps {
-  visible?: boolean;
-}
-
-export const Header: React.FC<HeaderProps> = ({ visible = true }) => {
-  const [scrolled, setScrolled] = useState(false);
+export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const closeMenu = () => setMobileMenuOpen(false);
 
   const whatsappUrl =
     'https://wa.me/5588981957471?text=' +
     encodeURIComponent('Olá, Wesley! Vi seu portfólio e gostaria de conversar sobre um projeto.');
-  const instagramUrl = 'https://www.instagram.com/euwesleyununes/';
 
   return (
-    <header
-      className={`site-header ${scrolled ? 'header-scrolled' : ''} ${
-        !visible ? 'header-hidden' : 'header-visible'
-      }`}
-    >
+    <header className="site-header">
       <div className="header-inner">
-        {/* Official Brand Logo */}
+        {/* Official Brand Logo (Left) */}
         <a href="#projetos" className="brand-logo" onClick={closeMenu} aria-label="Wesley Nunes Home">
           <img
             src="/logo.png"
@@ -43,15 +25,7 @@ export const Header: React.FC<HeaderProps> = ({ visible = true }) => {
           />
         </a>
 
-        {/* Desktop Navigation */}
-        <nav className="desktop-nav" aria-label="Navegação Principal">
-          <ul className="nav-list">
-            <li><a href="#projetos" className="nav-link">Projetos</a></li>
-            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="nav-link">Contato</a></li>
-          </ul>
-        </nav>
-
-        {/* Header Action Button (Desktop) & Menu Button (Mobile) */}
+        {/* Action Button 'Iniciar Projeto' (Right) */}
         <div className="header-cta">
           <a
             href={whatsappUrl}
@@ -63,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ visible = true }) => {
             <ArrowUpRight size={15} />
           </a>
 
-          {/* Mobile Ice-Blue Menu Button */}
+          {/* Mobile Menu Button */}
           <button
             className="btn-mobile-ice-menu"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -76,41 +50,56 @@ export const Header: React.FC<HeaderProps> = ({ visible = true }) => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
-        <nav className="mobile-nav-inner">
-          <a href="#projetos" className="mobile-nav-link" onClick={closeMenu}>Projetos</a>
+      {/* Mobile Drawer (Only when mobile menu is toggled) */}
+      <div
+        className={`mobile-menu-backdrop ${mobileMenuOpen ? 'is-active' : ''}`}
+        onClick={closeMenu}
+        aria-hidden={!mobileMenuOpen}
+      />
+      <div
+        className={`mobile-menu-drawer ${mobileMenuOpen ? 'is-open' : ''}`}
+        aria-hidden={!mobileMenuOpen}
+      >
+        <div className="mobile-drawer-header">
+          <div className="mobile-drawer-title">NAVEGAÇÃO</div>
+          <button
+            className="btn-close-drawer"
+            onClick={closeMenu}
+            aria-label="Fechar menu"
+          >
+            ✕
+          </button>
+        </div>
+
+        <nav className="mobile-nav-links">
+          <a href="#projetos" className="mobile-nav-item" onClick={closeMenu}>
+            <span className="mobile-nav-num">01</span>
+            <span className="mobile-nav-label">Cases de Sucesso</span>
+          </a>
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mobile-nav-link"
+            className="mobile-nav-item"
             onClick={closeMenu}
           >
-            Falar no WhatsApp
+            <span className="mobile-nav-num">02</span>
+            <span className="mobile-nav-label">Iniciar Projeto</span>
           </a>
+        </nav>
+
+        <div className="mobile-drawer-footer">
           <a
-            href={instagramUrl}
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mobile-nav-link"
+            className="mobile-drawer-cta"
             onClick={closeMenu}
           >
-            Instagram
+            <span>Falar no WhatsApp</span>
+            <ArrowUpRight size={16} />
           </a>
-          <div className="mobile-drawer-footer">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-mobile-contact"
-              onClick={closeMenu}
-            >
-              <span>Iniciar Projeto</span>
-              <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </nav>
+        </div>
       </div>
     </header>
   );
