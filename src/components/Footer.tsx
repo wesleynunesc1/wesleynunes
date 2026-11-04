@@ -10,12 +10,17 @@ export const Footer: React.FC = () => {
   return (
     <footer className="site-footer">
       <div className="footer-inner">
-        {/* Wordmark & Brand Line */}
+        {/* Official Brand Logo in Footer */}
         <div className="footer-branding">
-          <div className="footer-logo">
-            <span className="footer-brand-primary">WESLEY</span>
-            <span className="footer-brand-secondary">NUNES</span>
-          </div>
+          <a href="#projetos" className="footer-logo-link" aria-label="Wesley Nunes Topo">
+            <img
+              src="/logo.png"
+              alt="Wesley Nunes"
+              className="footer-logo-img"
+              width="220"
+              height="32"
+            />
+          </a>
           <p className="footer-tagline">
             DESIGN • DEVELOPMENT • DIGITAL EXPERIENCES
           </p>

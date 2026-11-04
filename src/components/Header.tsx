@@ -24,11 +24,15 @@ export const Header: React.FC = () => {
   return (
     <header className={`site-header ${scrolled ? 'header-scrolled' : ''}`}>
       <div className="header-inner">
-        {/* Brand Wordmark */}
-        <a href="#projetos" className="brand-logo" onClick={closeMenu}>
-          <span className="brand-primary">WESLEY</span>
-          <span className="brand-secondary">NUNES</span>
-          <span className="brand-dot" />
+        {/* Official Brand Logo */}
+        <a href="#projetos" className="brand-logo" onClick={closeMenu} aria-label="Wesley Nunes Home">
+          <img
+            src="/logo.png"
+            alt="Wesley Nunes"
+            className="brand-logo-img"
+            width="200"
+            height="29"
+          />
         </a>
 
         {/* Desktop Navigation */}

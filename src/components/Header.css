@@ -25,42 +25,27 @@
   justify-content: space-between;
 }
 
-/* Wordmark Logo */
+/* Official Logo Link & Image */
 .brand-logo {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  font-family: var(--font-sans);
-  font-size: 1.12rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  color: var(--color-white);
-  transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
   position: relative;
 }
 
 .brand-logo:hover {
   opacity: 0.9;
+  transform: translateY(-1px);
 }
 
-.brand-primary {
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.brand-secondary {
-  color: var(--color-ice);
-  margin-left: 0.35rem;
-  font-weight: 300;
-}
-
-.brand-dot {
-  width: 5px;
-  height: 5px;
-  background-color: var(--color-ice);
-  border-radius: 50%;
-  margin-left: 0.35rem;
-  box-shadow: 0 0 10px var(--color-ice);
+.brand-logo-img {
+  height: 28px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(169, 200, 216, 0.2));
 }
 
 /* Desktop Navigation */
@@ -152,7 +137,6 @@
 @media (max-width: 820px) {
   .site-header {
     position: relative;
-    /* Discreet height and padding */
     padding: 0.85rem 0.85rem 0.25rem;
     background: transparent !important;
     border-bottom: none !important;
@@ -169,7 +153,7 @@
     background: rgba(17, 19, 24, 0.88);
     border: 1px solid rgba(169, 200, 216, 0.18);
     border-radius: 9999px;
-    padding: 0.32rem 0.45rem 0.32rem 1.25rem;
+    padding: 0.32rem 0.45rem 0.32rem 1.15rem;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -183,15 +167,9 @@
     display: none;
   }
 
-  .brand-logo {
-    font-size: 0.92rem;
-    letter-spacing: 0.15em;
-  }
-
-  .brand-dot {
-    width: 4px;
-    height: 4px;
-    box-shadow: 0 0 6px var(--color-ice);
+  .brand-logo-img {
+    height: 21px;
+    max-width: 145px;
   }
 
   /* Refined, softer glow on Menu button */
@@ -298,21 +276,5 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 0.88rem;
-  }
-
-  .btn-mobile-instagram {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    width: 100%;
-    padding: 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(169, 200, 216, 0.18);
-    border-radius: 9999px;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.84rem;
   }
 }
