@@ -6,23 +6,14 @@ Portfólio editorial e imersivo desenvolvido em **React 19**, **Vite** e **TypeS
 
 ---
 
-## ✦ Ordem Oficial dos Projetos
+## ✦ Estrutura e Destaques
 
-A galeria está configurada na seguinte sequência:
-
-1. **Leo Nunes Barbearia** — [leonunesbarbearia.vercel.app](https://leonunesbarbearia.vercel.app)
-2. **Mateus Cavalcante** — [mateuscavalcante.vercel.app](https://mateuscavalcante.vercel.app)
-3. **Pedro Fit — Consultoria** — [pedrofit.vercel.app](https://pedrofit.vercel.app)
-4. **Nunes Hub** — [nuneshub.vercel.app](https://nuneshub.vercel.app)
-5. **Cimentop Concrete** — [cimentopconcrete.vercel.app](https://cimentopconcrete.vercel.app)
-6. **Wesley Nunes — Soluções Web** — [wesleynunes.vercel.app](https://wesleynunes.vercel.app)
-7. **Conexão Baby** — [conexaobaby.vercel.app](https://conexaobaby.vercel.app)
-8. **Vista Prime Seven** — [vistaprime-seven.vercel.app](https://vistaprime-seven.vercel.app)
-9. **SCBA Escolinha de Futebol** — [scbaescolinha.vercel.app](https://scbaescolinha.vercel.app)
-10. **Alicerce Digital** — [alicercedigital.vercel.app](https://alicercedigital.vercel.app)
-11. **Cartório do Brasileiro** — [cartoriodobrasileiro.com](https://cartoriodobrasileiro.com)
-12. **DSS Solutions** — [dsssolutions.vercel.app](https://dsssolutions.vercel.app)
-13. **Tioni — Marca & Vestuário** — [www.tioni.com.br](https://www.tioni.com.br)
+- **Início Imediato em Portfólio**: Header em cápsula seguido imediatamente pelos cases de sucesso e pelo marquee horizontal contínuo.
+- **Auto Scroll Rápido e Responsivo**:
+  - Velocidade otimizada (~240px/s) para uma visualização dinâmica e fluida.
+  - **Sensível ao toque no Mobile**: Basta passar o dedo sobre o card (`onTouchStart`) para a rolagem iniciar imediatamente.
+  - **Efeito Reverso Suave**: Ao trocar de projeto, o case anterior rola suavemente em sentido inverso de volta ao topo.
+- **Galeria com 13 Cases Reais**: Imagens comprimidas em WebP com proporção retangular `1.35:1` no desktop e compacta no mobile.
 
 ---
 

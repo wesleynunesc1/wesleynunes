@@ -35,8 +35,7 @@ export const Header: React.FC = () => {
         <nav className="desktop-nav" aria-label="Navegação Principal">
           <ul className="nav-list">
             <li><a href="#projetos" className="nav-link">Projetos</a></li>
-            <li><a href="#sobre" className="nav-link">Sobre</a></li>
-            <li><a href="#contato" className="nav-link">Contato</a></li>
+            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="nav-link">Contato</a></li>
           </ul>
         </nav>
 
@@ -65,12 +64,28 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu — efeito dropdown/deslizante original logo abaixo da barra */}
+      {/* Mobile Drawer Menu */}
       <div className={`mobile-nav-drawer ${mobileMenuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav-inner">
           <a href="#projetos" className="mobile-nav-link" onClick={closeMenu}>Projetos</a>
-          <a href="#sobre" className="mobile-nav-link" onClick={closeMenu}>Sobre</a>
-          <a href="#contato" className="mobile-nav-link" onClick={closeMenu}>Contato</a>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-nav-link"
+            onClick={closeMenu}
+          >
+            Falar no WhatsApp
+          </a>
+          <a
+            href={instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-nav-link"
+            onClick={closeMenu}
+          >
+            Instagram
+          </a>
           <div className="mobile-drawer-footer">
             <a
               href={whatsappUrl}
@@ -80,16 +95,6 @@ export const Header: React.FC = () => {
               onClick={closeMenu}
             >
               <span>Iniciar Projeto</span>
-              <ArrowUpRight size={16} />
-            </a>
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-mobile-instagram"
-              onClick={closeMenu}
-            >
-              <span>Instagram @euwesleyununes</span>
               <ArrowUpRight size={16} />
             </a>
           </div>

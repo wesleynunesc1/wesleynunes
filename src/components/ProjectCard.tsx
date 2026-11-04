@@ -24,6 +24,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       className={`gallery-project-card ${isActive ? 'is-active' : ''}`}
       onMouseEnter={onActivate}
       onMouseLeave={onDeactivate}
+      onTouchStart={onActivate}
       onClick={onTouchToggle}
       tabIndex={0}
       role="button"

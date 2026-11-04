@@ -13,14 +13,14 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
   screenshotSrc,
   projectTitle,
   isActive,
-  scrollSpeedSeconds = 20,
+  scrollSpeedSeconds = 14,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const animationRef = useRef<Animation | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Stop and clean up any ongoing animation
+  // Stop ongoing animation
   const stopAnimation = useCallback(() => {
     if (animationRef.current) {
       animationRef.current.cancel();
@@ -28,19 +28,50 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     }
   }, []);
 
-  // Reset to initial top position
-  const resetPosition = useCallback(() => {
+  // Smoothly rewind / scroll in reverse back to top
+  const rewindToTop = useCallback(() => {
+    if (!imageRef.current) return;
+
+    // Get current translateY position from computed transform
+    const style = window.getComputedStyle(imageRef.current);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    const currentY = matrix.m42; // current translateY in pixels (negative or 0)
+
     stopAnimation();
-    if (imageRef.current) {
+
+    if (currentY >= 0 || Math.abs(currentY) < 5) {
       imageRef.current.style.transform = 'translateY(0px)';
+      return;
     }
+
+    // Rewind smoothly backwards from currentY back to 0
+    // Dynamic rewind duration proportional to displacement (~600px/s)
+    const rewindDuration = Math.max(350, (Math.abs(currentY) / 600) * 1000);
+
+    const keyframes: Keyframe[] = [
+      { transform: `translateY(${currentY}px)` },
+      { transform: 'translateY(0px)' },
+    ];
+
+    const animation = imageRef.current.animate(keyframes, {
+      duration: rewindDuration,
+      easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+      fill: 'forwards',
+    });
+
+    animationRef.current = animation;
+    animation.onfinish = () => {
+      if (imageRef.current) {
+        imageRef.current.style.transform = 'translateY(0px)';
+      }
+      animationRef.current = null;
+    };
   }, [stopAnimation]);
 
-  // Main scroll driver using Web Animations API
+  // Main scroll forward driver (passes faster ~240px per second)
   const startScroll = useCallback(() => {
     if (!containerRef.current || !imageRef.current) return;
 
-    // Check reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       return;
@@ -54,11 +85,10 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
       return;
     }
 
-    // Cancel existing animation
     stopAnimation();
 
-    // Constant speed calculation proportional to real height (~170px/s)
-    const calculatedDuration = Math.max(scrollSpeedSeconds * 1000, (maxScrollDistance / 170) * 1000);
+    // Constant speed calculation proportional to real height (~240px/s - faster, smooth velocity)
+    const calculatedDuration = Math.max(scrollSpeedSeconds * 1000, (maxScrollDistance / 240) * 1000);
 
     const keyframes: Keyframe[] = [
       { transform: 'translateY(0px)' },
@@ -89,14 +119,14 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [isActive]);
 
-  // React to isActive changes (hover or touch)
+  // React to isActive changes: when active startScroll; when de-activated rewind to top
   useEffect(() => {
     if (isActive && imageLoaded) {
       startScroll();
-    } else if (!isActive) {
-      resetPosition();
+    } else if (!isActive && imageLoaded) {
+      rewindToTop();
     }
-  }, [isActive, imageLoaded, startScroll, resetPosition]);
+  }, [isActive, imageLoaded, startScroll, rewindToTop]);
 
   // Recalculate on window resize
   useEffect(() => {
@@ -118,7 +148,6 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     };
   }, [isActive, imageLoaded, startScroll, stopAnimation]);
 
-  // Fallback if browser doesn't support WebP or fails to load
   const jpgFallback = screenshotSrc.replace(/\.webp$/, '.jpg');
 
   return (
@@ -140,7 +169,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
         />
       </picture>
 
-      {/* Discret hint badge indicating auto scroll capability (disappears when active) */}
+      {/* Discret hint badge indicating auto scroll capability */}
       {!isActive && (
         <div className="scroll-hint-badge" aria-hidden="true">
           <span className="scroll-hint-dot" />
