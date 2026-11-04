@@ -1,9 +1,9 @@
-/* Cinematic Hero Wall - Exact FilmSupply Reference Architecture (Clean, Borderless) */
+/* Cinematic Hero Wall - Exact FilmSupply Reference Architecture (Clean, Borderless, Top Hero Framing) */
 
 .fs-hero-section {
   position: relative;
   width: 100%;
-  height: 340svh; /* Smooth, luxurious scroll track */
+  height: 320svh; /* Optimized, fluid scroll track */
   background-color: #05070B;
 }
 
@@ -92,6 +92,7 @@
   height: 100%;
 }
 
+/* All project images in the cinematic cells ALWAYS start at the top (Hero of the site) */
 .fs-cell-video,
 .fs-cell-img {
   position: absolute;
@@ -99,13 +100,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top !important; /* STRICT: Always show the hero of the website */
   display: block;
 }
 
 .fs-cell-shade {
   position: absolute;
   inset: 0;
-  background-color: rgba(5, 7, 11, 0.4);
+  background-color: rgba(5, 7, 11, 0.35);
   pointer-events: none;
 }
 
@@ -266,7 +268,7 @@
 /* Mobile specific styling */
 @media (max-width: 768px) {
   .fs-hero-section {
-    height: 300svh;
+    height: 280svh;
   }
 
   .fs-hero-cell {

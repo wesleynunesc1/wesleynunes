@@ -3,10 +3,13 @@ export interface FilmHeroCellConfig {
   position: 'main' | 't' | 'b' | 'l' | 'r' | 'tl' | 'tr' | 'bl' | 'br';
   title: string;
   category: string;
-  imageSrc: string;
+  /** Optimized Hero screenshot (top section only, light & crisp) */
+  heroImage: string;
+  /** Full length screenshot for auto-scrolling gallery */
+  fullScreenshot: string;
+  websiteUrl?: string;
   videoSrc?: string;
   poster?: string;
-  objectPosition?: string;
 }
 
 export const filmHeroContent = {
@@ -24,10 +27,11 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'main',
     title: 'Wesley Nunes',
     category: 'Digital Studio',
-    imageSrc: '/projects/wesleynunes-lp.webp',
+    heroImage: '/projects/heroes/wesleynunes-lp.webp',
+    fullScreenshot: '/projects/wesleynunes-lp.webp',
+    websiteUrl: 'https://wesleynunes.com',
     videoSrc: '/cinematic/hero-intro.mp4',
-    poster: '/projects/wesleynunes-lp.webp',
-    objectPosition: 'center 10%',
+    poster: '/projects/heroes/wesleynunes-lp.webp',
   },
 
   // 2. QUADROS QUE SURGEM AO REDOR (Acima, Abaixo, Esquerda, Direita e Cantos)
@@ -37,8 +41,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 't',
     title: 'Cimentop Concrete',
     category: 'Construção Civil',
-    imageSrc: '/projects/cimentopconcrete.webp',
-    objectPosition: 'center 20%',
+    heroImage: '/projects/heroes/cimentopconcrete.webp',
+    fullScreenshot: '/projects/cimentopconcrete.webp',
+    websiteUrl: 'https://cimentopconcrete.com',
   },
   // Abaixo (Bottom)
   {
@@ -46,8 +51,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'b',
     title: 'Pedro Fit',
     category: 'High Performance',
-    imageSrc: '/projects/pedrofit.webp',
-    objectPosition: 'center 20%',
+    heroImage: '/projects/heroes/pedrofit.webp',
+    fullScreenshot: '/projects/pedrofit.webp',
+    websiteUrl: 'https://pedrofit.vercel.app',
   },
   // Esquerda (Left)
   {
@@ -55,8 +61,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'l',
     title: 'Mateus Cavalcante',
     category: 'Design & Tecnologia',
-    imageSrc: '/projects/mateuscavalcante.webp',
-    objectPosition: 'center 15%',
+    heroImage: '/projects/heroes/mateuscavalcante.webp',
+    fullScreenshot: '/projects/mateuscavalcante.webp',
+    websiteUrl: 'https://mateuscavalcante.vercel.app',
   },
   // Direita (Right)
   {
@@ -64,8 +71,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'r',
     title: 'Leo Nunes Barbearia',
     category: 'Experiência & Barbearia Premium',
-    imageSrc: '/projects/leo-nunes.webp',
-    objectPosition: 'center 10%',
+    heroImage: '/projects/heroes/leo-nunes.webp',
+    fullScreenshot: '/projects/leo-nunes.webp',
+    websiteUrl: 'https://leonunesbarbearia.vercel.app',
   },
   // Top-Left (Superior Esquerdo)
   {
@@ -73,8 +81,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'tl',
     title: 'Cartório do Brasileiro',
     category: 'Serviços Jurídicos',
-    imageSrc: '/projects/cartoriodobrasileiro.webp',
-    objectPosition: 'center 25%',
+    heroImage: '/projects/heroes/cartoriodobrasileiro.webp',
+    fullScreenshot: '/projects/cartoriodobrasileiro.webp',
+    websiteUrl: 'https://cartoriodobrasileiro.com',
   },
   // Top-Right (Superior Direito)
   {
@@ -82,8 +91,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'tr',
     title: 'Nunes Hub',
     category: 'Hub de Inovação',
-    imageSrc: '/projects/nuneshub.webp',
-    objectPosition: 'center 20%',
+    heroImage: '/projects/heroes/nuneshub.webp',
+    fullScreenshot: '/projects/nuneshub.webp',
+    websiteUrl: 'https://nuneshub.vercel.app',
   },
   // Bottom-Left (Inferior Esquerdo)
   {
@@ -91,8 +101,9 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'bl',
     title: 'Conexão Baby',
     category: 'E-commerce Infantil',
-    imageSrc: '/projects/conexaobaby.webp',
-    objectPosition: 'center 15%',
+    heroImage: '/projects/heroes/conexaobaby.webp',
+    fullScreenshot: '/projects/conexaobaby.webp',
+    websiteUrl: 'https://conexaobaby.com.br',
   },
   // Bottom-Right (Inferior Direito)
   {
@@ -100,8 +111,8 @@ export const filmHeroCells: FilmHeroCellConfig[] = [
     position: 'br',
     title: 'Alicerce Digital',
     category: 'Estratégia Digital',
-    imageSrc: '/projects/alicercedigital.webp',
-    objectPosition: 'center 15%',
+    heroImage: '/projects/heroes/alicercedigital.webp',
+    fullScreenshot: '/projects/alicercedigital.webp',
+    websiteUrl: 'https://alicercedigital.com',
   },
 ];
-
