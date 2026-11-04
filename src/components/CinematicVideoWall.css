@@ -1,0 +1,395 @@
+/* Cinematic Video Wall Styles */
+.cinematic-wall-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  background-color: #05070B;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.cinematic-wall-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+/* Master Moving Mosaic (Virtual Camera Target) */
+.cinematic-wall-mosaic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 16px;
+  width: 130vw;
+  max-width: 1800px;
+  will-change: transform;
+  transform-style: preserve-3d;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 3 Columns Layout */
+.mosaic-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Column vertical offsets to create dynamic staggered mosaic */
+.mosaic-col-0 {
+  transform: translateY(-40px);
+}
+.mosaic-col-1 {
+  transform: translateY(0);
+}
+.mosaic-col-2 {
+  transform: translateY(30px);
+}
+
+/* Panels */
+.cinematic-panel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0B0E14;
+  border: 1px solid rgba(169, 200, 216, 0.12);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+
+.panel-media-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.panel-video,
+.panel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  pointer-events: none;
+  transition: transform 0.6s ease;
+}
+
+.panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 7, 11, 0.25) 0%,
+    rgba(5, 7, 11, 0.1) 40%,
+    rgba(5, 7, 11, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-initial-overlay {
+  background: radial-gradient(
+    circle at center,
+    rgba(5, 7, 11, 0.4) 0%,
+    rgba(5, 7, 11, 0.85) 80%,
+    rgba(5, 7, 11, 0.96) 100%
+  );
+}
+
+/* Initial Hero Content (Centered on initial panel) */
+.panel-hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 20px;
+  text-align: center;
+  box-sizing: border-box;
+  will-change: opacity, transform;
+}
+
+.hero-film-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border: 1px solid rgba(169, 200, 216, 0.35);
+  background: rgba(11, 14, 20, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.film-crosshair {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: #A9C8D8;
+  border-style: solid;
+}
+.film-tl {
+  top: -2px;
+  left: -2px;
+  border-width: 1.5px 0 0 1.5px;
+}
+.film-tr {
+  top: -2px;
+  right: -2px;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.film-badge-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #FFFFFF;
+}
+
+.hero-film-title {
+  font-size: clamp(1.65rem, 3.8vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+  margin: 0 0 16px;
+  text-wrap: balance;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.hero-film-subtitle {
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  line-height: 1.45;
+  color: rgba(245, 247, 250, 0.75);
+  max-width: 380px;
+  margin: 0 0 28px;
+}
+
+/* Button & Film Technical Markers */
+.hero-film-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.film-marker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.marker-line {
+  width: 18px;
+  height: 1px;
+  background: rgba(169, 200, 216, 0.4);
+}
+
+.marker-code {
+  font-family: monospace, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: rgba(169, 200, 216, 0.65);
+}
+
+.hero-film-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border-radius: 9999px;
+  background: rgba(169, 200, 216, 0.12);
+  border: 1px solid rgba(169, 200, 216, 0.45);
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 25px rgba(169, 200, 216, 0.15);
+  transition: all 0.3s ease;
+}
+
+.hero-film-btn:hover {
+  background: rgba(169, 200, 216, 0.22);
+  border-color: #A9C8D8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6), 0 0 35px rgba(169, 200, 216, 0.35);
+}
+
+.btn-arrow {
+  color: #A9C8D8;
+  font-size: 1rem;
+}
+
+/* Film Calibration Scale / Ruler */
+.film-ruler {
+  position: absolute;
+  bottom: 18px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-top: 1px solid rgba(169, 200, 216, 0.2);
+  padding-top: 6px;
+}
+
+.ruler-notch {
+  width: 1px;
+  height: 4px;
+  background: rgba(169, 200, 216, 0.3);
+}
+
+.ruler-notch.major {
+  height: 8px;
+  background: rgba(169, 200, 216, 0.6);
+}
+
+.ruler-text {
+  font-family: monospace, sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: rgba(169, 200, 216, 0.5);
+  margin: 0 8px;
+}
+
+/* Target Panel Reveal Overlay (Leo Nunes Barbearia) */
+.panel-target-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px 24px;
+  background: linear-gradient(0deg, rgba(5, 7, 11, 0.96) 0%, rgba(5, 7, 11, 0.6) 70%, transparent 100%);
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+.target-film-tag {
+  font-family: monospace, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: #A9C8D8;
+  margin-bottom: 8px;
+}
+
+.target-film-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.target-film-desc {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: rgba(245, 247, 250, 0.75);
+  margin: 0 0 16px;
+}
+
+.target-film-link {
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #A9C8D8;
+  text-decoration: none;
+}
+
+/* Atmospheric Overlays */
+.wall-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 180px rgba(5, 7, 11, 0.95);
+  pointer-events: none;
+  z-index: 30;
+}
+
+.wall-light-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 70vh;
+  background: radial-gradient(circle, rgba(169, 200, 216, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 25;
+}
+
+/* Mobile specific styling */
+@media (max-width: 768px) {
+  .cinematic-wall-mosaic {
+    width: 220vw; /* Mosaic extends laterally beyond visible width so virtual camera can pan */
+    gap: 12px;
+  }
+
+  .mosaic-column {
+    gap: 12px;
+  }
+
+  .cinematic-panel {
+    border-radius: 10px;
+  }
+
+  .hero-film-title {
+    font-size: 1.65rem;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .hero-film-subtitle {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin-bottom: 22px;
+  }
+
+  .hero-film-btn-container {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .film-marker {
+    display: none; /* Keep clean on small screen */
+  }
+
+  .hero-film-btn {
+    padding: 11px 22px;
+    font-size: 0.74rem;
+  }
+
+  .panel-target-content {
+    padding: 24px 18px;
+  }
+
+  .target-film-title {
+    font-size: 1.25rem;
+  }
+
+  .target-film-desc {
+    font-size: 0.8rem;
+  }
+}

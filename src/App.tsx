@@ -1,6 +1,6 @@
 import { AmbientBackground } from './components/AmbientBackground';
 import { Header } from './components/Header';
-import { CinematicHero } from './components/CinematicHero';
+import { CinematicVideoWall } from './components/CinematicVideoWall';
 import { PortfolioGallery } from './components/PortfolioGallery';
 import { InfiniteMarquee } from './components/InfiniteMarquee';
 import { Footer } from './components/Footer';
@@ -16,8 +16,8 @@ export function App() {
 
       {/* Main Content Sections */}
       <main>
-        {/* Nova Hero Cinematográfica */}
-        <CinematicHero />
+        {/* Nova Experiência Cinematográfica — Video Wall com Zoom Contínuo & Translação */}
+        <CinematicVideoWall />
 
         {/* Seção 01 — Portfólio / Projetos Selecionados (Galeria 3 colunas) */}
         <PortfolioGallery />

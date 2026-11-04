@@ -32,3 +32,4 @@ export const heroVideoConfig: HeroVideoConfig = {
   ],
   poster: '/Logo WN.png',
 };
+

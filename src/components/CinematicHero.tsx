@@ -236,3 +236,4 @@ export const CinematicHero: React.FC = () => {
     </section>
   );
 };
+
