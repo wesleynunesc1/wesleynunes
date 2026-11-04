@@ -305,18 +305,7 @@ export const CinematicHeroWall: React.FC = () => {
           {/* MAIN PANEL (Strictly ISOLATED & Centered at scrollProgress = 0) */}
           <div className="fs-hero-cell fs-hero-cell--main" id={mainCell.id}>
             <div className="fs-cell-media">
-              {mainCell.videoSrc && (
-                <video
-                  className="fs-cell-video"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster={mainCell.poster || mainCell.heroImageDesktop}
-                >
-                  <source src={mainCell.videoSrc} type="video/mp4" />
-                </video>
-              )}
+              {/* Fallback image poster behind video */}
               <picture>
                 <source
                   media="(max-width: 768px)"
@@ -329,6 +318,18 @@ export const CinematicHeroWall: React.FC = () => {
                   loading="eager"
                 />
               </picture>
+              {mainCell.videoSrc && (
+                <video
+                  className="fs-cell-video"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={mainCell.poster || mainCell.heroImageDesktop}
+                >
+                  <source src={mainCell.videoSrc} type="video/mp4" />
+                </video>
+              )}
               {/* Controlled dark gradient overlay on main panel for optimal legibility */}
               <div className="fs-cell-shade main-shade" />
             </div>
