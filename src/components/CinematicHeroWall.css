@@ -3,7 +3,7 @@
 .fs-hero-section {
   position: relative;
   width: 100%;
-  height: 320svh; /* Optimized, fluid scroll track */
+  height: 280svh; /* Compact, objective timeline without dead scroll distance */
   background-color: #05070B;
 }
 
@@ -138,15 +138,15 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  will-change: opacity, transform;
+  will-change: opacity, transform, clip-path;
 }
 
-/* Official Brand Logo (Replaces old text tag, no capsule, no borders, transparent) */
+/* 1. Official Brand Logo (Replaces old text tag, no capsule, no borders, transparent) */
 .fs-hero-brand-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
@@ -161,9 +161,9 @@
   filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.9));
 }
 
-/* Title */
+/* 2. Title */
 .fs-hero-title {
-  font-size: clamp(2rem, 5.2vw, 4.4rem);
+  font-size: clamp(2rem, 5.2vw, 4.2rem);
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.035em;
@@ -173,69 +173,47 @@
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95), 0 0 50px rgba(169, 200, 216, 0.2);
 }
 
-/* Subtitle */
-.fs-hero-subtitle {
-  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
-  line-height: 1.5;
-  color: rgba(245, 247, 250, 0.85);
-  max-width: 600px;
-  margin: 0 0 34px;
+/* 3. Description (Refined ~3 lines on mobile, #B8BEC7) */
+.fs-hero-description {
+  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+  line-height: 1.6;
+  font-weight: 400;
+  color: #B8BEC7;
+  max-width: 580px;
+  margin: 0 0 32px;
+  text-wrap: balance;
 }
 
-/* Minimalist Button */
+/* 4. Minimalist Cutout White Button "PROJETOS" (Text Cutout revealing media) */
 .fs-hero-cta {
   display: flex;
   justify-content: center;
 }
 
-.fs-cta-button {
-  position: relative;
+.fs-cutout-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 13px 32px;
-  border-radius: 9999px;
-  background: rgba(169, 200, 216, 0.12);
-  border: 1px solid rgba(169, 200, 216, 0.5);
-  color: #FFFFFF;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  justify-content: center;
   text-decoration: none;
-  text-transform: uppercase;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(169, 200, 216, 0.15);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
+  border-radius: 9999px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
-.fs-btn-glow {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(169, 200, 216, 0.3), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.fs-cutout-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 255, 255, 0.35);
 }
 
-.fs-cta-button:hover {
-  border-color: #A9C8D8;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 35px rgba(169, 200, 216, 0.4);
+.fs-cutout-btn:active {
+  transform: scale(0.97);
 }
 
-.fs-cta-button:hover .fs-btn-glow {
-  opacity: 1;
-}
-
-.fs-btn-arrow {
-  color: #A9C8D8;
-  font-size: 1rem;
-  transition: transform 0.3s ease;
-}
-
-.fs-cta-button:hover .fs-btn-arrow {
-  transform: translateY(2px);
+.fs-cutout-svg {
+  display: block;
+  width: 154px;
+  height: 46px;
+  overflow: visible;
 }
 
 /* Exit Dim Overlay */
@@ -251,7 +229,7 @@
 /* Mobile specific styling */
 @media (max-width: 768px) {
   .fs-hero-section {
-    height: 280svh;
+    height: 240svh; /* Objective, tight scroll distance on mobile */
   }
 
   .fs-hero-cell {
@@ -291,23 +269,24 @@
   }
 
   .fs-hero-brand-logo {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .fs-hero-title {
-    font-size: clamp(1.75rem, 8.2vw, 2.5rem);
+    font-size: clamp(1.65rem, 7.8vw, 2.35rem);
     line-height: 1.15;
     margin-bottom: 14px;
   }
 
-  .fs-hero-subtitle {
-    font-size: 0.88rem;
-    line-height: 1.45;
+  .fs-hero-description {
+    font-size: 0.86rem;
+    line-height: 1.5;
+    max-width: 320px; /* Refined to comfortably span ~3 lines on mobile */
     margin-bottom: 24px;
   }
 
-  .fs-cta-button {
-    padding: 11px 24px;
-    font-size: 0.74rem;
+  .fs-cutout-svg {
+    width: 144px;
+    height: 44px;
   }
 }

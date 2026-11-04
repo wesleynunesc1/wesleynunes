@@ -33,24 +33,6 @@ export const PortfolioGallery: React.FC = () => {
   return (
     <section id="projetos" className="portfolio-gallery-section">
       <div className="portfolio-gallery-container">
-        {/* Mobile Central Featured "Portfólio" Button with Refined Sphere */}
-        <div className="mobile-portfolio-cta-wrapper">
-          <div className="mobile-portfolio-pill-box">
-            {/* Delicate translucid cold sphere */}
-            <div className="portfolio-pill-bubble" aria-hidden="true" />
-            <button
-              type="button"
-              className="btn-mobile-portfolio-main"
-              onClick={() => {
-                const el = document.getElementById('cases-start');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Portfólio
-            </button>
-          </div>
-        </div>
-
         {/* Section Header: 01 / CASES DE SUCESSO */}
         <div id="cases-start" className="gallery-header">
           <span className="gallery-section-tag">

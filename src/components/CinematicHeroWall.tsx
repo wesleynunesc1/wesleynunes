@@ -81,9 +81,14 @@ export const CinematicHeroWall: React.FC = () => {
       }
 
       gsap.set(grid, { transformOrigin: '50% 50%', scale: 1 });
+      gsap.set(copy, {
+        opacity: 1,
+        y: 0,
+        clipPath: 'inset(0% 0% 0% 0%)',
+      });
 
       // Master Timeline pinned with ScrollTrigger
-      // scrub: immediate 0.4 on mobile, 0.6 on desktop for fluid 1:1 response
+      // scrub: 0.35 on mobile, 0.55 on desktop for immediate response without latency
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -93,92 +98,90 @@ export const CinematicHeroWall: React.FC = () => {
           anticipatePin: 1,
           fastScrollEnd: true,
           preventOverlaps: true,
-          invalidateOnRefresh: false, // Prevent jumps on dynamic browser bar show/hide
+          invalidateOnRefresh: false, // Prevents jumps when mobile address bar collapses/expands
         },
       });
 
-      // TIMELINE EXECUTION:
-      // Total duration units: 100
+      // TIMELINE BREAKDOWN:
+      // Total duration: 100 units (compact, objective timeline)
       //
-      // 0% - 10%: Initial state hold. ONLY main panel.
-      // 10% - 30%: Text fades out smoothly.
-      // 15% - 75%: Continuous zoom-out of the 3x3 grid (scale 1.0 -> 0.4654).
-      // 30% - 55%: Progressive revelation of surrounding panels:
-      //            - Layer becomes visible.
-      //            - Laterals appear first (30% -> 42%).
-      //            - Top / bottom appear (36% -> 50%).
-      //            - Corners complete the wall (42% -> 55%).
-      // 55% - 75%: Full mosaic view, texts gone, central panel in place.
-      //            - Header progressively fades in smoothly from 58% to 74%.
-      // 75% - 100%: Seamless transition to next section:
-      //            - Mosaic translates upward (yPercent: -35) with soft dimming.
-      //            - Next section moves up naturally to meet it, without black void.
+      // 0% - 25%: Content vanishes smoothly via combined opacity, slight upward drift and clipping mask
+      // 15% - 70%: Continuous virtual camera zoom-out (scale 1.0 -> 0.4654)
+      // 25% - 60%: Progressive revelation of surrounding panels
+      //            - Laterals appear (25% -> 40%)
+      //            - Top / bottom appear (32% -> 48%)
+      //            - Corners complete the wall (40% -> 58%)
+      // 60% - 75%: Full composition hold (brief, natural breathing room)
+      //            - Header progressively fades in (55% -> 70%)
+      // 75% - 100%: Seamless cinematic transition:
+      //            - Mosaic translates upward (yPercent: -35) with soft dimming
+      //            - Next section immediately slides up to meet it without blank gaps
 
       masterTl
-        // 10% -> 30%: Text fade out
+        // 0% -> 25%: Hero elements vanish with combined opacity + translateY + clipping mask
         .to(
           copy,
           {
             opacity: 0,
             y: -24,
-            scale: 0.96,
+            clipPath: 'inset(0% 0% 85% 0%)',
             ease: 'power2.inOut',
-            duration: 20,
+            duration: 25,
           },
-          10
+          0
         )
 
-        // 15% -> 75%: Continuous zoom-out of the grid
+        // 15% -> 70%: Continuous zoom-out of the grid
         .to(
           grid,
           {
             scale: isMobile ? 0.48 : 0.4654,
             ease: 'power1.inOut',
-            duration: 60,
+            duration: 55,
           },
           15
         )
 
-        // 30%: Make surrounding layer container visible
+        // 25%: Make surrounding layer container visible
         .set(
           surroundLayer,
           {
             visibility: 'visible',
           },
-          30
+          25
         )
 
-        // 30% -> 42%: Laterals appear first
+        // 25% -> 40%: Laterals appear first
         .to(
           [leftCell, rightCell].filter(Boolean),
           {
             opacity: 1,
             ease: 'power1.out',
-            duration: 14,
+            duration: 15,
           },
-          30
+          25
         )
 
-        // 36% -> 50%: Top & bottom appear
+        // 32% -> 48%: Top & bottom appear
         .to(
           [topCell, bottomCell].filter(Boolean),
           {
             opacity: 1,
             ease: 'power1.out',
-            duration: 14,
+            duration: 16,
           },
-          36
+          32
         )
 
-        // 42% -> 55%: Corners appear to complete the wall
+        // 40% -> 58%: Corners appear to complete the wall
         .to(
           corners.filter(Boolean),
           {
             opacity: 1,
             ease: 'power1.out',
-            duration: 13,
+            duration: 18,
           },
-          42
+          40
         )
 
         // Surrounding layer general opacity 0 -> 1
@@ -187,12 +190,12 @@ export const CinematicHeroWall: React.FC = () => {
           {
             opacity: 1,
             ease: 'none',
-            duration: 15,
+            duration: 20,
           },
-          30
+          25
         );
 
-      // Header progressive reveal: 58% -> 74%
+      // Header progressive reveal: 55% -> 72%
       if (header) {
         masterTl.to(
           header,
@@ -200,7 +203,7 @@ export const CinematicHeroWall: React.FC = () => {
             opacity: 1,
             y: 0,
             ease: 'power2.out',
-            duration: 16,
+            duration: 17,
             onStart: () => {
               header.style.pointerEvents = 'auto';
             },
@@ -208,29 +211,29 @@ export const CinematicHeroWall: React.FC = () => {
               header.style.pointerEvents = 'none';
             },
           },
-          58
+          55
         );
       }
 
-      // 78% -> 100%: Smooth coordinated exit & entrance of next section
+      // 75% -> 100%: Smooth coordinated exit & entrance of next section
       masterTl
         .to(
           grid,
           {
             yPercent: isMobile ? -36 : -32,
             ease: 'power1.inOut',
-            duration: 22,
+            duration: 25,
           },
-          78
+          75
         )
         .to(
           dim,
           {
             opacity: 0.65,
             ease: 'power1.in',
-            duration: 20,
+            duration: 22,
           },
-          80
+          78
         );
 
       // If next section exists, animate its entrance smoothly
@@ -242,9 +245,9 @@ export const CinematicHeroWall: React.FC = () => {
             y: 0,
             opacity: 1,
             ease: 'power1.out',
-            duration: 20,
+            duration: 25,
           },
-          80
+          75
         );
       }
     }, sectionRef);
@@ -332,7 +335,7 @@ export const CinematicHeroWall: React.FC = () => {
 
             {/* CENTRAL CONTENT ON MAIN PANEL */}
             <div ref={copyRef} className="fs-hero-content">
-              {/* Official Brand Logo (Replaces old text tag, zero border, transparent) */}
+              {/* 1. Official Brand Logo (Replaces old text tag, transparent, zero borders) */}
               <div className="fs-hero-brand-logo">
                 <img
                   src="/logo.png"
@@ -343,29 +346,62 @@ export const CinematicHeroWall: React.FC = () => {
                 />
               </div>
 
-              {/* Main Title */}
+              {/* 2. Main Title */}
               <h1 className="fs-hero-title">
                 EXPERIÊNCIAS DIGITAIS
                 <br />
                 QUE IMPRESSIONAM.
               </h1>
 
-              {/* Subtitle */}
-              <p className="fs-hero-subtitle">
-                {filmHeroContent.subtitle}
+              {/* 3. Description (Refined ~3 lines on mobile, #B8BEC7) */}
+              <p className="fs-hero-description">
+                {filmHeroContent.description}
               </p>
 
-              {/* Minimalist CTA Button */}
+              {/* 4. Minimalist Cutout White Button "PROJETOS" (SVG Masked to reveal underlying media) */}
               <div className="fs-hero-cta">
                 <a
                   href={`#${filmHeroContent.targetSectionId}`}
                   onClick={handleScrollToProjects}
-                  className="fs-cta-button"
-                  aria-label="Explorar projetos selecionados"
+                  className="fs-cutout-btn"
+                  aria-label="PROJETOS — Navegar para Cases de Sucesso"
                 >
-                  <span className="fs-btn-glow" />
-                  <span className="fs-btn-label">{filmHeroContent.ctaText}</span>
-                  <span className="fs-btn-arrow" aria-hidden="true">↓</span>
+                  <svg
+                    className="fs-cutout-svg"
+                    viewBox="0 0 160 48"
+                    width="160"
+                    height="48"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <defs>
+                      <mask id="cutout-text-mask">
+                        {/* White fills the mask, black cuts out the text */}
+                        <rect width="100%" height="100%" fill="white" rx="24" ry="24" />
+                        <text
+                          x="50%"
+                          y="52%"
+                          textAnchor="middle"
+                          dominantBaseline="central"
+                          fill="black"
+                          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+                          fontSize="13"
+                          fontWeight="800"
+                          letterSpacing="0.18em"
+                        >
+                          PROJETOS
+                        </text>
+                      </mask>
+                    </defs>
+                    {/* Solid white shape with masked cutout text */}
+                    <rect
+                      width="100%"
+                      height="100%"
+                      fill="#FFFFFF"
+                      rx="24"
+                      ry="24"
+                      mask="url(#cutout-text-mask)"
+                    />
+                  </svg>
                 </a>
               </div>
             </div>

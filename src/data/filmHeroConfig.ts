@@ -18,8 +18,8 @@ export interface FilmHeroCellConfig {
 
 export const filmHeroContent = {
   title: 'EXPERIÊNCIAS DIGITAIS QUE IMPRESSIONAM.',
-  subtitle: 'Design, tecnologia e experiências digitais em cada detalhe.',
-  ctaText: 'EXPLORAR PROJETOS',
+  description: 'Transformo ideias em experiências digitais únicas, combinando design, tecnologia e inteligência para criar websites que impressionam.',
+  ctaText: 'PROJETOS',
   targetSectionId: 'projetos',
 };
 
