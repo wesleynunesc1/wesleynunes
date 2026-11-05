@@ -1,0 +1,280 @@
+/* ==========================================================================
+   ABOUT PROFILE CARD — CINEMATIC EDITORIAL PERSONAL CARD
+   ========================================================================== */
+
+.about-profile-section {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 3rem;
+  z-index: 10;
+}
+
+.about-profile-card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, #090c12 0%, #05070a 100%);
+  border: 1px solid rgba(169, 200, 216, 0.16);
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-profile-card:hover {
+  border-color: rgba(169, 200, 216, 0.3);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 25px rgba(169, 200, 216, 0.06);
+}
+
+/* 1. Lado Esquerdo / Fotografia */
+.about-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  overflow: hidden;
+  background-color: #05070b;
+}
+
+.about-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.about-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  filter: contrast(1.04) brightness(0.96);
+}
+
+/* Gradiente de fusão do desktop (da foto para a direita) */
+.about-photo-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    transparent 55%,
+    rgba(7, 9, 14, 0.6) 80%,
+    rgba(7, 9, 14, 0.98) 100%
+  ),
+  linear-gradient(
+    to bottom,
+    transparent 75%,
+    rgba(7, 9, 14, 0.85) 100%
+  );
+}
+
+/* 2. Lado Direito / Conteúdo Editorial */
+.about-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem 3.5rem 3.5rem 2.5rem;
+  background: transparent;
+  z-index: 2;
+}
+
+.about-content-inner {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.about-tagline {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--color-ice);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.about-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0 0 1.25rem 0;
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #b8bec7;
+  margin: 0 0 2rem 0;
+  max-width: 540px;
+}
+
+/* Três Etiquetas */
+.about-pill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 2.2rem;
+}
+
+.about-tag-pill {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #d2d8e2;
+  background: rgba(169, 200, 216, 0.08);
+  border: 1px solid rgba(169, 200, 216, 0.18);
+  border-radius: 9999px;
+  padding: 0.4rem 0.95rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Linha Divisória */
+.about-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(169, 200, 216, 0.12);
+  margin-bottom: 1.75rem;
+}
+
+/* Rodapé Interno */
+.about-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.about-cta-prompt {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.about-btn-talk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.6rem;
+  background-color: #ffffff;
+  color: #05070b;
+  text-decoration: none;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.about-btn-talk:hover {
+  transform: translateY(-2px);
+  background-color: #f0f4f8;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+.about-btn-talk:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE (Vertical layout matching the reference)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .about-profile-section {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .about-profile-card {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+  }
+
+  .about-photo-wrapper {
+    min-height: 380px;
+    height: 65vw;
+    max-height: 420px;
+  }
+
+  .about-photo-img {
+    object-position: center 15%;
+  }
+
+  /* Gradiente vertical no mobile para desvanecer a foto no card escuro abaixo */
+  .about-photo-shade {
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba(7, 9, 14, 0.5) 65%,
+      rgba(7, 9, 14, 0.95) 90%,
+      #07090e 100%
+    );
+  }
+
+  .about-content-wrapper {
+    padding: 1.75rem 1.35rem 2rem;
+    margin-top: -30px; /* Sobrepõe suavemente o desvanecimento da imagem */
+  }
+
+  .about-tagline {
+    font-size: 0.72rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .about-title {
+    font-size: 1.55rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .about-description {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-pill-tags {
+    gap: 0.45rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .about-tag-pill {
+    font-size: 0.74rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .about-footer-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .about-cta-prompt {
+    font-size: 0.88rem;
+    text-align: center;
+  }
+
+  .about-btn-talk {
+    width: 100%;
+    padding: 0.82rem 1.2rem;
+    font-size: 0.76rem;
+  }
+}

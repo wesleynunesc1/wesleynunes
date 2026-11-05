@@ -1,51 +1,86 @@
 /* ==========================================================================
-   WESLEY NUNES — REDESIGN PROFISSIONAL DO RODAPÉ (Editorial & Minimalista)
+   WESLEY NUNES — PREMIUM EDITORIAL FOOTER (Inspired by Academy Plus Reference)
    ========================================================================== */
 
 .site-footer {
   position: relative;
-  background-color: #05070b;
+  background-color: #040508;
   border-top: 1px solid rgba(169, 200, 216, 0.1);
-  padding: 6rem 2rem 3rem;
+  padding: 6.5rem 2rem 4rem;
   z-index: 10;
   overflow: hidden;
+  text-align: center;
+}
+
+/* Luz Atmosférica Curva / Degradê Luminoso Discreto */
+.footer-luminous-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1200px, 90vw);
+  height: 280px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(169, 200, 216, 0.14) 0%,
+    rgba(30, 58, 95, 0.12) 40%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .footer-container {
+  position: relative;
   width: 100%;
-  max-width: 1280px;
+  max-width: 980px;
   margin: 0 auto;
-}
-
-/* 1. Bloco de Abertura / Call to Action */
-.footer-cta-block {
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  margin-bottom: 4.5rem;
 }
 
-.footer-tag-label {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  color: var(--color-ice);
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
-  display: inline-block;
+/* 1. Bloco de Abertura */
+.footer-hero-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+.footer-brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: 2.2rem;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.footer-brand-logo-link:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.footer-brand-logo-img {
+  height: 32px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+  display: block;
 }
 
 .footer-headline {
   font-family: var(--font-sans);
-  font-size: clamp(2.1rem, 5.2vw, 4.2rem);
+  font-size: clamp(2rem, 5vw, 3.8rem);
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.12;
   color: #ffffff;
-  margin-bottom: 1.5rem;
-  max-width: 960px;
+  margin: 0 0 1.25rem 0;
+  text-align: center;
 }
 
 .footer-description {
@@ -54,8 +89,9 @@
   font-weight: 400;
   line-height: 1.6;
   color: #b8bec7;
-  max-width: 620px;
-  margin-bottom: 2.2rem;
+  max-width: 580px;
+  margin: 0 0 2.4rem 0;
+  text-align: center;
 }
 
 .footer-action-wrapper {
@@ -67,7 +103,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.05rem 2.5rem;
+  padding: 1.05rem 2.6rem;
   background-color: #ffffff;
   color: #05070b;
   text-decoration: none;
@@ -80,153 +116,117 @@
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.25s ease,
               background-color 0.25s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.18);
 }
 
 .footer-btn-primary:hover {
   transform: translateY(-2px) scale(1.02);
   background-color: #f0f4f8;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.32);
 }
 
 .footer-btn-primary:active {
   transform: scale(0.97);
 }
 
-/* Divisores Sutis */
-.footer-divider-top,
-.footer-divider-bottom {
-  width: 100%;
-  height: 1px;
-  background-color: rgba(169, 200, 216, 0.08);
-}
-
-.footer-divider-top {
-  margin-bottom: 3.5rem;
-}
-
-.footer-divider-bottom {
-  margin-top: 3.5rem;
-  margin-bottom: 2rem;
-}
-
-/* 2. Conteúdo em Grade / Colunas */
-.footer-content-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: 3.5rem;
-  align-items: start;
-}
-
-.footer-col--brand {
+/* 2. Conexões */
+.footer-connections-block {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.footer-brand-logo-link {
-  display: inline-flex;
   align-items: center;
-  text-decoration: none;
-  margin-bottom: 1.25rem;
-  transition: opacity 0.2s ease;
-}
-
-.footer-brand-logo-link:hover {
-  opacity: 0.85;
-}
-
-.footer-brand-logo-img {
-  height: 28px;
-  width: auto;
-  max-width: 200px;
-  object-fit: contain;
-  display: block;
-}
-
-.footer-brand-bio {
-  font-family: var(--font-sans);
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: #8c93a0;
-  max-width: 380px;
-}
-
-.footer-col-title {
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: #ffffff;
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
-}
-
-.footer-nav-list,
-.footer-social-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
   gap: 0.85rem;
+  margin-bottom: 3.5rem;
+  width: 100%;
 }
 
-.footer-link {
+.footer-connections-title {
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  color: #b8bec7;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-  display: inline-flex;
-  align-items: center;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #6d7582;
+  text-transform: uppercase;
 }
 
-.footer-link:hover {
-  color: #ffffff;
-  transform: translateX(2px);
-}
-
-.footer-link--icon {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.2rem;
-}
-
-.footer-handle {
-  font-size: 0.82rem;
-  color: var(--color-ice);
-  letter-spacing: 0.02em;
-}
-
-/* 3. Assinatura Final */
-.footer-bottom-row {
+.footer-connections-links {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.footer-copyright {
+.footer-connection-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  color: #6d7582;
-  margin: 0;
+  font-size: 0.92rem;
+  color: #d2d8e2;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-connection-item:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.connection-platform {
+  font-weight: 600;
+}
+
+.connection-handle {
+  color: var(--color-ice);
+  font-weight: 400;
+}
+
+.connection-sep {
+  color: rgba(169, 200, 216, 0.3);
+  font-size: 0.8rem;
+}
+
+/* Linha Divisória Fina */
+.footer-divider-thin {
+  width: 100%;
+  max-width: 680px;
+  height: 1px;
+  background-color: rgba(169, 200, 216, 0.1);
+  margin-bottom: 2.5rem;
+}
+
+/* 3. Bloco Inferior */
+.footer-bottom-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
 }
 
 .footer-back-to-top {
   font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--color-ice);
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .footer-back-to-top:hover {
-  opacity: 0.8;
+  color: #ffffff;
   transform: translateY(-2px);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #5c6370;
+  margin: 0;
+  letter-spacing: 0.02em;
 }
 
 /* ==========================================================================
@@ -234,11 +234,13 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .site-footer {
-    padding: 4.5rem 1.25rem 2.5rem;
+    padding: 5rem 1.25rem 3rem;
   }
 
-  .footer-cta-block {
-    margin-bottom: 3rem;
+  .footer-brand-logo-img {
+    height: 26px;
+    max-width: 200px;
+    margin-bottom: 1.8rem;
   }
 
   .footer-headline {
@@ -250,45 +252,30 @@
   .footer-description {
     font-size: 0.92rem;
     line-height: 1.5;
-    margin-bottom: 1.8rem;
+    margin-bottom: 2rem;
   }
 
   .footer-btn-primary {
-    padding: 0.92rem 2rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
     width: 100%;
     max-width: 320px;
+    padding: 0.92rem 2rem;
+    font-size: 0.78rem;
   }
 
-  .footer-divider-top {
-    margin-bottom: 2.5rem;
+  .footer-connections-links {
+    flex-direction: column;
+    gap: 0.85rem;
   }
 
-  .footer-divider-bottom {
-    margin-top: 2.5rem;
-    margin-bottom: 1.75rem;
+  .connection-sep {
+    display: none;
   }
 
-  .footer-content-grid {
-    grid-template-columns: 1fr;
-    gap: 2.2rem;
-  }
-
-  .footer-col--brand,
-  .footer-col--nav,
-  .footer-col--social {
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .footer-bottom-row {
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 1rem;
+  .footer-divider-thin {
+    margin-bottom: 2rem;
   }
 
   .footer-copyright {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 }

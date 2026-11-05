@@ -1,0 +1,132 @@
+/* ==========================================================================
+   TRANSITION VISION CARD — COMPACT HORIZONTAL BRIDGE
+   ========================================================================== */
+
+.transition-vision-card {
+  width: 100%;
+  margin-top: 2rem;
+  background: linear-gradient(135deg, #0e121a 0%, #07090e 100%);
+  border: 1px solid rgba(169, 200, 216, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transition-vision-card:hover {
+  border-color: rgba(169, 200, 216, 0.3);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(169, 200, 216, 0.08);
+}
+
+.vision-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.vision-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: left;
+}
+
+.vision-title {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.vision-description {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: #a0a6b2;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.vision-action-group {
+  flex-shrink: 0;
+}
+
+.vision-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  background-color: #ffffff;
+  color: #05070b;
+  text-decoration: none;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease,
+              box-shadow 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.vision-btn:hover {
+  transform: translateY(-2px);
+  background-color: #f0f4f8;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.25);
+}
+
+.vision-btn:active {
+  transform: scale(0.97);
+}
+
+.vision-btn-arrow {
+  color: #05070b;
+  transition: transform 0.2s ease;
+}
+
+.vision-btn:hover .vision-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+  .transition-vision-card {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.25rem;
+  }
+
+  .vision-card-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .vision-title {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+
+  .vision-description {
+    font-size: 0.85rem;
+  }
+
+  .vision-action-group {
+    width: 100%;
+  }
+
+  .vision-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.72rem 1.2rem;
+    font-size: 0.76rem;
+  }
+}

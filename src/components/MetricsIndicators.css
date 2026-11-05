@@ -1,0 +1,119 @@
+/* ==========================================================================
+   METRICS INDICATORS — 3 EDITORIAL GRAPHITE CARDS
+   ========================================================================== */
+
+.metrics-section {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  z-index: 10;
+}
+
+.metrics-container {
+  width: 100%;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.metric-card {
+  position: relative;
+  background: linear-gradient(145deg, #0d1118 0%, #06080c 100%);
+  border: 1px solid rgba(169, 200, 216, 0.14);
+  border-radius: 14px;
+  padding: 2.2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(169, 200, 216, 0.28);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(169, 200, 216, 0.06);
+}
+
+.metric-badge {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--color-ice);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  display: inline-block;
+}
+
+.metric-title {
+  font-family: var(--font-sans);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: #ffffff;
+  margin: 0 0 0.85rem 0;
+}
+
+.metric-description {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #a0a6b2;
+  margin: 0;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .metric-card {
+    padding: 1.8rem 1.4rem;
+  }
+
+  .metric-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .metrics-section {
+    padding: 0 1rem 3rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .metric-card {
+    padding: 1.6rem 1.4rem;
+    border-radius: 12px;
+  }
+
+  .metric-title {
+    font-size: 1.22rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .metric-description {
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+}

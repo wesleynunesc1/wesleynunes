@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { projectsData } from '../data/projects';
 import { ProjectCard } from './ProjectCard';
+import { TransitionVisionCard } from './TransitionVisionCard';
 import './PortfolioGallery.css';
 
 export const PortfolioGallery: React.FC = () => {
@@ -16,19 +17,14 @@ export const PortfolioGallery: React.FC = () => {
   };
 
   const handleTouchToggle = (id: string) => {
-    setActiveProjectId((current) => {
-      // Toggle or restart animation
-      if (current === id) {
-        return id;
-      }
-      return id;
-    });
+    setActiveProjectId((current) => (current === id ? id : id));
   };
 
-  // Only display published projects with real screenshots (pending projects remain prepared in data without cluttering public gallery)
+  // Only display published projects with real screenshots up to Nunes Hub (Noice Hub)
   const publishedProjects = projectsData
     .filter((project) => project.status !== 'pending' && Boolean(project.screenshot))
-    .sort((a, b) => a.order - b.order);
+    .sort((a, b) => a.order - b.order)
+    .filter((project) => project.order <= 4); // Cases up to Nunes Hub (Order 1: Leo Nunes, 2: Mateus Cavalcante, 3: Pedro Fit, 4: Nunes Hub)
 
   return (
     <section id="projetos" className="portfolio-gallery-section">
@@ -44,7 +40,7 @@ export const PortfolioGallery: React.FC = () => {
           </p>
         </div>
 
-        {/* Projects Gallery Desktop 3-col Grid */}
+        {/* Projects Gallery Grid */}
         <div
           className="projects-grid-3col"
           onMouseLeave={() => setActiveProjectId(null)}
@@ -61,6 +57,9 @@ export const PortfolioGallery: React.FC = () => {
             />
           ))}
         </div>
+
+        {/* Card Horizontal de Transição Imediatamente Abaixo do Último Case (Nunes Hub) */}
+        <TransitionVisionCard />
       </div>
     </section>
   );
