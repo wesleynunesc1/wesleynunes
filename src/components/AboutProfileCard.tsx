@@ -27,6 +27,8 @@ export const AboutProfileCard: React.FC = () => {
                 />
               </picture>
               <div className="about-photo-vignette" />
+              {/* Discrete static atmospheric ice-blue illumination */}
+              <div className="about-photo-glow" />
             </div>
           </div>
 
@@ -79,9 +81,10 @@ export const AboutProfileCard: React.FC = () => {
           </div>
         </div>
 
-        {/* MOBILE LAYOUT (<= 768px): Single unified vertical card with portrait framed at top */}
+        {/* MOBILE LAYOUT (<= 768px): Unified vertical editorial card with prominent face at top */}
         <div className="about-mobile-card">
-          <div className="about-mobile-bg-photo" aria-hidden="true">
+          {/* Top photograph container: strictly visual, face clear and prominent */}
+          <div className="about-mobile-photo-header" aria-hidden="true">
             <picture className="about-mobile-picture">
               <source media="(max-width: 768px)" srcSet="/wesley-nunes-bw-mobile.webp" type="image/webp" />
               <img
@@ -92,9 +95,11 @@ export const AboutProfileCard: React.FC = () => {
                 decoding="async"
               />
             </picture>
-            <div className="about-mobile-overlay" />
+            <div className="about-mobile-vignette" />
+            <div className="about-mobile-glow" />
           </div>
 
+          {/* Lower content section: well spaced, no text overlapping face */}
           <div className="about-mobile-body">
             {/* 1. Identificação Superior (Normal case) */}
             <span className="about-tagline">

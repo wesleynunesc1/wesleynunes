@@ -1,7 +1,7 @@
 /* ==========================================================================
    ABOUT / APRESENTAÇÃO PESSOAL - WESLEY NUNES
    Desktop: Layout editorial premium com 2 cards lado a lado (~40% foto, ~60% texto)
-   Mobile: Card único vertical com retrato B&W no topo (enquadramento superior refinado)
+   Mobile: Card único vertical com retrato B&W dominante no topo e iluminação sutil
    ========================================================================== */
 
 .about-profile-section {
@@ -77,6 +77,21 @@
     rgba(5, 7, 11, 0.05) 0%,
     rgba(5, 7, 11, 0.2) 65%,
     rgba(5, 7, 11, 0.65) 100%
+  );
+  pointer-events: none;
+}
+
+/* Discret atmospheric ice-blue illumination */
+.about-photo-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(169, 200, 216, 0.08) 0%,
+    transparent 70%
   );
   pointer-events: none;
 }
@@ -221,6 +236,9 @@
 
 /* ==========================================================================
    MOBILE RESPONSIVE (<= 768px)
+   - Top photo header dominates with clear facial framing (eyes high, hair in frame)
+   - Seamless gradient transition into dark card body
+   - Zero text overlapping the face
    ========================================================================== */
 @media (max-width: 768px) {
   .about-profile-section {
@@ -234,21 +252,21 @@
   /* Single unified vertical card on mobile */
   .about-mobile-card {
     display: flex;
+    flex-direction: column;
     position: relative;
     width: 100%;
     background-color: #06080D;
     border-radius: 14px;
     overflow: hidden;
     border: 1px solid rgba(169, 200, 216, 0.08);
-    align-items: flex-end; /* Conteúdo ancorado abaixo do retrato */
   }
 
-  .about-mobile-bg-photo {
-    position: absolute;
-    inset: 0;
+  /* Dedicated photo header on mobile */
+  .about-mobile-photo-header {
+    position: relative;
     width: 100%;
-    height: 100%;
-    pointer-events: none;
+    height: 280px;
+    overflow: hidden;
   }
 
   .about-mobile-picture {
@@ -257,36 +275,53 @@
     height: 100%;
   }
 
-  /* Foto posicionada no topo: rosto mais alto e ligeiramente à direita */
+  /* Foto perfeitamente enquadrada: rosto no topo, olhos visíveis, olhar expressivo */
   .about-mobile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 70% 6%; /* Enquadramento perfeito: testa, olhos e queixo no topo */
+    object-position: 72% 8%; /* Enquadramento perfeito: testa, olhos e queixo nítidos */
     display: block;
-    filter: grayscale(100%) contrast(1.15) brightness(0.65);
+    filter: grayscale(100%) contrast(1.12) brightness(0.85);
   }
 
-  /* Gradiente que deixa o topo nítido e escurece suavemente para o texto */
-  .about-mobile-overlay {
+  /* Gradiente inferior suave que funde a foto com o corpo do card */
+  .about-mobile-vignette {
     position: absolute;
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(6, 8, 13, 0.15) 0%,
-      rgba(6, 8, 13, 0.45) 24%,
-      rgba(6, 8, 13, 0.92) 48%,
-      #06080d 72%
+      rgba(6, 8, 13, 0.05) 0%,
+      rgba(6, 8, 13, 0.25) 50%,
+      rgba(6, 8, 13, 0.85) 85%,
+      #06080d 100%
     );
+    pointer-events: none;
+  }
+
+  /* Iluminação atmosférica azul-gelo sutil */
+  .about-mobile-glow {
+    position: absolute;
+    bottom: -10px;
+    left: 20%;
+    right: 20%;
+    height: 60px;
+    background: radial-gradient(
+      ellipse at 50% 100%,
+      rgba(169, 200, 216, 0.12) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
   }
 
   .about-mobile-body {
     position: relative;
     z-index: 2;
-    padding: 10.5rem 1.25rem 1.6rem; /* Dá espaço generoso no topo para o rosto */
+    padding: 1.25rem 1.35rem 1.75rem;
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: #06080D;
   }
 
   .about-tagline {

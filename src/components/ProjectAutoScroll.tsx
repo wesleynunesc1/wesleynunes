@@ -26,8 +26,8 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
   const animationRef = useRef<Animation | null>(null);
 
   // High performance strategy:
-  // Render lightweight hero thumbnail immediately as instant base layer
-  // Load full screenshot when card is near or when active
+  // 1. Hero thumbnail is the permanent solid base layer. It is NEVER removed or obscured.
+  // 2. Full screenshot is only loaded when needed and rendered seamlessly above the thumbnail.
   const [shouldLoadFull, setShouldLoadFull] = useState(isEager || isActive);
   const [fullImageLoaded, setFullImageLoaded] = useState(false);
   const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
@@ -119,14 +119,14 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     animationRef.current = animation;
   }, [scrollSpeedSeconds, stopAnimation]);
 
-  // When card becomes active or hovers, ensure full screenshot is loaded
+  // When card becomes active, immediately trigger full screenshot request
   useEffect(() => {
     if (isActive && !shouldLoadFull) {
       setShouldLoadFull(true);
     }
   }, [isActive, shouldLoadFull]);
 
-  // IntersectionObserver to preload full screenshot 1 viewport screen before entering
+  // IntersectionObserver to preload full screenshot 300px before entering viewport
   useEffect(() => {
     if (shouldLoadFull) return;
     const container = containerRef.current;
@@ -144,7 +144,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
           }
         });
       },
-      { rootMargin: '200px 0px' }
+      { rootMargin: '300px 0px' }
     );
 
     observer.observe(container);
@@ -202,8 +202,8 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
       ref={containerRef}
       className={`project-scroll-viewport ${isActive ? 'is-active' : ''}`}
     >
-      {/* 1. INSTANT THUMBNAIL (Zero black screen: lightweight hero screenshot loads in milliseconds) */}
-      <picture className={`project-thumb-picture ${fullImageLoaded ? 'is-obscured' : ''}`}>
+      {/* 1. INSTANT HERO THUMBNAIL (PERMANENT BASE: Guaranteed ZERO black screen) */}
+      <picture className="project-thumb-picture">
         <source media="(max-width: 768px)" srcSet={thumbMobile} type="image/webp" />
         <source srcSet={thumbDesktop} type="image/webp" />
         <img
@@ -217,7 +217,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
         />
       </picture>
 
-      {/* 2. FULL SCROLLABLE SCREENSHOT (Rendered on top once requested and loaded) */}
+      {/* 2. FULL SCROLLABLE SCREENSHOT (Renders seamlessly on top once loaded and active) */}
       {shouldLoadFull && (
         <picture className={`project-full-picture ${fullImageLoaded ? 'loaded' : ''}`}>
           <source srcSet={screenshotSrc} type="image/webp" />

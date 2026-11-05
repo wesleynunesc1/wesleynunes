@@ -59,8 +59,7 @@ export const CinematicHeroWall: React.FC = () => {
       const isMobile = window.innerWidth <= 768;
 
       // 1. INITIAL STATE (scrollProgress = 0):
-      // Only the main panel content is visually presented.
-      // Surrounding panels layer is kept at opacity: 0 with pointer-events: none (no visibility: hidden toggling to avoid GPU re-creation)
+      // Surrounding panels layer starts at opacity: 0
       gsap.set(surroundLayer, {
         opacity: 0,
       });
@@ -89,13 +88,13 @@ export const CinematicHeroWall: React.FC = () => {
       });
 
       // Master Timeline pinned with ScrollTrigger
-      // Ultra-fluid scrub without latency
+      // scrub: true on mobile (zero artificial latency / direct finger coupling), 0.2 on desktop
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: isMobile ? 0.3 : 0.5,
+          scrub: isMobile ? true : 0.2,
           anticipatePin: 1,
           fastScrollEnd: true,
           preventOverlaps: true,
@@ -103,7 +102,7 @@ export const CinematicHeroWall: React.FC = () => {
         },
       });
 
-      // TIMELINE BREAKDOWN (Continuous FilmSupply architecture):
+      // TIMELINE BREAKDOWN (Exact continuous FilmSupply architecture):
       // Total duration: 250 units (corresponding to 250svh scroll track)
       //
       // [0 -> 40]: Hero text/logo/CTA fades smoothly via opacity + translateY
@@ -292,6 +291,7 @@ export const CinematicHeroWall: React.FC = () => {
                   muted
                   loop
                   playsInline
+                  preload="metadata"
                   poster={mainCell.poster || mainCell.heroImageDesktop}
                 >
                   <source src={mainCell.videoSrc} type="video/mp4" />

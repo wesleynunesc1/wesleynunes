@@ -7,7 +7,7 @@
   user-select: none;
 }
 
-/* 1. Fast Instant Hero Thumbnail */
+/* 1. Fast Instant Hero Thumbnail - Permanent Solid Base Layer */
 .project-thumb-picture {
   position: absolute;
   inset: 0;
@@ -15,12 +15,6 @@
   height: 100%;
   display: block;
   z-index: 1;
-  transition: opacity 0.3s ease;
-}
-
-.project-thumb-picture.is-obscured {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .project-thumb-image {
@@ -37,7 +31,7 @@
   opacity: 1;
 }
 
-/* 2. Full Scrollable Screenshot */
+/* 2. Full Scrollable Screenshot - Layers above thumbnail seamlessly */
 .project-full-picture {
   position: absolute;
   top: 0;
@@ -98,12 +92,4 @@
   letter-spacing: 0.05em;
   color: var(--color-ice);
   text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
-  .project-scroll-viewport {
-    height: 100%;
-    /* Compact height rule: clamp(260px, 38vh, 300px) */
-    max-height: clamp(260px, 38vh, 300px);
-  }
 }
