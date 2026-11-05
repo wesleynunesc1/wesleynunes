@@ -1,122 +1,143 @@
 /* ==========================================================================
-   ABOUT PROFILE CARD — B&W BACKGROUND PHOTO, COMPACT MOBILE & PREMIUM DESKTOP
+   ABOUT / APRESENTAÇÃO PESSOAL - WESLEY NUNES
+   Desktop: Layout editorial premium com 2 cards lado a lado (~40% foto, ~60% texto)
+   Mobile: Card único vertical com retrato B&W no topo (enquadramento superior refinado)
    ========================================================================== */
 
 .about-profile-section {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2.5rem 2rem 3.5rem;
+  padding: 3rem 2rem 5rem;
   z-index: 10;
+  background-color: #05070b;
 }
 
-.about-profile-card {
+.about-profile-container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   DESKTOP GRID (Dois Cards Independentes Lado a Lado)
+   ========================================================================== */
+.about-desktop-grid {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr; /* Proporção ~36% / ~64% elegante */
+  gap: 20px;
+  align-items: stretch;
+}
+
+.about-mobile-card {
+  display: none;
+}
+
+/* 1. Card Esquerdo - Fotografia Editorial Pura */
+.about-photo-card {
+  position: relative;
+  background-color: #07090E;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(169, 200, 216, 0.08);
+  min-height: 520px;
+  display: flex;
+}
+
+.about-photo-wrapper {
   position: relative;
   width: 100%;
-  background-color: #06080d;
-  border: 1px solid rgba(169, 200, 216, 0.16);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-}
-
-.about-profile-card:hover {
-  border-color: rgba(169, 200, 216, 0.28);
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.8), 0 0 25px rgba(169, 200, 216, 0.06);
-}
-
-/* 1. Imagem de Fundo B&W */
-.about-bg-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
   height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
 }
 
-.about-picture {
+.about-photo-wrapper picture {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.about-bg-img {
+.about-editorial-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 85% 18%; /* Foto posicionada estrategicamente à direita/centro no desktop */
+  object-position: center 15%; /* Foco editorial no olhar e rosto */
   display: block;
-  filter: grayscale(100%) contrast(1.15) brightness(0.65);
+  filter: grayscale(100%) contrast(1.12) brightness(0.9);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
 }
 
-/* Overlay escurecido e gradientes de alto contraste para legibilidade absoluta */
-.about-bg-overlay {
+.about-photo-card:hover .about-editorial-img {
+  transform: scale(1.02);
+  filter: grayscale(100%) contrast(1.15) brightness(0.95);
+}
+
+.about-photo-vignette {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    90deg,
-    rgba(6, 8, 13, 0.98) 0%,
-    rgba(6, 8, 13, 0.92) 45%,
-    rgba(6, 8, 13, 0.65) 75%,
-    rgba(6, 8, 13, 0.45) 100%
-  ),
-  radial-gradient(
-    circle at 80% 25%,
-    rgba(169, 200, 216, 0.06) 0%,
-    transparent 60%
+    180deg,
+    rgba(5, 7, 11, 0.05) 0%,
+    rgba(5, 7, 11, 0.2) 65%,
+    rgba(5, 7, 11, 0.65) 100%
   );
+  pointer-events: none;
 }
 
-/* 2. Corpo do Conteúdo / Bloco Coeso */
+/* 2. Card Direito - Conteúdo Narrativo Completo */
+.about-content-card {
+  position: relative;
+  background-color: #07090E;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(169, 200, 216, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 3.5rem 3.5rem;
+}
+
 .about-card-body {
   position: relative;
   z-index: 2;
-  width: 100%;
-  max-width: 680px;
-  padding: 3.5rem 3.5rem;
   display: flex;
   flex-direction: column;
-  text-align: left;
+  width: 100%;
 }
 
+/* 1. Identificação Superior em Case Normal */
 .about-tagline {
   font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--color-ice);
-  text-transform: uppercase;
-  margin-bottom: 1.15rem;
+  text-transform: none; /* NÃO uppercase */
+  margin-bottom: 1.25rem;
   display: inline-block;
+  opacity: 0.92;
 }
 
+/* 2. Título Principal */
 .about-title {
   font-family: var(--font-sans);
-  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.85rem, 2.8vw, 2.65rem);
+  font-weight: 700;
   line-height: 1.15;
-  color: #ffffff;
-  margin: 0 0 1.15rem 0;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  margin: 0 0 1.5rem;
+  text-wrap: balance;
 }
 
+/* 3. Descrição */
 .about-description {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 1.02rem;
   font-weight: 400;
-  line-height: 1.6;
-  color: #c4cad4;
-  margin: 0 0 1.8rem 0;
+  line-height: 1.65;
+  color: #B8BEC7;
+  margin: 0 0 1.75rem;
+  max-width: 640px;
 }
 
-/* Tags Complementares */
+/* 4. Categorias / Tags */
 .about-pill-tags {
   display: flex;
   flex-wrap: wrap;
@@ -126,27 +147,31 @@
 
 .about-tag-pill {
   font-family: var(--font-sans);
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: #d6dbe4;
-  background: rgba(169, 200, 216, 0.1);
-  border: 1px solid rgba(169, 200, 216, 0.22);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(169, 200, 216, 0.12);
+  padding: 0.4rem 0.95rem;
   border-radius: 9999px;
-  padding: 0.38rem 0.95rem;
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
-/* Divisor Sutil */
+/* 5. Linha Divisória Integrada */
 .about-divider {
   width: 100%;
   height: 1px;
-  background-color: rgba(169, 200, 216, 0.14);
-  margin-bottom: 1.6rem;
+  background: linear-gradient(
+    90deg,
+    rgba(169, 200, 216, 0.16) 0%,
+    rgba(169, 200, 216, 0.04) 70%,
+    transparent 100%
+  );
+  margin-bottom: 1.75rem;
 }
 
-/* Rodapé Interno */
+/* 6. CTA Final Elegante */
 .about-footer-row {
   display: flex;
   align-items: center;
@@ -158,23 +183,24 @@
 .about-cta-prompt {
   font-family: var(--font-sans);
   font-size: 0.95rem;
-  font-weight: 600;
-  color: #ffffff;
+  font-weight: 500;
+  color: #94A3B8;
+  letter-spacing: -0.01em;
 }
 
 .about-btn-talk {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.78rem 1.65rem;
-  background-color: #ffffff;
-  color: #05070b;
+  padding: 0.85rem 1.85rem;
+  background-color: #FFFFFF;
+  color: #05070B;
   text-decoration: none;
   border-radius: 9999px;
   font-family: var(--font-sans);
   font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               background-color 0.25s ease,
@@ -184,9 +210,9 @@
 }
 
 .about-btn-talk:hover {
-  transform: translateY(-2px);
-  background-color: #f0f4f8;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px) scale(1.02);
+  background-color: #F1F5F9;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .about-btn-talk:active {
@@ -194,82 +220,115 @@
 }
 
 /* ==========================================================================
-   MOBILE RESPONSIVE — COMPACT, SINGLE-SCREEN FITTING, PRECISE FRAMING
+   MOBILE RESPONSIVE (<= 768px)
    ========================================================================== */
 @media (max-width: 768px) {
   .about-profile-section {
-    padding: 1.25rem 1rem 2rem;
+    padding: 2rem 1rem 4rem;
   }
 
-  .about-profile-card {
-    min-height: auto;
+  .about-desktop-grid {
+    display: none;
+  }
+
+  /* Single unified vertical card on mobile */
+  .about-mobile-card {
+    display: flex;
+    position: relative;
+    width: 100%;
+    background-color: #06080D;
     border-radius: 14px;
-    align-items: flex-end; /* Conteúdo fica ancorado embaixo da foto de fundo */
+    overflow: hidden;
+    border: 1px solid rgba(169, 200, 216, 0.08);
+    align-items: flex-end; /* Conteúdo ancorado abaixo do retrato */
   }
 
-  .about-bg-img {
-    /* Enquadramento milimétrico: queixo/rosto visível no topo */
-    object-position: center 12%;
-    filter: grayscale(100%) contrast(1.2) brightness(0.5);
+  .about-mobile-bg-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
   }
 
-  /* Overlay vertical no mobile: topo revela o rosto/queixo, base escura garante contraste total */
-  .about-bg-overlay {
+  .about-mobile-picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Foto posicionada no topo: rosto mais alto e ligeiramente à direita */
+  .about-mobile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 70% 6%; /* Enquadramento perfeito: testa, olhos e queixo no topo */
+    display: block;
+    filter: grayscale(100%) contrast(1.15) brightness(0.65);
+  }
+
+  /* Gradiente que deixa o topo nítido e escurece suavemente para o texto */
+  .about-mobile-overlay {
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(6, 8, 13, 0.25) 0%,
-      rgba(6, 8, 13, 0.65) 28%,
-      rgba(6, 8, 13, 0.94) 52%,
-      #06080d 80%
+      rgba(6, 8, 13, 0.15) 0%,
+      rgba(6, 8, 13, 0.45) 24%,
+      rgba(6, 8, 13, 0.92) 48%,
+      #06080d 72%
     );
   }
 
-  .about-card-body {
-    padding: 9.5rem 1.25rem 1.6rem; /* 9.5rem no topo permite ver o rosto/queixo perfeitamente */
-    max-width: 100%;
+  .about-mobile-body {
+    position: relative;
+    z-index: 2;
+    padding: 10.5rem 1.25rem 1.6rem; /* Dá espaço generoso no topo para o rosto */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .about-tagline {
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    margin-bottom: 0.65rem;
+    font-size: 0.76rem;
+    margin-bottom: 0.85rem;
+    line-height: 1.4;
   }
 
   .about-title {
     font-size: 1.45rem;
-    line-height: 1.2;
-    margin-bottom: 0.75rem;
+    line-height: 1.18;
+    margin-bottom: 1rem;
   }
 
   .about-description {
-    font-size: 0.88rem;
-    line-height: 1.48;
+    font-size: 0.86rem;
+    line-height: 1.55;
     margin-bottom: 1.25rem;
-    color: #b8bec7;
   }
 
   .about-pill-tags {
-    gap: 0.4rem;
-    margin-bottom: 1.35rem;
+    gap: 0.45rem;
+    margin-bottom: 1.25rem;
   }
 
   .about-tag-pill {
     font-size: 0.72rem;
-    padding: 0.3rem 0.75rem;
+    padding: 0.32rem 0.75rem;
   }
 
   .about-divider {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.25rem;
   }
 
   .about-footer-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
 
   .about-cta-prompt {
-    font-size: 0.86rem;
+    font-size: 0.85rem;
     text-align: center;
   }
 

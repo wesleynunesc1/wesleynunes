@@ -3,7 +3,7 @@
 .fs-hero-section {
   position: relative;
   width: 100%;
-  height: 250svh; /* Exact FilmSupply continuous track */
+  height: 250svh; /* Continuous cinematic track */
   background-color: #05070B;
 }
 
@@ -24,13 +24,12 @@
   will-change: transform;
 }
 
-/* Surrounding Panels Container Layer (Toggled in Timeline) */
+/* Surrounding Panels Container Layer (Clean opacity blend, no visibility switching) */
 .fs-surround-layer {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  will-change: opacity, visibility;
   pointer-events: none;
 }
 
@@ -143,7 +142,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  will-change: opacity, transform, clip-path;
+  will-change: opacity, transform;
 }
 
 /* 1. Official Brand Logo (Replaces old text tag, no capsule, no borders, transparent) */

@@ -14,15 +14,6 @@ export const AmbientBackground: React.FC = () => {
 
       {/* Subtle coordinate dot grid */}
       <div className="ambient-grid-overlay" />
-
-      {/* Subtle dispersed starlight sparkles */}
-      <div className="ambient-sparkles">
-        <span className="sparkle sparkle-1" />
-        <span className="sparkle sparkle-2" />
-        <span className="sparkle sparkle-3" />
-        <span className="sparkle sparkle-4" />
-        <span className="sparkle sparkle-5" />
-      </div>
     </div>
   );
 };

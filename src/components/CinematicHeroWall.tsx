@@ -59,11 +59,10 @@ export const CinematicHeroWall: React.FC = () => {
       const isMobile = window.innerWidth <= 768;
 
       // 1. INITIAL STATE (scrollProgress = 0):
-      // Strict: Only the main panel is visible.
-      // Surrounding panels layer is hidden and 0 opacity
+      // Only the main panel content is visually presented.
+      // Surrounding panels layer is kept at opacity: 0 with pointer-events: none (no visibility: hidden toggling to avoid GPU re-creation)
       gsap.set(surroundLayer, {
         opacity: 0,
-        visibility: 'hidden',
       });
 
       if (leftCell) gsap.set(leftCell, { opacity: 0 });
@@ -83,15 +82,14 @@ export const CinematicHeroWall: React.FC = () => {
         });
       }
 
-      gsap.set(grid, { transformOrigin: '50% 50%', scale: 1 });
+      gsap.set(grid, { transformOrigin: '50% 50%', scale: 1, yPercent: 0, force3D: true });
       gsap.set(copy, {
         opacity: 1,
         y: 0,
-        clipPath: 'inset(0% 0% 0% 0%)',
       });
 
       // Master Timeline pinned with ScrollTrigger
-      // scrub: 0.35 on mobile, 0.55 on desktop for immediate response without latency
+      // Ultra-fluid scrub without latency
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -105,14 +103,12 @@ export const CinematicHeroWall: React.FC = () => {
         },
       });
 
-      // TIMELINE BREAKDOWN (Exact continuous FilmSupply architecture):
+      // TIMELINE BREAKDOWN (Continuous FilmSupply architecture):
       // Total duration: 250 units (corresponding to 250svh scroll track)
       //
       // [0 -> 40]: Hero text/logo/CTA fades smoothly via opacity + translateY
       // [0 -> 150]: Virtual camera continuous zoom-out (scale 1.0 -> 0.4654)
-      // [0 -> 25]: Surrounding cells emerge organically as camera starts pulling back
-      //            - Layer becomes visible at 0
-      //            - Cells fade in 0 -> 40
+      // [0 -> 35]: Surrounding cells emerge organically as camera pulls back
       // [55 -> 95]: Header fades in gracefully while composition is visible
       // [150 -> 250]: CONTINUOUS TRANSITION:
       //            - Grid translates up: yPercent: 0 -> -50
@@ -140,19 +136,12 @@ export const CinematicHeroWall: React.FC = () => {
           scale: isMobile ? 0.48 : 0.4654,
           ease: 'power1.inOut',
           duration: 150,
+          force3D: true,
         },
         0
       );
 
-      // Surrounding panels layer visibility & opacity
-      masterTl.set(
-        surroundLayer,
-        {
-          visibility: 'visible',
-        },
-        0
-      );
-
+      // Surrounding panels layer opacity fade in
       masterTl.to(
         surroundLayer,
         {
@@ -213,6 +202,7 @@ export const CinematicHeroWall: React.FC = () => {
             yPercent: -50,
             ease: 'none',
             duration: 100,
+            force3D: true,
           },
           150
         )
@@ -235,7 +225,7 @@ export const CinematicHeroWall: React.FC = () => {
       <div ref={stickyRef} className="fs-hero-sticky">
         {/* 3x3 Grid */}
         <div ref={gridRef} className="fs-hero-grid">
-          {/* SURROUNDING PANELS LAYER (Strictly hidden at scrollProgress = 0) */}
+          {/* SURROUNDING PANELS LAYER */}
           <div ref={surroundLayerRef} className="fs-surround-layer" aria-hidden="true">
             {surroundingCells.map((cell) => {
               const getCellRef = (pos: string) => {
@@ -268,6 +258,7 @@ export const CinematicHeroWall: React.FC = () => {
                         alt={cell.title}
                         className="fs-cell-img"
                         loading="eager"
+                        decoding="async"
                       />
                     </picture>
                     <div className="fs-cell-shade" />
@@ -291,6 +282,7 @@ export const CinematicHeroWall: React.FC = () => {
                   alt={mainCell.title}
                   className="fs-cell-img"
                   loading="eager"
+                  decoding="async"
                 />
               </picture>
               {mainCell.videoSrc && (
