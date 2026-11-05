@@ -27,9 +27,14 @@ export const CinematicHeroWall: React.FC = () => {
 
   const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const target = document.getElementById(filmHeroContent.targetSectionId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const section = sectionRef.current;
+    if (section) {
+      // Scroll smoothly through the cinematic animation track down to where Cases de Sucesso starts
+      const targetScroll = section.offsetTop + section.offsetHeight;
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -319,9 +324,9 @@ export const CinematicHeroWall: React.FC = () => {
 
               {/* 2. Main Title */}
               <h1 className="fs-hero-title">
-                EXPERIÊNCIAS DIGITAIS
+                WEBSITES QUE ELEVAM
                 <br />
-                QUE IMPRESSIONAM.
+                O PADRÃO DIGITAL.
               </h1>
 
               {/* 3. Description (Refined ~3 lines on mobile, #B8BEC7) */}
@@ -329,50 +334,15 @@ export const CinematicHeroWall: React.FC = () => {
                 {filmHeroContent.description}
               </p>
 
-              {/* 4. Minimalist Cutout White Button "PROJETOS" (SVG Masked to reveal underlying media) */}
+              {/* 4. Editorial Interaction "DESCUBRA O QUE EU CRIO" */}
               <div className="fs-hero-cta">
                 <a
                   href={`#${filmHeroContent.targetSectionId}`}
                   onClick={handleScrollToProjects}
-                  className="fs-cutout-btn"
-                  aria-label="PROJETOS — Navegar para Cases de Sucesso"
+                  className="fs-editorial-btn"
+                  aria-label="DESCUBRA O QUE EU CRIO — Explorar projetos de Wesley Nunes"
                 >
-                  <svg
-                    className="fs-cutout-svg"
-                    viewBox="0 0 160 48"
-                    width="160"
-                    height="48"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <defs>
-                      <mask id="cutout-text-mask">
-                        {/* White fills the mask, black cuts out the text */}
-                        <rect width="100%" height="100%" fill="white" rx="24" ry="24" />
-                        <text
-                          x="50%"
-                          y="52%"
-                          textAnchor="middle"
-                          dominantBaseline="central"
-                          fill="black"
-                          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                          fontSize="13"
-                          fontWeight="800"
-                          letterSpacing="0.18em"
-                        >
-                          PROJETOS
-                        </text>
-                      </mask>
-                    </defs>
-                    {/* Solid white shape with masked cutout text */}
-                    <rect
-                      width="100%"
-                      height="100%"
-                      fill="#FFFFFF"
-                      rx="24"
-                      ry="24"
-                      mask="url(#cutout-text-mask)"
-                    />
-                  </svg>
+                  <span className="fs-editorial-btn-text">DESCUBRA O QUE EU CRIO</span>
                 </a>
               </div>
             </div>

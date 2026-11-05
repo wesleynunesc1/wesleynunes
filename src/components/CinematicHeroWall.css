@@ -189,36 +189,45 @@
   text-wrap: balance;
 }
 
-/* 4. Minimalist Cutout White Button "PROJETOS" (Text Cutout revealing media) */
+/* 4. Editorial Interaction "DESCUBRA O QUE EU CRIO" */
 .fs-hero-cta {
   display: flex;
   justify-content: center;
 }
 
-.fs-cutout-btn {
+.fs-editorial-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0.9rem 2.2rem;
+  background-color: #ffffff;
+  color: #05070b;
   text-decoration: none;
   border-radius: 9999px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s ease, 
+              background-color 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.2);
 }
 
-.fs-cutout-btn:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 255, 255, 0.35);
+.fs-editorial-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background-color: #f0f4f8;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.35);
 }
 
-.fs-cutout-btn:active {
+.fs-editorial-btn:active {
   transform: scale(0.97);
 }
 
-.fs-cutout-svg {
-  display: block;
-  width: 154px;
-  height: 46px;
-  overflow: visible;
+.fs-editorial-btn-text {
+  display: inline-block;
+  line-height: 1;
 }
 
 /* Exit Dim Overlay */
@@ -290,8 +299,9 @@
     margin-bottom: 24px;
   }
 
-  .fs-cutout-svg {
-    width: 144px;
-    height: 44px;
+  .fs-editorial-btn {
+    padding: 0.82rem 1.6rem;
+    font-size: 0.76rem;
+    letter-spacing: 0.14em;
   }
 }

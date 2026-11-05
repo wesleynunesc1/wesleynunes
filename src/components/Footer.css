@@ -1,130 +1,294 @@
+/* ==========================================================================
+   WESLEY NUNES — REDESIGN PROFISSIONAL DO RODAPÉ (Editorial & Minimalista)
+   ========================================================================== */
+
 .site-footer {
   position: relative;
-  padding: 4.5rem 2rem 3rem;
-  background: #06080b;
-  border-top: 1px solid rgba(169, 200, 216, 0.08);
-  z-index: 5;
+  background-color: #05070b;
+  border-top: 1px solid rgba(169, 200, 216, 0.1);
+  padding: 6rem 2rem 3rem;
+  z-index: 10;
+  overflow: hidden;
 }
 
-.footer-inner {
-  max-width: 1240px;
+.footer-container {
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
+}
+
+/* 1. Bloco de Abertura / Call to Action */
+.footer-cta-block {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-bottom: 4.5rem;
 }
 
-.footer-branding {
+.footer-tag-label {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--color-ice);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: inline-block;
+}
+
+.footer-headline {
+  font-family: var(--font-sans);
+  font-size: clamp(2.1rem, 5.2vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  max-width: 960px;
+}
+
+.footer-description {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #b8bec7;
+  max-width: 620px;
+  margin-bottom: 2.2rem;
+}
+
+.footer-action-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 2rem;
+  justify-content: center;
 }
 
-.footer-logo-link {
+.footer-btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 1.05rem 2.5rem;
+  background-color: #ffffff;
+  color: #05070b;
   text-decoration: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.footer-logo-link:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-.footer-logo-img {
-  height: 30px;
-  width: auto;
-  max-width: 240px;
-  object-fit: contain;
-  display: block;
-  filter: drop-shadow(0 0 16px rgba(169, 200, 216, 0.25));
-}
-
-.footer-tagline {
+  border-radius: 9999px;
   font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.25em;
-  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              background-color 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.15);
 }
 
-.footer-contact-pills {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
+.footer-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  background-color: #f0f4f8;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.3);
 }
 
-.footer-contact-link {
-  color: var(--color-ice);
-  text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 400;
-  transition: opacity 0.2s ease;
+.footer-btn-primary:active {
+  transform: scale(0.97);
 }
 
-.footer-contact-link:hover {
-  opacity: 0.8;
-  text-decoration: underline;
-}
-
-.footer-dot-sep {
-  color: var(--color-text-dim);
-}
-
-.footer-line {
+/* Divisores Sutis */
+.footer-divider-top,
+.footer-divider-bottom {
   width: 100%;
-  max-width: 480px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(169, 200, 216, 0.18), transparent);
+  background-color: rgba(169, 200, 216, 0.08);
+}
+
+.footer-divider-top {
+  margin-bottom: 3.5rem;
+}
+
+.footer-divider-bottom {
+  margin-top: 3.5rem;
   margin-bottom: 2rem;
 }
 
+/* 2. Conteúdo em Grade / Colunas */
+.footer-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.footer-col--brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.footer-brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+  transition: opacity 0.2s ease;
+}
+
+.footer-brand-logo-link:hover {
+  opacity: 0.85;
+}
+
+.footer-brand-logo-img {
+  height: 28px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-brand-bio {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #8c93a0;
+  max-width: 380px;
+}
+
+.footer-col-title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.footer-nav-list,
+.footer-social-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-link {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: #b8bec7;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.footer-link--icon {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.footer-handle {
+  font-size: 0.82rem;
+  color: var(--color-ice);
+  letter-spacing: 0.02em;
+}
+
+/* 3. Assinatura Final */
 .footer-bottom-row {
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  font-size: 0.82rem;
-  color: var(--color-text-dim);
 }
 
 .footer-copyright {
-  font-weight: 300;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #6d7582;
+  margin: 0;
 }
 
 .footer-back-to-top {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
   color: var(--color-ice);
   text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .footer-back-to-top:hover {
-  opacity: 0.75;
+  opacity: 0.8;
+  transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
+/* ==========================================================================
+   MOBILE RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
   .site-footer {
-    padding: 3.5rem 1.25rem 2.5rem;
+    padding: 4.5rem 1.25rem 2.5rem;
   }
-  .footer-logo-img {
-    height: 24px;
-    max-width: 180px;
+
+  .footer-cta-block {
+    margin-bottom: 3rem;
   }
+
+  .footer-headline {
+    font-size: 1.95rem;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .footer-description {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+  }
+
+  .footer-btn-primary {
+    padding: 0.92rem 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .footer-divider-top {
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-divider-bottom {
+    margin-top: 2.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .footer-content-grid {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .footer-col--brand,
+  .footer-col--nav,
+  .footer-col--social {
+    align-items: flex-start;
+    text-align: left;
+  }
+
   .footer-bottom-row {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: flex-start;
     gap: 1rem;
-    text-align: center;
+  }
+
+  .footer-copyright {
+    font-size: 0.78rem;
   }
 }

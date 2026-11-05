@@ -1,9 +1,9 @@
 .portfolio-gallery-section {
   position: relative;
   margin-top: -100svh; /* Seamless continuity: Slides over the pinned hero during mosaic exit */
-  padding: 4rem 2rem 4rem;
+  padding: 5rem 2rem 5rem;
   z-index: 10;
-  background-color: transparent;
+  background-color: #05070b; /* Solid opaque backdrop prevents any cinematic mosaic bleed-through */
 }
 
 .portfolio-gallery-container {
@@ -19,10 +19,10 @@
 
 /* Header alinhado à esquerda, sutil e discreto */
 .gallery-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.5rem;
   text-align: left;
 }
 
@@ -31,28 +31,17 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.18em;
-  color: var(--color-white);
+  color: var(--color-ice);
   text-transform: uppercase;
 }
 
-.gallery-instruction {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
+.gallery-subtitle {
   font-family: var(--font-sans);
-  font-size: 0.825rem;
+  font-size: 1.05rem;
   font-weight: 400;
-  color: var(--color-text-muted);
-}
-
-.instruction-symbol {
-  color: var(--color-ice);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
-.instruction-text-mobile {
-  display: none;
+  line-height: 1.5;
+  color: #B8BEC7;
+  max-width: 560px;
 }
 
 /* ==========================================================================
@@ -84,39 +73,26 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .portfolio-gallery-section {
-    padding: 2.5rem 1rem 3rem;
+    padding: 3.5rem 1rem 3.5rem;
   }
 
   .gallery-header {
-    margin-bottom: 0.9rem;
+    margin-bottom: 1.2rem;
     padding-left: 0.2rem;
-    gap: 0.25rem;
+    gap: 0.35rem;
   }
 
   .gallery-section-tag {
-    font-size: 0.84rem;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.16em;
-    color: #ffffff;
-  }
-
-  .gallery-instruction {
-    font-size: 0.78rem;
-    color: var(--color-text-muted);
-  }
-
-  .instruction-text-desktop {
-    display: none;
-  }
-
-  .instruction-text-mobile {
-    display: inline;
-    color: var(--color-silver);
-  }
-
-  .instruction-symbol {
     color: var(--color-ice);
-    font-weight: 800;
+  }
+
+  .gallery-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #B8BEC7;
   }
 
   /* 1 column on mobile with 16px gap */

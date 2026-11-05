@@ -10,6 +10,7 @@ interface ProjectCardProps {
   onActivate: () => void;
   onDeactivate: () => void;
   onTouchToggle: () => void;
+  isFirstCards?: boolean;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -18,6 +19,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   onActivate,
   onDeactivate,
   onTouchToggle,
+  isFirstCards = false,
 }) => {
   return (
     <article
@@ -36,14 +38,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         }
       }}
     >
-      {/* ÁREA DE PREVIEW COM AUTO SCROLL */}
+      {/* ÁREA DE PREVIEW COM AUTO SCROLL E THUMBNAIL DE ALTA VELOCIDADE */}
       <div className="card-preview-area">
         <ProjectAutoScroll
           screenshotSrc={project.screenshot}
+          heroThumbnail={project.heroThumbnail}
+          heroThumbnailMobile={project.heroThumbnailMobile}
           projectTitle={project.title}
           isActive={isActive}
           onActivate={onActivate}
           scrollSpeedSeconds={project.scrollSpeed}
+          isEager={isFirstCards}
         />
 
         {/* OVERLAY DISCRETO NO DESKTOP AO PASSAR O MOUSE */}

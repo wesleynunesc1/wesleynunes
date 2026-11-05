@@ -3,22 +3,38 @@ import './ProjectAutoScroll.css';
 
 interface ProjectAutoScrollProps {
   screenshotSrc: string;
+  heroThumbnail?: string;
+  heroThumbnailMobile?: string;
   projectTitle: string;
   isActive: boolean;
   onActivate: () => void;
   scrollSpeedSeconds?: number;
+  isEager?: boolean;
 }
 
 export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
   screenshotSrc,
+  heroThumbnail,
+  heroThumbnailMobile,
   projectTitle,
   isActive,
   scrollSpeedSeconds = 14,
+  isEager = false,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const animationRef = useRef<Animation | null>(null);
-  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // High performance strategy:
+  // Render lightweight hero thumbnail immediately as instant base layer
+  // Load full screenshot when card is near or when active
+  const [shouldLoadFull, setShouldLoadFull] = useState(isEager || isActive);
+  const [fullImageLoaded, setFullImageLoaded] = useState(false);
+  const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
+
+  // Fallback thumbnail if none provided
+  const thumbDesktop = heroThumbnail || screenshotSrc;
+  const thumbMobile = heroThumbnailMobile || thumbDesktop;
 
   // Stop ongoing animation
   const stopAnimation = useCallback(() => {
@@ -45,7 +61,6 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     }
 
     // Rewind smoothly backwards from currentY back to 0
-    // Dynamic rewind duration proportional to displacement (~600px/s)
     const rewindDuration = Math.max(350, (Math.abs(currentY) / 600) * 1000);
 
     const keyframes: Keyframe[] = [
@@ -68,7 +83,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     };
   }, [stopAnimation]);
 
-  // Main scroll forward driver (passes faster ~240px per second)
+  // Main scroll forward driver
   const startScroll = useCallback(() => {
     if (!containerRef.current || !imageRef.current) return;
 
@@ -87,7 +102,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
 
     stopAnimation();
 
-    // Constant speed calculation proportional to real height (~240px/s - faster, smooth velocity)
+    // Constant speed calculation proportional to real height (~240px/s)
     const calculatedDuration = Math.max(scrollSpeedSeconds * 1000, (maxScrollDistance / 240) * 1000);
 
     const keyframes: Keyframe[] = [
@@ -103,6 +118,38 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
 
     animationRef.current = animation;
   }, [scrollSpeedSeconds, stopAnimation]);
+
+  // When card becomes active or hovers, ensure full screenshot is loaded
+  useEffect(() => {
+    if (isActive && !shouldLoadFull) {
+      setShouldLoadFull(true);
+    }
+  }, [isActive, shouldLoadFull]);
+
+  // IntersectionObserver to preload full screenshot 1 viewport screen before entering
+  useEffect(() => {
+    if (shouldLoadFull) return;
+    const container = containerRef.current;
+    if (!container || !('IntersectionObserver' in window)) {
+      setShouldLoadFull(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldLoadFull(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px 0px' }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [shouldLoadFull]);
 
   // Pause when tab is hidden, resume when active
   useEffect(() => {
@@ -121,12 +168,12 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
 
   // React to isActive changes: when active startScroll; when de-activated rewind to top
   useEffect(() => {
-    if (isActive && imageLoaded) {
+    if (isActive && fullImageLoaded) {
       startScroll();
-    } else if (!isActive && imageLoaded) {
+    } else if (!isActive && fullImageLoaded) {
       rewindToTop();
     }
-  }, [isActive, imageLoaded, startScroll, rewindToTop]);
+  }, [isActive, fullImageLoaded, startScroll, rewindToTop]);
 
   // Recalculate on window resize
   useEffect(() => {
@@ -134,7 +181,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     const handleResize = () => {
       clearTimeout(timeoutId);
       timeoutId = window.setTimeout(() => {
-        if (isActive && imageLoaded) {
+        if (isActive && fullImageLoaded) {
           startScroll();
         }
       }, 200);
@@ -146,7 +193,7 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
       window.removeEventListener('resize', handleResize);
       stopAnimation();
     };
-  }, [isActive, imageLoaded, startScroll, stopAnimation]);
+  }, [isActive, fullImageLoaded, startScroll, stopAnimation]);
 
   const jpgFallback = screenshotSrc.replace(/\.webp$/, '.jpg');
 
@@ -155,19 +202,37 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
       ref={containerRef}
       className={`project-scroll-viewport ${isActive ? 'is-active' : ''}`}
     >
-      <picture>
-        <source srcSet={screenshotSrc} type="image/webp" />
-        <source srcSet={jpgFallback} type="image/jpeg" />
+      {/* 1. INSTANT THUMBNAIL (Zero black screen: lightweight hero screenshot loads in milliseconds) */}
+      <picture className={`project-thumb-picture ${fullImageLoaded ? 'is-obscured' : ''}`}>
+        <source media="(max-width: 768px)" srcSet={thumbMobile} type="image/webp" />
+        <source srcSet={thumbDesktop} type="image/webp" />
         <img
-          ref={imageRef}
-          src={screenshotSrc}
-          alt={`Screenshot do website ${projectTitle}`}
-          className="project-screenshot-image"
-          loading="lazy"
+          src={thumbDesktop}
+          alt={`Apresentação do website ${projectTitle}`}
+          className={`project-thumb-image ${thumbnailLoaded ? 'loaded' : ''}`}
+          loading={isEager ? 'eager' : 'lazy'}
+          fetchPriority={isEager ? 'high' : 'auto'}
           decoding="async"
-          onLoad={() => setImageLoaded(true)}
+          onLoad={() => setThumbnailLoaded(true)}
         />
       </picture>
+
+      {/* 2. FULL SCROLLABLE SCREENSHOT (Rendered on top once requested and loaded) */}
+      {shouldLoadFull && (
+        <picture className={`project-full-picture ${fullImageLoaded ? 'loaded' : ''}`}>
+          <source srcSet={screenshotSrc} type="image/webp" />
+          <source srcSet={jpgFallback} type="image/jpeg" />
+          <img
+            ref={imageRef}
+            src={screenshotSrc}
+            alt={`Screenshot completo do website ${projectTitle}`}
+            className="project-screenshot-image"
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setFullImageLoaded(true)}
+          />
+        </picture>
+      )}
 
       {/* Discret hint badge indicating auto scroll capability */}
       {!isActive && (

@@ -39,10 +39,8 @@ export const PortfolioGallery: React.FC = () => {
             01 / CASES DE SUCESSO
           </span>
 
-          <p className="gallery-instruction">
-            <span className="instruction-symbol">//</span>
-            <span className="instruction-text-desktop">Passe o mouse para explorar o site.</span>
-            <span className="instruction-text-mobile">Toque para explorar o site.</span>
+          <p className="gallery-subtitle">
+            Projetos desenvolvidos para unir identidade, experiência e resultado.
           </p>
         </div>
 
@@ -51,7 +49,7 @@ export const PortfolioGallery: React.FC = () => {
           className="projects-grid-3col"
           onMouseLeave={() => setActiveProjectId(null)}
         >
-          {publishedProjects.map((project) => (
+          {publishedProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -59,6 +57,7 @@ export const PortfolioGallery: React.FC = () => {
               onActivate={() => handleHoverActivate(project.id)}
               onDeactivate={() => handleHoverDeactivate(project.id)}
               onTouchToggle={() => handleTouchToggle(project.id)}
+              isFirstCards={index < 3}
             />
           ))}
         </div>

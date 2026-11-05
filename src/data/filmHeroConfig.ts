@@ -17,9 +17,9 @@ export interface FilmHeroCellConfig {
 }
 
 export const filmHeroContent = {
-  title: 'EXPERIÊNCIAS DIGITAIS QUE IMPRESSIONAM.',
-  description: 'Transformo ideias em experiências digitais únicas, combinando design, tecnologia e inteligência para criar websites que impressionam.',
-  ctaText: 'PROJETOS',
+  title: 'WEBSITES QUE ELEVAM O PADRÃO DIGITAL.',
+  description: 'Design, estratégia e tecnologia para transformar negócios em experiências digitais marcantes.',
+  ctaText: 'DESCUBRA O QUE EU CRIO',
   targetSectionId: 'projetos',
 };
 

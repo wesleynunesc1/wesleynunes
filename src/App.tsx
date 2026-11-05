@@ -2,7 +2,6 @@ import { AmbientBackground } from './components/AmbientBackground';
 import { Header } from './components/Header';
 import { CinematicHeroWall } from './components/CinematicHeroWall';
 import { PortfolioGallery } from './components/PortfolioGallery';
-import { InfiniteMarquee } from './components/InfiniteMarquee';
 import { Footer } from './components/Footer';
 
 export function App() {
@@ -21,12 +20,9 @@ export function App() {
 
         {/* Seção 01 — Portfólio / Projetos Selecionados (Galeria 3 colunas) */}
         <PortfolioGallery />
-
-        {/* Letreiro horizontal editorial */}
-        <InfiniteMarquee />
       </main>
 
-      {/* Rodapé Oficial com links de contato */}
+      {/* Rodapé Oficial Redesenhado com links de contato */}
       <Footer />
     </div>
   );
