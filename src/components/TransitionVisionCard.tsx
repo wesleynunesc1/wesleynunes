@@ -42,3 +42,4 @@ export const TransitionVisionCard: React.FC<TransitionVisionCardProps> = ({ onEx
     </div>
   );
 };
+

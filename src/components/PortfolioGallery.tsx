@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { ArrowDown } from 'lucide-react';
 import { projectsData } from '../data/projects';
 import { ProjectCard } from './ProjectCard';
-import { TransitionVisionCard } from './TransitionVisionCard';
 import './PortfolioGallery.css';
 
 export const PortfolioGallery: React.FC = () => {
   // Store currently active project id
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+
+  // Initial visible cases count (up to Nunes Hub = 4)
+  const [visibleCount, setVisibleCount] = useState<number>(4);
 
   const handleHoverActivate = (id: string) => {
     setActiveProjectId(id);
@@ -20,11 +23,34 @@ export const PortfolioGallery: React.FC = () => {
     setActiveProjectId((current) => (current === id ? id : id));
   };
 
-  // Only display published projects with real screenshots up to Nunes Hub (Noice Hub)
-  const publishedProjects = projectsData
+  const allPublishedProjects = projectsData
     .filter((project) => project.status !== 'pending' && Boolean(project.screenshot))
-    .sort((a, b) => a.order - b.order)
-    .filter((project) => project.order <= 4); // Cases up to Nunes Hub (Order 1: Leo Nunes, 2: Mateus Cavalcante, 3: Pedro Fit, 4: Nunes Hub)
+    .sort((a, b) => a.order - b.order);
+
+  const displayedProjects = allPublishedProjects.slice(0, visibleCount);
+  const hasMoreProjects = visibleCount < allPublishedProjects.length;
+
+  // Handle "VER MAIS PROJETOS" button click:
+  // Reveals all remaining projects smoothly and scrolls to the first newly revealed project,
+  // or scrolls seamlessly to the next section if all are revealed.
+  const handleViewMoreProjects = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (hasMoreProjects) {
+      setVisibleCount(allPublishedProjects.length);
+      // Wait for React re-render then scroll smoothly
+      setTimeout(() => {
+        const nextCase = document.querySelectorAll('.gallery-project-card')[4];
+        if (nextCase) {
+          nextCase.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 50);
+    } else {
+      const aboutSec = document.getElementById('sobre-mim');
+      if (aboutSec) {
+        aboutSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
 
   return (
     <section id="projetos" className="portfolio-gallery-section">
@@ -45,7 +71,7 @@ export const PortfolioGallery: React.FC = () => {
           className="projects-grid-3col"
           onMouseLeave={() => setActiveProjectId(null)}
         >
-          {publishedProjects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
@@ -58,8 +84,18 @@ export const PortfolioGallery: React.FC = () => {
           ))}
         </div>
 
-        {/* Card Horizontal de Transição Imediatamente Abaixo do Último Case (Nunes Hub) */}
-        <TransitionVisionCard />
+        {/* Botão Sofisticado "VER MAIS PROJETOS" Centralizado */}
+        <div className="view-more-projects-wrapper">
+          <button
+            type="button"
+            onClick={handleViewMoreProjects}
+            className="btn-view-more-projects"
+            aria-label="VER MAIS PROJETOS — Expandir ou continuar a experiência"
+          >
+            <span>VER MAIS PROJETOS</span>
+            <ArrowDown className="btn-view-more-arrow" size={15} strokeWidth={2.4} />
+          </button>
+        </div>
       </div>
     </section>
   );

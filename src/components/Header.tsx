@@ -5,6 +5,27 @@ import './Header.css';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+
+  // Monitor footer visibility so header fades out smoothly when footer enters
+  useEffect(() => {
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsFooterVisible(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.05,
+      }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   // Lock scroll while mobile menu is open without losing page scroll position
   useEffect(() => {
@@ -45,7 +66,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header ${isFooterVisible ? 'is-footer-hidden' : ''}`}>
         <div className="header-inner">
           {/* Official Brand Logo (Left) */}
           <a

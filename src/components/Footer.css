@@ -1,12 +1,12 @@
 /* ==========================================================================
-   WESLEY NUNES — PREMIUM EDITORIAL FOOTER (Inspired by Academy Plus Reference)
+   WESLEY NUNES — PREMIUM EDITORIAL FOOTER (Compact, Screen-Filling, Clean)
    ========================================================================== */
 
 .site-footer {
   position: relative;
   background-color: #040508;
-  border-top: 1px solid rgba(169, 200, 216, 0.1);
-  padding: 6.5rem 2rem 4rem;
+  border-top: 1px solid rgba(169, 200, 216, 0.08);
+  padding: 4.5rem 2rem 2.8rem;
   z-index: 10;
   overflow: hidden;
   text-align: center;
@@ -18,12 +18,12 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1200px, 90vw);
-  height: 280px;
+  width: min(1000px, 90vw);
+  height: 220px;
   background: radial-gradient(
     ellipse at 50% 0%,
-    rgba(169, 200, 216, 0.14) 0%,
-    rgba(30, 58, 95, 0.12) 40%,
+    rgba(169, 200, 216, 0.12) 0%,
+    rgba(30, 58, 95, 0.08) 45%,
     transparent 75%
   );
   pointer-events: none;
@@ -33,7 +33,7 @@
 .footer-container {
   position: relative;
   width: 100%;
-  max-width: 980px;
+  max-width: 920px;
   margin: 0 auto;
   z-index: 2;
   display: flex;
@@ -41,12 +41,12 @@
   align-items: center;
 }
 
-/* 1. Bloco de Abertura */
+/* 1. Bloco de Abertura / Compacto e Marcante */
 .footer-hero-block {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   width: 100%;
 }
 
@@ -55,7 +55,7 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.5rem;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -65,32 +65,32 @@
 }
 
 .footer-brand-logo-img {
-  height: 32px;
+  height: 28px;
   width: auto;
-  max-width: 240px;
+  max-width: 220px;
   object-fit: contain;
   display: block;
 }
 
 .footer-headline {
   font-family: var(--font-sans);
-  font-size: clamp(2rem, 5vw, 3.8rem);
+  font-size: clamp(1.85rem, 4.4vw, 3.2rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   color: #ffffff;
-  margin: 0 0 1.25rem 0;
+  margin: 0 0 0.95rem 0;
   text-align: center;
 }
 
 .footer-description {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-size: clamp(0.92rem, 1.6vw, 1.05rem);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.55;
   color: #b8bec7;
-  max-width: 580px;
-  margin: 0 0 2.4rem 0;
+  max-width: 540px;
+  margin: 0 0 1.8rem 0;
   text-align: center;
 }
 
@@ -103,48 +103,48 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1.05rem 2.6rem;
+  padding: 0.92rem 2.4rem;
   background-color: #ffffff;
   color: #05070b;
   text-decoration: none;
   border-radius: 9999px;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.25s ease,
               background-color 0.25s ease;
-  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 255, 255, 0.15);
 }
 
 .footer-btn-primary:hover {
   transform: translateY(-2px) scale(1.02);
   background-color: #f0f4f8;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 255, 255, 0.32);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.3);
 }
 
 .footer-btn-primary:active {
   transform: scale(0.97);
 }
 
-/* 2. Conexões */
+/* 2. Conexões / Minimalista e Linear */
 .footer-connections-block {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 3.5rem;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
   width: 100%;
 }
 
 .footer-connections-title {
   font-family: var(--font-sans);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: #6d7582;
+  color: #656c78;
   text-transform: uppercase;
 }
 
@@ -152,18 +152,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.4rem;
   flex-wrap: wrap;
 }
 
 .footer-connection-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   text-decoration: none;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  color: #d2d8e2;
+  font-size: 0.9rem;
+  color: #cfd5df;
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -182,17 +182,17 @@
 }
 
 .connection-sep {
-  color: rgba(169, 200, 216, 0.3);
-  font-size: 0.8rem;
+  color: rgba(169, 200, 216, 0.25);
+  font-size: 0.75rem;
 }
 
 /* Linha Divisória Fina */
 .footer-divider-thin {
   width: 100%;
-  max-width: 680px;
+  max-width: 580px;
   height: 1px;
-  background-color: rgba(169, 200, 216, 0.1);
-  margin-bottom: 2.5rem;
+  background-color: rgba(169, 200, 216, 0.08);
+  margin-bottom: 1.8rem;
 }
 
 /* 3. Bloco Inferior */
@@ -200,13 +200,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.95rem;
   width: 100%;
 }
 
 .footer-back-to-top {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -222,60 +222,78 @@
 
 .footer-copyright {
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  color: #5c6370;
+  color: #555b66;
   margin: 0;
   letter-spacing: 0.02em;
 }
 
 /* ==========================================================================
-   MOBILE RESPONSIVE
+   MOBILE RESPONSIVE — ENCURTADO E PREENCHENDO BEM A TELA
    ========================================================================== */
 @media (max-width: 768px) {
   .site-footer {
-    padding: 5rem 1.25rem 3rem;
+    padding: 3.5rem 1.25rem 2.2rem;
+  }
+
+  .footer-hero-block {
+    margin-bottom: 2rem;
   }
 
   .footer-brand-logo-img {
-    height: 26px;
-    max-width: 200px;
-    margin-bottom: 1.8rem;
+    height: 24px;
+    max-width: 180px;
+    margin-bottom: 1.25rem;
   }
 
   .footer-headline {
-    font-size: 1.95rem;
+    font-size: 1.75rem;
     line-height: 1.15;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .footer-description {
-    font-size: 0.92rem;
-    line-height: 1.5;
-    margin-bottom: 2rem;
+    font-size: 0.88rem;
+    line-height: 1.48;
+    margin-bottom: 1.5rem;
   }
 
   .footer-btn-primary {
     width: 100%;
-    max-width: 320px;
-    padding: 0.92rem 2rem;
-    font-size: 0.78rem;
+    max-width: 300px;
+    padding: 0.82rem 1.8rem;
+    font-size: 0.76rem;
+  }
+
+  .footer-connections-block {
+    margin-bottom: 1.5rem;
+    gap: 0.5rem;
   }
 
   .footer-connections-links {
-    flex-direction: column;
-    gap: 0.85rem;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.8rem;
   }
 
   .connection-sep {
-    display: none;
+    display: inline;
+  }
+
+  .footer-connection-item {
+    font-size: 0.82rem;
   }
 
   .footer-divider-thin {
-    margin-bottom: 2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .footer-bottom-block {
+    gap: 0.75rem;
   }
 
   .footer-copyright {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
   }
 }

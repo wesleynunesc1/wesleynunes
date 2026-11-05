@@ -17,6 +17,14 @@
   transform: translateY(-14px);
   pointer-events: none;
   will-change: opacity, transform;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Smooth fade out when footer enters to avoid competing with footer logo */
+.site-header.is-footer-hidden {
+  opacity: 0 !important;
+  transform: translateY(-20px) !important;
+  pointer-events: none !important;
 }
 
 .header-inner {

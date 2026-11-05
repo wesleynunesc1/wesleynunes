@@ -52,3 +52,4 @@ export const MetricsIndicators: React.FC = () => {
     </section>
   );
 };
+
