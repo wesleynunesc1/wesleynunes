@@ -2,16 +2,12 @@ import React from 'react';
 import './AboutProfileCard.css';
 
 export const AboutProfileCard: React.FC = () => {
-  const whatsappUrl =
-    'https://wa.me/5588981957471?text=' +
-    encodeURIComponent('Olá, Wesley! Vi seu portfólio e gostaria de conversar sobre um projeto.');
-
   const tags = ['Web Design', 'Desenvolvimento', 'Inteligência Artificial'];
 
   return (
     <section id="sobre-mim" className="about-profile-section" aria-label="Sobre Wesley Nunes">
       <div className="about-profile-container">
-        {/* DESKTOP LAYOUT (>= 769px): Two distinct editorial cards side-by-side */}
+        {/* DESKTOP LAYOUT (>= 769px): Two distinct editorial cards side-by-side (Foto 34% / Info 66%) */}
         <div className="about-desktop-grid">
           {/* Left Card: Editorial B&W Photograph Only */}
           <div className="about-photo-card" aria-hidden="true">
@@ -26,8 +22,9 @@ export const AboutProfileCard: React.FC = () => {
                   decoding="async"
                 />
               </picture>
+              {/* Degradê natural de baixo para cima apagando a imagem suavemente */}
               <div className="about-photo-vignette" />
-              {/* Discrete static atmospheric ice-blue illumination */}
+              {/* Iluminação sutil estática */}
               <div className="about-photo-glow" />
             </div>
           </div>
@@ -60,31 +57,14 @@ export const AboutProfileCard: React.FC = () => {
                   </span>
                 ))}
               </div>
-
-              {/* 5. Linha Divisória Integrada */}
-              <div className="about-divider" />
-
-              {/* 6. CTA Final Elegante */}
-              <div className="about-footer-row">
-                <span className="about-cta-prompt">Tem uma ideia em mente?</span>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="about-btn-talk"
-                  aria-label="VAMOS CONVERSAR no WhatsApp"
-                >
-                  VAMOS CONVERSAR
-                </a>
-              </div>
             </div>
           </div>
         </div>
 
-        {/* MOBILE LAYOUT (<= 768px): Unified vertical editorial card with prominent face at top */}
+        {/* MOBILE LAYOUT (<= 768px): Unified vertical card with photo integrated into background */}
         <div className="about-mobile-card">
-          {/* Top photograph container: strictly visual, face clear and prominent */}
-          <div className="about-mobile-photo-header" aria-hidden="true">
+          {/* Fotografia integrada ao fundo do card com degradê de baixo para cima */}
+          <div className="about-mobile-bg-wrapper" aria-hidden="true">
             <picture className="about-mobile-picture">
               <source media="(max-width: 768px)" srcSet="/wesley-nunes-bw-mobile.webp" type="image/webp" />
               <img
@@ -95,11 +75,12 @@ export const AboutProfileCard: React.FC = () => {
                 decoding="async"
               />
             </picture>
+            {/* Degradê vertical suave de baixo para cima integrando a foto ao fundo escuro */}
             <div className="about-mobile-vignette" />
             <div className="about-mobile-glow" />
           </div>
 
-          {/* Lower content section: well spaced, no text overlapping face */}
+          {/* Conteúdo sobreposto confortavelmente sem sobrepor o rosto */}
           <div className="about-mobile-body">
             {/* 1. Identificação Superior (Normal case) */}
             <span className="about-tagline">
@@ -125,23 +106,6 @@ export const AboutProfileCard: React.FC = () => {
                   {tag}
                 </span>
               ))}
-            </div>
-
-            {/* 5. Linha Divisória Integrada */}
-            <div className="about-divider" />
-
-            {/* 6. CTA Final Elegante */}
-            <div className="about-footer-row">
-              <span className="about-cta-prompt">Tem uma ideia em mente?</span>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="about-btn-talk"
-                aria-label="VAMOS CONVERSAR no WhatsApp"
-              >
-                VAMOS CONVERSAR
-              </a>
             </div>
           </div>
         </div>

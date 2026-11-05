@@ -73,6 +73,18 @@
   opacity: 0.6;
 }
 
+/* Desativação completa de animações contínuas de background no mobile para máxima economia de GPU */
+@media (max-width: 768px) {
+  .ambient-layer {
+    will-change: auto;
+  }
+  .ambient-orb-1,
+  .ambient-orb-2,
+  .ambient-orb-3 {
+    animation: none !important;
+  }
+}
+
 @keyframes floatOrb1 {
   0% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(60px, 80px) scale(1.08); }

@@ -1,7 +1,7 @@
 /* ==========================================================================
    ABOUT / APRESENTAÇÃO PESSOAL - WESLEY NUNES
-   Desktop: Layout editorial premium com 2 cards lado a lado (~40% foto, ~60% texto)
-   Mobile: Card único vertical com retrato B&W dominante no topo e iluminação sutil
+   Desktop: Layout editorial premium com 2 cards lado a lado (Foto 34%, Info 66%)
+   Mobile: Card único vertical com retrato B&W integrado ao fundo, deslocado à direita
    ========================================================================== */
 
 .about-profile-section {
@@ -19,10 +19,11 @@
 
 /* ==========================================================================
    DESKTOP GRID (Dois Cards Independentes Lado a Lado)
+   Referência solicitada: Fotografia 34% / Informações 66% (descontando o gap de 20px)
    ========================================================================== */
 .about-desktop-grid {
   display: grid;
-  grid-template-columns: 0.72fr 1.28fr; /* Proporção ~36% / ~64% elegante */
+  grid-template-columns: calc(34% - 10px) calc(66% - 10px);
   gap: 20px;
   align-items: stretch;
 }
@@ -38,7 +39,7 @@
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(169, 200, 216, 0.08);
-  min-height: 520px;
+  min-height: 470px;
   display: flex;
 }
 
@@ -46,6 +47,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .about-photo-wrapper picture {
@@ -54,40 +56,44 @@
   height: 100%;
 }
 
+/* Enquadramento: rosto completamente visível (cabeça, testa, olhos, queixo e ombros) e deslocado à direita */
 .about-editorial-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 15%; /* Foco editorial no olhar e rosto */
+  object-position: 75% 10%; /* Deslocado um pouco mais para a direita com foco na cabeça e ombros */
   display: block;
-  filter: grayscale(100%) contrast(1.12) brightness(0.9);
+  filter: grayscale(100%) contrast(1.1) brightness(0.92);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
 }
 
 .about-photo-card:hover .about-editorial-img {
   transform: scale(1.02);
-  filter: grayscale(100%) contrast(1.15) brightness(0.95);
+  filter: grayscale(100%) contrast(1.12) brightness(0.96);
 }
 
+/* Degradê natural de baixo para cima apagando a imagem suavemente para o fundo do card */
 .about-photo-vignette {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    180deg,
-    rgba(5, 7, 11, 0.05) 0%,
-    rgba(5, 7, 11, 0.2) 65%,
-    rgba(5, 7, 11, 0.65) 100%
+    0deg,
+    #07090E 0%,
+    rgba(7, 9, 14, 0.95) 16%,
+    rgba(7, 9, 14, 0.6) 42%,
+    rgba(7, 9, 14, 0.18) 70%,
+    transparent 100%
   );
   pointer-events: none;
 }
 
-/* Discret atmospheric ice-blue illumination */
+/* Iluminação atmosférica azul-gelo sutil e estática */
 .about-photo-glow {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 140px;
+  height: 120px;
   background: radial-gradient(
     ellipse at 50% 100%,
     rgba(169, 200, 216, 0.08) 0%,
@@ -105,7 +111,7 @@
   border: 1px solid rgba(169, 200, 216, 0.08);
   display: flex;
   align-items: center;
-  padding: 3.5rem 3.5rem;
+  padding: 3.2rem 3.5rem;
 }
 
 .about-card-body {
@@ -148,8 +154,8 @@
   font-weight: 400;
   line-height: 1.65;
   color: #B8BEC7;
-  margin: 0 0 1.75rem;
-  max-width: 640px;
+  margin: 0 0 2rem;
+  max-width: 660px;
 }
 
 /* 4. Categorias / Tags */
@@ -157,7 +163,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin-bottom: 2rem;
 }
 
 .about-tag-pill {
@@ -173,76 +178,16 @@
   backdrop-filter: blur(8px);
 }
 
-/* 5. Linha Divisória Integrada */
-.about-divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(169, 200, 216, 0.16) 0%,
-    rgba(169, 200, 216, 0.04) 70%,
-    transparent 100%
-  );
-  margin-bottom: 1.75rem;
-}
-
-/* 6. CTA Final Elegante */
-.about-footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.about-cta-prompt {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #94A3B8;
-  letter-spacing: -0.01em;
-}
-
-.about-btn-talk {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.85rem 1.85rem;
-  background-color: #FFFFFF;
-  color: #05070B;
-  text-decoration: none;
-  border-radius: 9999px;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.25s ease,
-              box-shadow 0.25s ease;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-}
-
-.about-btn-talk:hover {
-  transform: translateY(-2px) scale(1.02);
-  background-color: #F1F5F9;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.about-btn-talk:active {
-  transform: scale(0.97);
-}
-
 /* ==========================================================================
    MOBILE RESPONSIVE (<= 768px)
-   - Top photo header dominates with clear facial framing (eyes high, hair in frame)
-   - Seamless gradient transition into dark card body
-   - Zero text overlapping the face
+   - Fotografia integrada ao fundo do card, posicionada mais à direita
+   - Rosto completamente visível, preservando cabeça e ombros
+   - Degradê natural de baixo para cima cobrindo a parte inferior
+   - Sem CTA final: card compacto e limpo
    ========================================================================== */
 @media (max-width: 768px) {
   .about-profile-section {
-    padding: 2rem 1rem 4rem;
+    padding: 2rem 1rem 3.5rem;
   }
 
   .about-desktop-grid {
@@ -252,20 +197,23 @@
   /* Single unified vertical card on mobile */
   .about-mobile-card {
     display: flex;
-    flex-direction: column;
     position: relative;
     width: 100%;
     background-color: #06080D;
     border-radius: 14px;
     overflow: hidden;
     border: 1px solid rgba(169, 200, 216, 0.08);
+    align-items: flex-end; /* Conteúdo ancorado na base */
+    min-height: 480px;
   }
 
-  /* Dedicated photo header on mobile */
-  .about-mobile-photo-header {
-    position: relative;
+  /* Fotografia de fundo integrada */
+  .about-mobile-bg-wrapper {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 280px;
+    height: 100%;
+    pointer-events: none;
     overflow: hidden;
   }
 
@@ -275,26 +223,27 @@
     height: 100%;
   }
 
-  /* Foto perfeitamente enquadrada: rosto no topo, olhos visíveis, olhar expressivo */
+  /* Posicionamento mobile específico: mais à direita, escala menor (contain/cover equilibrado), rosto 100% visível */
   .about-mobile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 72% 8%; /* Enquadramento perfeito: testa, olhos e queixo nítidos */
+    object-position: 80% 4%; /* Deslocado para a direita e ancorado no topo para mostrar toda a cabeça e testa */
     display: block;
-    filter: grayscale(100%) contrast(1.12) brightness(0.85);
+    filter: grayscale(100%) contrast(1.1) brightness(0.72);
   }
 
-  /* Gradiente inferior suave que funde a foto com o corpo do card */
+  /* Degradê natural de baixo para cima: base escura para leitura perfeita, topo translúcido para o rosto */
   .about-mobile-vignette {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      180deg,
-      rgba(6, 8, 13, 0.05) 0%,
-      rgba(6, 8, 13, 0.25) 50%,
-      rgba(6, 8, 13, 0.85) 85%,
-      #06080d 100%
+      0deg,
+      #06080D 0%,
+      rgba(6, 8, 13, 0.98) 35%,
+      rgba(6, 8, 13, 0.82) 58%,
+      rgba(6, 8, 13, 0.35) 78%,
+      rgba(6, 8, 13, 0.1) 100%
     );
     pointer-events: none;
   }
@@ -302,26 +251,26 @@
   /* Iluminação atmosférica azul-gelo sutil */
   .about-mobile-glow {
     position: absolute;
-    bottom: -10px;
-    left: 20%;
-    right: 20%;
-    height: 60px;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 80px;
     background: radial-gradient(
       ellipse at 50% 100%,
-      rgba(169, 200, 216, 0.12) 0%,
+      rgba(169, 200, 216, 0.1) 0%,
       transparent 70%
     );
     pointer-events: none;
   }
 
+  /* Corpo com padding superior generoso para dar respiro ao rosto */
   .about-mobile-body {
     position: relative;
     z-index: 2;
-    padding: 1.25rem 1.35rem 1.75rem;
+    padding: 10rem 1.35rem 1.75rem;
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #06080D;
   }
 
   .about-tagline {
@@ -339,37 +288,15 @@
   .about-description {
     font-size: 0.86rem;
     line-height: 1.55;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
   }
 
   .about-pill-tags {
     gap: 0.45rem;
-    margin-bottom: 1.25rem;
   }
 
   .about-tag-pill {
     font-size: 0.72rem;
     padding: 0.32rem 0.75rem;
-  }
-
-  .about-divider {
-    margin-bottom: 1.25rem;
-  }
-
-  .about-footer-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.85rem;
-  }
-
-  .about-cta-prompt {
-    font-size: 0.85rem;
-    text-align: center;
-  }
-
-  .about-btn-talk {
-    width: 100%;
-    padding: 0.8rem 1.2rem;
-    font-size: 0.75rem;
   }
 }
