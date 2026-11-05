@@ -57,7 +57,7 @@
   will-change: transform;
 }
 
-/* Subtle motion indicator badge when inactive (Desktop only) */
+/* Subtle motion indicator badge when inactive */
 .scroll-hint-badge {
   position: absolute;
   top: 10px;
@@ -92,11 +92,4 @@
   letter-spacing: 0.05em;
   color: var(--color-ice);
   text-transform: uppercase;
-}
-
-/* No mobile, o badge e qualquer auto-scroll são ocultados para experiência limpa e leve */
-@media (max-width: 768px) {
-  .scroll-hint-badge {
-    display: none !important;
-  }
 }
