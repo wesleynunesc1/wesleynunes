@@ -1,6 +1,6 @@
 .portfolio-gallery-section {
   position: relative;
-  margin-top: -100svh; /* Seamless continuity: Slides over the pinned hero during mosaic exit */
+  margin-top: -100svh; /* Seamless continuity: Slides over the pinned hero during mosaic exit on desktop */
   padding: 5rem 2rem 5rem;
   z-index: 10;
   background-color: #05070b; /* Solid opaque backdrop prevents any cinematic mosaic bleed-through */
@@ -126,6 +126,7 @@
    ========================================================================== */
 @media (max-width: 768px) {
   .portfolio-gallery-section {
+    margin-top: 0; /* No mobile, o fluxo é natural sem sobreposição de scroll negativo */
     padding: 3rem 1rem 2.5rem;
   }
 

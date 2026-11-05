@@ -27,9 +27,17 @@ export const CinematicHeroWall: React.FC = () => {
 
   const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      const projectsSection = document.getElementById(filmHeroContent.targetSectionId);
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
     const section = sectionRef.current;
     if (section) {
-      // Scroll smoothly through the cinematic animation track down to where Cases de Sucesso starts
+      // Scroll smoothly through the cinematic animation track down to where Cases starts
       const targetScroll = section.offsetTop + section.offsetHeight;
       window.scrollTo({
         top: targetScroll,
@@ -39,6 +47,23 @@ export const CinematicHeroWall: React.FC = () => {
   };
 
   useLayoutEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    const header = document.querySelector<HTMLElement>('.site-header');
+
+    // NO MOBILE: Remove o efeito complexo de animação, zoom-out e pinned track.
+    // Deixa apenas o vídeo e o conteúdo da Hero diretamente visíveis com header acessível.
+    if (isMobile) {
+      if (header) {
+        gsap.set(header, {
+          opacity: 1,
+          y: 0,
+          pointerEvents: 'auto',
+        });
+      }
+      return;
+    }
+
+    // DESKTOP: Preserva a experiência cinematográfica FilmSupply completa
     const ctx = gsap.context(() => {
       const section = sectionRef.current;
       const grid = gridRef.current;
@@ -51,15 +76,9 @@ export const CinematicHeroWall: React.FC = () => {
       const bottomCell = bottomCellRef.current;
       const corners = cornerCellsRef.current;
 
-      // Header element in DOM (controlled directly by timeline)
-      const header = document.querySelector<HTMLElement>('.site-header');
-
       if (!section || !grid || !copy || !dim || !surroundLayer) return;
 
-      const isMobile = window.innerWidth <= 768;
-
       // 1. INITIAL STATE (scrollProgress = 0):
-      // Surrounding panels layer starts at opacity: 0
       gsap.set(surroundLayer, {
         opacity: 0,
       });
@@ -87,34 +106,18 @@ export const CinematicHeroWall: React.FC = () => {
         y: 0,
       });
 
-      // Master Timeline pinned with ScrollTrigger
-      // scrub: true on mobile (zero artificial latency / direct finger coupling), 0.2 on desktop
+      // Master Timeline pinned with ScrollTrigger on desktop
       const masterTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: 'top top',
           end: 'bottom bottom',
-          scrub: isMobile ? true : 0.2,
+          scrub: 0.2,
           anticipatePin: 1,
           fastScrollEnd: true,
           preventOverlaps: true,
-          invalidateOnRefresh: false, // Prevents jumps when mobile address bar collapses/expands
         },
       });
-
-      // TIMELINE BREAKDOWN (Exact continuous FilmSupply architecture):
-      // Total duration: 250 units (corresponding to 250svh scroll track)
-      //
-      // [0 -> 40]: Hero text/logo/CTA fades smoothly via opacity + translateY
-      // [0 -> 150]: Virtual camera continuous zoom-out (scale 1.0 -> 0.4654)
-      // [0 -> 35]: Surrounding cells emerge organically as camera pulls back
-      // [55 -> 95]: Header fades in gracefully while composition is visible
-      // [150 -> 250]: CONTINUOUS TRANSITION:
-      //            - Grid translates up: yPercent: 0 -> -50
-      //            - Soft dimming: dim opacity: 0 -> 0.75
-      //            - Because the following section has `margin-top: -100svh`,
-      //              as the mosaic moves up from 150 to 250, Cases de Sucesso
-      //              moves directly up into the viewport simultaneously. ZERO blank gap!
 
       // 0 -> 40: Copy fades out
       masterTl.to(
@@ -132,7 +135,7 @@ export const CinematicHeroWall: React.FC = () => {
       masterTl.to(
         grid,
         {
-          scale: isMobile ? 0.48 : 0.4654,
+          scale: 0.4654,
           ease: 'power1.inOut',
           duration: 150,
           force3D: true,
@@ -193,7 +196,6 @@ export const CinematicHeroWall: React.FC = () => {
       }
 
       // 150 -> 250: Coordinated Exit
-      // The grid moves up by yPercent: -50 while dimming
       masterTl
         .to(
           grid,
@@ -224,7 +226,7 @@ export const CinematicHeroWall: React.FC = () => {
       <div ref={stickyRef} className="fs-hero-sticky">
         {/* 3x3 Grid */}
         <div ref={gridRef} className="fs-hero-grid">
-          {/* SURROUNDING PANELS LAYER */}
+          {/* SURROUNDING PANELS LAYER (Ocultos no mobile, ativos no desktop) */}
           <div ref={surroundLayerRef} className="fs-surround-layer" aria-hidden="true">
             {surroundingCells.map((cell) => {
               const getCellRef = (pos: string) => {
@@ -267,7 +269,7 @@ export const CinematicHeroWall: React.FC = () => {
             })}
           </div>
 
-          {/* MAIN PANEL (Strictly ISOLATED & Centered at scrollProgress = 0) */}
+          {/* MAIN PANEL COM O VÍDEO CENTRAL */}
           <div className="fs-hero-cell fs-hero-cell--main" id={mainCell.id}>
             <div className="fs-cell-media">
               {/* Fallback image poster behind video */}
@@ -303,7 +305,7 @@ export const CinematicHeroWall: React.FC = () => {
 
             {/* CENTRAL CONTENT ON MAIN PANEL */}
             <div ref={copyRef} className="fs-hero-content">
-              {/* 1. Official Brand Logo (Replaces old text tag, transparent, zero borders) */}
+              {/* 1. Official Brand Logo */}
               <div className="fs-hero-brand-logo">
                 <img
                   src="/logo.png"
@@ -321,7 +323,7 @@ export const CinematicHeroWall: React.FC = () => {
                 O PADRÃO DIGITAL.
               </h1>
 
-              {/* 3. Description (Refined ~3 lines on mobile, #B8BEC7) */}
+              {/* 3. Description */}
               <p className="fs-hero-description">
                 {filmHeroContent.description}
               </p>
