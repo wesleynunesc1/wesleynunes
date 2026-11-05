@@ -1,7 +1,7 @@
 /* ==========================================================================
    ABOUT / APRESENTAÇÃO PESSOAL - WESLEY NUNES
-   Desktop: Layout editorial premium com 2 cards lado a lado (~40% foto, ~60% texto)
-   Mobile: Card único vertical com retrato B&W dominante no topo e iluminação sutil
+   Desktop: Layout editorial premium com 2 cards lado a lado (~32% foto, ~68% texto)
+   Mobile: Card único vertical com retrato B&W deslocado à direita, degradê de baixo pra cima
    ========================================================================== */
 
 .about-profile-section {
@@ -19,10 +19,11 @@
 
 /* ==========================================================================
    DESKTOP GRID (Dois Cards Independentes Lado a Lado)
+   Card da foto reduzido para ~0.6fr / 1.4fr (~30% / 70%) para proporção mais elegante
    ========================================================================== */
 .about-desktop-grid {
   display: grid;
-  grid-template-columns: 0.72fr 1.28fr; /* Proporção ~36% / ~64% elegante */
+  grid-template-columns: 0.62fr 1.38fr;
   gap: 20px;
   align-items: stretch;
 }
@@ -38,7 +39,7 @@
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(169, 200, 216, 0.08);
-  min-height: 520px;
+  min-height: 480px;
   display: flex;
 }
 
@@ -46,6 +47,7 @@
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .about-photo-wrapper picture {
@@ -54,11 +56,12 @@
   height: 100%;
 }
 
+/* Foto deslocada mais para a direita com enquadramento integral */
 .about-editorial-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 15%; /* Foco editorial no olhar e rosto */
+  object-position: 78% 12%; /* Posicionada mais à direita */
   display: block;
   filter: grayscale(100%) contrast(1.12) brightness(0.9);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
@@ -69,25 +72,28 @@
   filter: grayscale(100%) contrast(1.15) brightness(0.95);
 }
 
+/* Degradê suave apagando de baixo pra cima para evitar linha ou sombra de recorte */
 .about-photo-vignette {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    180deg,
-    rgba(5, 7, 11, 0.05) 0%,
-    rgba(5, 7, 11, 0.2) 65%,
-    rgba(5, 7, 11, 0.65) 100%
+    0deg,
+    #07090E 0%,
+    rgba(7, 9, 14, 0.95) 15%,
+    rgba(7, 9, 14, 0.65) 40%,
+    rgba(7, 9, 14, 0.2) 70%,
+    transparent 100%
   );
   pointer-events: none;
 }
 
-/* Discret atmospheric ice-blue illumination */
+/* Iluminação atmosférica azul-gelo sutil */
 .about-photo-glow {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 140px;
+  height: 120px;
   background: radial-gradient(
     ellipse at 50% 100%,
     rgba(169, 200, 216, 0.08) 0%,
@@ -148,8 +154,8 @@
   font-weight: 400;
   line-height: 1.65;
   color: #B8BEC7;
-  margin: 0 0 1.75rem;
-  max-width: 640px;
+  margin: 0 0 2rem;
+  max-width: 660px;
 }
 
 /* 4. Categorias / Tags */
@@ -157,7 +163,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin-bottom: 2rem;
 }
 
 .about-tag-pill {
@@ -173,72 +178,10 @@
   backdrop-filter: blur(8px);
 }
 
-/* 5. Linha Divisória Integrada */
-.about-divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(169, 200, 216, 0.16) 0%,
-    rgba(169, 200, 216, 0.04) 70%,
-    transparent 100%
-  );
-  margin-bottom: 1.75rem;
-}
-
-/* 6. CTA Final Elegante */
-.about-footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.about-cta-prompt {
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #94A3B8;
-  letter-spacing: -0.01em;
-}
-
-.about-btn-talk {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.85rem 1.85rem;
-  background-color: #FFFFFF;
-  color: #05070B;
-  text-decoration: none;
-  border-radius: 9999px;
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.25s ease,
-              box-shadow 0.25s ease;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
-}
-
-.about-btn-talk:hover {
-  transform: translateY(-2px) scale(1.02);
-  background-color: #F1F5F9;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.about-btn-talk:active {
-  transform: scale(0.97);
-}
-
 /* ==========================================================================
    MOBILE RESPONSIVE (<= 768px)
-   - Top photo header dominates with clear facial framing (eyes high, hair in frame)
-   - Seamless gradient transition into dark card body
-   - Zero text overlapping the face
+   - Top photo header: foto posicionada mais à direita, permitindo que a imagem apareça
+   - Degradê apagando de baixo pra cima a foto para não dar sombra de recorte
    ========================================================================== */
 @media (max-width: 768px) {
   .about-profile-section {
@@ -265,8 +208,9 @@
   .about-mobile-photo-header {
     position: relative;
     width: 100%;
-    height: 280px;
+    height: 260px;
     overflow: hidden;
+    background-color: #06080D;
   }
 
   .about-mobile-picture {
@@ -275,26 +219,27 @@
     height: 100%;
   }
 
-  /* Foto perfeitamente enquadrada: rosto no topo, olhos visíveis, olhar expressivo */
+  /* Foto posicionada mais para a direita com rosto e presença preservados */
   .about-mobile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 72% 8%; /* Enquadramento perfeito: testa, olhos e queixo nítidos */
+    object-position: 82% 10%; /* Mais para a direita conforme solicitado */
     display: block;
     filter: grayscale(100%) contrast(1.12) brightness(0.85);
   }
 
-  /* Gradiente inferior suave que funde a foto com o corpo do card */
+  /* Degradê suave apagando de baixo pra cima a foto para eliminar qualquer recorte ou sombra */
   .about-mobile-vignette {
     position: absolute;
     inset: 0;
     background: linear-gradient(
-      180deg,
-      rgba(6, 8, 13, 0.05) 0%,
-      rgba(6, 8, 13, 0.25) 50%,
-      rgba(6, 8, 13, 0.85) 85%,
-      #06080d 100%
+      0deg,
+      #06080D 0%,
+      rgba(6, 8, 13, 0.95) 20%,
+      rgba(6, 8, 13, 0.6) 50%,
+      rgba(6, 8, 13, 0.15) 80%,
+      transparent 100%
     );
     pointer-events: none;
   }
@@ -302,7 +247,7 @@
   /* Iluminação atmosférica azul-gelo sutil */
   .about-mobile-glow {
     position: absolute;
-    bottom: -10px;
+    bottom: 0;
     left: 20%;
     right: 20%;
     height: 60px;
@@ -317,7 +262,7 @@
   .about-mobile-body {
     position: relative;
     z-index: 2;
-    padding: 1.25rem 1.35rem 1.75rem;
+    padding: 1.2rem 1.35rem 1.85rem;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -339,37 +284,15 @@
   .about-description {
     font-size: 0.86rem;
     line-height: 1.55;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
   }
 
   .about-pill-tags {
     gap: 0.45rem;
-    margin-bottom: 1.25rem;
   }
 
   .about-tag-pill {
     font-size: 0.72rem;
     padding: 0.32rem 0.75rem;
-  }
-
-  .about-divider {
-    margin-bottom: 1.25rem;
-  }
-
-  .about-footer-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.85rem;
-  }
-
-  .about-cta-prompt {
-    font-size: 0.85rem;
-    text-align: center;
-  }
-
-  .about-btn-talk {
-    width: 100%;
-    padding: 0.8rem 1.2rem;
-    font-size: 0.75rem;
   }
 }
