@@ -9,7 +9,7 @@ interface ProjectCardProps {
   isActive: boolean;
   onActivate: () => void;
   onDeactivate: () => void;
-  onTouchToggle: () => void;
+  onTouchToggle?: () => void;
   isFirstCards?: boolean;
 }
 
@@ -18,7 +18,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   isActive,
   onActivate,
   onDeactivate,
-  onTouchToggle,
   isFirstCards = false,
 }) => {
   return (
@@ -26,19 +25,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       className={`gallery-project-card ${isActive ? 'is-active' : ''}`}
       onMouseEnter={onActivate}
       onMouseLeave={onDeactivate}
-      onTouchStart={onActivate}
-      onClick={onTouchToggle}
       tabIndex={0}
-      role="button"
+      role="region"
       aria-label={`Projeto ${project.title} - ${project.category}`}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onTouchToggle();
-        }
-      }}
     >
-      {/* ÁREA DE PREVIEW COM AUTO SCROLL E THUMBNAIL DE ALTA VELOCIDADE */}
+      {/* ÁREA DE PREVIEW COM AUTO SCROLL NO DESKTOP E HERO ESTÁTICA OTIMIZADA NO MOBILE */}
       <div className="card-preview-area">
         <ProjectAutoScroll
           screenshotSrc={project.screenshot}

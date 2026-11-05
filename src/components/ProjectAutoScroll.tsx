@@ -25,10 +25,24 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
   const imageRef = useRef<HTMLImageElement>(null);
   const animationRef = useRef<Animation | null>(null);
 
-  // High performance strategy:
-  // 1. Hero thumbnail is the permanent solid base layer. It is NEVER removed or obscured.
-  // 2. Full screenshot is only loaded when needed and rendered seamlessly above the thumbnail.
-  const [shouldLoadFull, setShouldLoadFull] = useState(isEager || isActive);
+  // Check if viewport is mobile (<= 768px)
+  const [isMobile, setIsMobile] = useState<boolean>(
+    typeof window !== 'undefined' ? window.innerWidth <= 768 : false
+  );
+
+  useEffect(() => {
+    const handleCheckMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleCheckMobile);
+    return () => window.removeEventListener('resize', handleCheckMobile);
+  }, []);
+
+  // On desktop: load full screenshot when needed (near or active).
+  // On mobile: completely disabled (never loads the 8000px screenshot, saves massive memory & avoids scroll effect).
+  const [shouldLoadFull, setShouldLoadFull] = useState(
+    !isMobile && (isEager || isActive)
+  );
   const [fullImageLoaded, setFullImageLoaded] = useState(false);
   const [thumbnailLoaded, setThumbnailLoaded] = useState(false);
 
@@ -44,9 +58,9 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     }
   }, []);
 
-  // Smoothly rewind / scroll in reverse back to top
+  // Smoothly rewind / scroll in reverse back to top (desktop only)
   const rewindToTop = useCallback(() => {
-    if (!imageRef.current) return;
+    if (isMobile || !imageRef.current) return;
 
     // Get current translateY position from computed transform
     const style = window.getComputedStyle(imageRef.current);
@@ -81,11 +95,11 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
       }
       animationRef.current = null;
     };
-  }, [stopAnimation]);
+  }, [isMobile, stopAnimation]);
 
-  // Main scroll forward driver
+  // Main scroll forward driver (desktop only)
   const startScroll = useCallback(() => {
-    if (!containerRef.current || !imageRef.current) return;
+    if (isMobile || !containerRef.current || !imageRef.current) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
@@ -117,18 +131,18 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
     });
 
     animationRef.current = animation;
-  }, [scrollSpeedSeconds, stopAnimation]);
+  }, [isMobile, scrollSpeedSeconds, stopAnimation]);
 
-  // When card becomes active, immediately trigger full screenshot request
+  // When card becomes active on desktop, trigger full screenshot request
   useEffect(() => {
-    if (isActive && !shouldLoadFull) {
+    if (!isMobile && isActive && !shouldLoadFull) {
       setShouldLoadFull(true);
     }
-  }, [isActive, shouldLoadFull]);
+  }, [isMobile, isActive, shouldLoadFull]);
 
-  // IntersectionObserver to preload full screenshot 300px before entering viewport
+  // IntersectionObserver to preload full screenshot 300px before entering viewport (desktop only)
   useEffect(() => {
-    if (shouldLoadFull) return;
+    if (isMobile || shouldLoadFull) return;
     const container = containerRef.current;
     if (!container || !('IntersectionObserver' in window)) {
       setShouldLoadFull(true);
@@ -149,10 +163,11 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
 
     observer.observe(container);
     return () => observer.disconnect();
-  }, [shouldLoadFull]);
+  }, [isMobile, shouldLoadFull]);
 
-  // Pause when tab is hidden, resume when active
+  // Pause when tab is hidden, resume when active (desktop only)
   useEffect(() => {
+    if (isMobile) return;
     const handleVisibilityChange = () => {
       if (!animationRef.current) return;
       if (document.hidden) {
@@ -164,19 +179,21 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [isActive]);
+  }, [isMobile, isActive]);
 
   // React to isActive changes: when active startScroll; when de-activated rewind to top
   useEffect(() => {
+    if (isMobile) return;
     if (isActive && fullImageLoaded) {
       startScroll();
     } else if (!isActive && fullImageLoaded) {
       rewindToTop();
     }
-  }, [isActive, fullImageLoaded, startScroll, rewindToTop]);
+  }, [isMobile, isActive, fullImageLoaded, startScroll, rewindToTop]);
 
   // Recalculate on window resize
   useEffect(() => {
+    if (isMobile) return;
     let timeoutId: number;
     const handleResize = () => {
       clearTimeout(timeoutId);
@@ -193,14 +210,14 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
       window.removeEventListener('resize', handleResize);
       stopAnimation();
     };
-  }, [isActive, fullImageLoaded, startScroll, stopAnimation]);
+  }, [isMobile, isActive, fullImageLoaded, startScroll, stopAnimation]);
 
   const jpgFallback = screenshotSrc.replace(/\.webp$/, '.jpg');
 
   return (
     <div
       ref={containerRef}
-      className={`project-scroll-viewport ${isActive ? 'is-active' : ''}`}
+      className={`project-scroll-viewport ${!isMobile && isActive ? 'is-active' : ''}`}
     >
       {/* 1. INSTANT HERO THUMBNAIL (PERMANENT BASE: Guaranteed ZERO black screen) */}
       <picture className="project-thumb-picture">
@@ -217,8 +234,8 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
         />
       </picture>
 
-      {/* 2. FULL SCROLLABLE SCREENSHOT (Renders seamlessly on top once loaded and active) */}
-      {shouldLoadFull && (
+      {/* 2. FULL SCROLLABLE SCREENSHOT (Desktop only, never loaded on mobile) */}
+      {!isMobile && shouldLoadFull && (
         <picture className={`project-full-picture ${fullImageLoaded ? 'loaded' : ''}`}>
           <source srcSet={screenshotSrc} type="image/webp" />
           <source srcSet={jpgFallback} type="image/jpeg" />
@@ -234,8 +251,8 @@ export const ProjectAutoScroll: React.FC<ProjectAutoScrollProps> = ({
         </picture>
       )}
 
-      {/* Discret hint badge indicating auto scroll capability */}
-      {!isActive && (
+      {/* Discreet hint badge indicating auto scroll capability (Desktop only) */}
+      {!isMobile && !isActive && (
         <div className="scroll-hint-badge" aria-hidden="true">
           <span className="scroll-hint-dot" />
           <span className="scroll-hint-text">Auto Scroll</span>
